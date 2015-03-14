@@ -1,0 +1,47 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/FragmentStyle"
+    tools:context="com.example.isabel.guitestapp.SingleChoiceQuestion">
+
+
+    <TextView
+        style="@style/TextFieldStyle"
+        android:text="@string/one_choice_question"
+        android:id="@+id/singleAnswerQuestion"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="77dp" />
+
+    <Button
+        style="@style/ButtonAnswerStyle"
+        android:text="@string/answer_option_one"
+        android:id="@+id/btnAnswerOption1"
+        android:onClick="btnAnswerOption1Clicked"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="317dp" />
+
+    <Button
+        style="@style/ButtonAnswerStyle"
+        android:text="@string/answer_option_two"
+        android:id="@+id/btnAnswerOption2"
+        android:onClick="btnAnswerOption2Clicked"
+        android:layout_marginStart="125dp"
+        android:layout_alignTop="@+id/btnAnswerOption1"
+        android:layout_toEndOf="@+id/btnAnswerOption1" />
+
+    <Button
+        style="@style/ButtonDontKnowStyle"
+        android:text="@string/answer_dont_know"
+        android:id="@+id/singleDontKnow"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        style="@style/TextFieldSwipeStyle"
+        android:text="@string/swipe_to_continue"
+        android:id="@+id/singleChoiceContinue"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible"/>
+</RelativeLayout>

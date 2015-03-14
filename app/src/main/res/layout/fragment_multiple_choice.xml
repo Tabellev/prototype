@@ -1,0 +1,57 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/FragmentStyle"
+    tools:context="com.example.isabel.usertestapp.MultipleChoiceFragment">
+
+
+    <TextView
+        style="@style/TextFieldStyle"
+        android:text="@string/mutiple_choice_question"
+        android:id="@+id/multipleAnswerQuestion"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="106dp" />
+
+    <Button
+        style="@style/ButtonAnswerStyle"
+        android:text="@string/griffindor"
+        android:id="@+id/btnMulAnsOne"
+        android:layout_alignTop="@+id/btnMulAnsTwo"
+        android:layout_toStartOf="@+id/btnMulAnsTwo" />
+
+    <Button
+        style="@style/ButtonAnswerStyle"
+        android:text="@string/huffelpuff"
+        android:id="@+id/btnMulAnsTwo"
+        android:layout_alignTop="@+id/btnMulAnsThree"
+        android:layout_toStartOf="@+id/btnMulAnsThree" />
+
+    <Button
+        style="@style/ButtonAnswerStyle"
+        android:text="@string/slytherin"
+        android:id="@+id/btnMulAnsThree"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@+id/btnMulAnsFour" />
+
+    <Button
+        style="@style/ButtonAnswerStyle"
+        android:text="@string/rawenclaw"
+        android:id="@+id/btnMulAnsFour"
+        android:layout_alignTop="@+id/btnMulAnsThree"
+        android:layout_alignEnd="@+id/multipleAnswerQuestion" />
+
+    <Button
+        style="@style/ButtonDontKnowStyle"
+        android:text="@string/answer_dont_know"
+        android:id="@+id/multipleDontKnow"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        style="@style/TextFieldSwipeStyle"
+        android:text="@string/swipe_to_continue"
+        android:id="@+id/multipleChoiceContinue"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible"/>
+</RelativeLayout>
