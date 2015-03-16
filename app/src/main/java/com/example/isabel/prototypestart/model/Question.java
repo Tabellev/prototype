@@ -5,26 +5,31 @@ package com.example.isabel.prototypestart.model;
  */
 public class Question {
 
-    private int id;
+    private int mID;
     private QuestionType mType;
+    private String mQuestionText;
+    private String[] mResponseOptions;
 
-    public String getBodyText() {
-        return bodyText;
+    public Question(int id, String questionText, QuestionType type){
+        this.mID = id;
+        this.mQuestionText = questionText;
+        this.mType = type;
     }
 
-    private String bodyText;
-
-    public int getId() {
-        return id;
+    public String[] getResponseOptions() {
+        return mResponseOptions;
     }
 
-    public QuestionType getmType() {
+    public String getQuestionText() {
+        return mQuestionText;
+    }
+
+    public int getID() {
+        return mID;
+    }
+
+    public QuestionType getType() {
         return mType;
     }
 
-    public Question(int id, String bodyText, QuestionType type){
-        this.id = id;
-        this.bodyText = bodyText;
-        this.mType = type;
-    }
 }

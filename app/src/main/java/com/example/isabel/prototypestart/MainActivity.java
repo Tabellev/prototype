@@ -1,11 +1,9 @@
 package com.example.isabel.prototypestart;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -14,7 +12,6 @@ import com.example.isabel.prototypestart.model.IDbInteractor;
 import com.example.isabel.prototypestart.model.Question;
 
 import java.util.List;
-import java.util.Vector;
 
 public class MainActivity extends android.support.v4.app.FragmentActivity {
 
@@ -23,7 +20,7 @@ public class MainActivity extends android.support.v4.app.FragmentActivity {
     private int deltaX = 0;
     private IDbInteractor mDataManager;
 
-    public IDbInteractor getDBInteractor() { return mDataManager; }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +63,8 @@ public class MainActivity extends android.support.v4.app.FragmentActivity {
         });
     }
 
+    public IDbInteractor getDBInteractor() { return mDataManager; }
+
     public class PagerAdapter extends FragmentStatePagerAdapter {
 
         private List<Question> questions;
@@ -80,7 +79,7 @@ public class MainActivity extends android.support.v4.app.FragmentActivity {
             int qid = position;
             Question q = questions.get(qid);
             Fragment f;
-            switch ( q.getmType()){
+            switch ( q.getType()){
                 case SingleChoice:
                     f =  SingleChoiceFragment.newInstance(qid);
                     break;

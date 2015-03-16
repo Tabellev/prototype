@@ -1,6 +1,5 @@
 package com.example.isabel.prototypestart;
 
-import android.app.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -46,7 +45,7 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment {
         final Button dontKnow = (Button) view.findViewById(R.id.singleDontKnow);
         final TextView swipe = (TextView) view.findViewById(R.id.singleChoiceContinue);
         final TextView questionText = (TextView) view.findViewById(R.id.singleAnswerQuestion);
-        questionText.setText(question.getBodyText());
+        questionText.setText(question.getQuestionText());
         btnOption1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(!option1isClicked){
