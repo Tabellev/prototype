@@ -10,19 +10,32 @@ package com.example.isabel.prototypestart.model;
  * Alias: Output file
  */
 public class TestResult {
+    private long mStartTime;
+    private long mStopTime;
     private String mExperimentName;
     private int mSessionID;
     private int mCrewID;
     private int mNumberOfRuns;
     private RunResult[] mRunResults;
 
-    public TestResult(String experimentName, int sessionID, int crewID, RunResult[] runResults) {
+    public TestResult(long startTime, long stopTime, String experimentName, int sessionID,
+                      int crewID, RunResult[] runResults) {
 
+        this.mStartTime = startTime;
+        this.mStopTime = stopTime;
         this.mExperimentName = experimentName;
         this.mSessionID = sessionID;
         this.mCrewID = crewID;
         this.mRunResults = runResults;
         setNumberOfRuns();
+    }
+
+    public long getmStartTime() {
+        return mStartTime;
+    }
+
+    public long getmStopTime() {
+        return mStopTime;
     }
 
     private void setNumberOfRuns() {
