@@ -13,6 +13,7 @@ public class DbInteractorTest implements IDbInteractor {
     public DbInteractorTest(){
         questionList.add(new Question(1, "Hva heter du?", QuestionType.SingleChoice));
         questionList.add(new Question(2,"Hvor gammel er du?", QuestionType.MultipleChoice));
+        questionList.add(new Question(3, "Hva er 5/2?", QuestionType.Numerical));
     }
     @Override
     public List<Question> getQuestions() {

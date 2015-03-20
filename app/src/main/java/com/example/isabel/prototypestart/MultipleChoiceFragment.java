@@ -15,12 +15,18 @@ import android.widget.TextView;
 import com.example.isabel.prototypestart.MainActivity;
 import com.example.isabel.prototypestart.R;
 
-public class MultipleChoiceFragment extends android.support.v4.app.Fragment {
+public class MultipleChoiceFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
     private Boolean option1isClicked = false;
     private Boolean option2isClicked = false;
     private Boolean option3isClicked = false;
     private Boolean option4isClicked = false;
     private Boolean dontKnowIsClicked = false;
+    private Button btnOption1;
+    private Button btnOption2;
+    private Button btnOption3;
+    private Button btnOption4;
+    private Button dontKnow;
+    private TextView swipe;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -29,17 +35,37 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment {
         }
         ((MainActivity)getActivity()).getDBInteractor();
 
-
         View view = (RelativeLayout)inflater.inflate(R.layout.fragment_multiple_choice, container, false);
-        final Button btnOption1 = (Button)view.findViewById(R.id.btnMulAnsOne);
-        final Button btnOption2 = (Button) view.findViewById(R.id.btnMulAnsTwo);
-        final Button btnOption3 = (Button) view.findViewById(R.id.btnMulAnsThree);
-        final Button btnOption4 = (Button) view.findViewById(R.id.btnMulAnsFour);
-        final Button dontKnow = (Button) view.findViewById(R.id.multipleDontKnow);
-        final TextView swipe = (TextView) view.findViewById(R.id.multipleChoiceContinue);
+        btnOption1 = (Button)view.findViewById(R.id.btnMulAnsOne);
+        btnOption1.setOnClickListener(this);
+        btnOption2 = (Button) view.findViewById(R.id.btnMulAnsTwo);
+        btnOption2.setOnClickListener(this);
+        btnOption3 = (Button) view.findViewById(R.id.btnMulAnsThree);
+        btnOption3.setOnClickListener(this);
+        btnOption4 = (Button) view.findViewById(R.id.btnMulAnsFour);
+        btnOption4.setOnClickListener(this);
+        dontKnow = (Button) view.findViewById(R.id.multipleDontKnow);
+        dontKnow.setOnClickListener(this);
+        swipe = (TextView) view.findViewById(R.id.multipleChoiceContinue);
 
-        btnOption1.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+        return view;
+    }
+
+    public MultipleChoiceFragment(){}
+
+    public static MultipleChoiceFragment newInstance(int index) {
+        MultipleChoiceFragment f = new MultipleChoiceFragment();
+        Bundle args = new Bundle();
+        args.putInt("index", index);
+        f.setArguments(args);
+        return f;
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()){
+            case R.id.btnMulAnsOne:
                 if(!option1isClicked){
                     btnOption1.setBackgroundColor(Color.rgb(7, 147, 194));
                     dontKnow.setEnabled(false);
@@ -54,12 +80,8 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment {
                         dontKnow.setBackgroundColor(Color.rgb(160,200,220));
                     }
                 }
-
-            }
-        });
-
-        btnOption2.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+                break;
+            case R.id.btnMulAnsTwo:
                 if(!option2isClicked){
                     btnOption2.setBackgroundColor(Color.rgb(7, 147, 194));
                     dontKnow.setEnabled(false);
@@ -74,12 +96,8 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment {
                         dontKnow.setBackgroundColor(Color.rgb(160,200,220));
                     }
                 }
-
-            }
-        });
-
-        btnOption3.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+                break;
+            case R.id.btnMulAnsThree:
                 if(!option3isClicked){
                     btnOption3.setBackgroundColor(Color.rgb(7, 147, 194));
                     dontKnow.setEnabled(false);
@@ -94,12 +112,8 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment {
                         dontKnow.setBackgroundColor(Color.rgb(160,200,220));
                     }
                 }
-
-            }
-        });
-
-        btnOption4.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+                break;
+            case R.id.btnMulAnsFour:
                 if(!option4isClicked){
                     btnOption4.setBackgroundColor(Color.rgb(7, 147, 194));
                     dontKnow.setEnabled(false);
@@ -114,12 +128,8 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment {
                         dontKnow.setBackgroundColor(Color.rgb(160,200,220));
                     }
                 }
-
-            }
-        });
-
-        dontKnow.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+                break;
+            case R.id.multipleDontKnow:
                 if(!dontKnowIsClicked){
                     dontKnow.setBackgroundColor(Color.rgb(7, 147, 194));
                     swipe.setVisibility(View.VISIBLE);
@@ -144,22 +154,7 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment {
                     btnOption4.setBackgroundColor(Color.rgb(160,200,220));
                     dontKnowIsClicked = false;
                 }
-
-            }
-        });
-
-
-
-        return view;
-    }
-
-    public MultipleChoiceFragment(){}
-
-    public static MultipleChoiceFragment newInstance(int index) {
-        MultipleChoiceFragment f = new MultipleChoiceFragment();
-        Bundle args = new Bundle();
-        args.putInt("index", index);
-        f.setArguments(args);
-        return f;
+                break;
+        }
     }
 }

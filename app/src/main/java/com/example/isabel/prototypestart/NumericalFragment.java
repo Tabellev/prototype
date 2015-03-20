@@ -14,9 +14,24 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class NumericalFragment extends android.support.v4.app.Fragment {
+public class NumericalFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
 
     private Boolean dontKnowIsClicked = false;
+    private EditText input;
+    private TextView swipe;
+    private  Button btn0;
+    private  Button btn1;
+    private  Button btn2;
+    private  Button btn3;
+    private  Button btn4;
+    private  Button btn5;
+    private  Button btn6;
+    private  Button btn7;
+    private  Button btn8;
+    private  Button btn9;
+    private  Button btnPoint;
+    private Button dontKnow;
+    private ImageButton btnBackspace;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -25,127 +40,120 @@ public class NumericalFragment extends android.support.v4.app.Fragment {
         }
 
         View view = (RelativeLayout)inflater.inflate(R.layout.fragment_numerical, container, false);
-        final Button btn0 = (Button)view.findViewById(R.id.btnZero);
-        final Button btn1 = (Button) view.findViewById(R.id.btnOne);
-        final Button btn2 = (Button) view.findViewById(R.id.btnTwo);
-        final Button btn3 = (Button) view.findViewById(R.id.btnThree);
-        final Button btn4 = (Button) view.findViewById(R.id.btnFour);
-        final Button btn5 = (Button) view.findViewById(R.id.btnFive);
-        final Button btn6 = (Button) view.findViewById(R.id.btnSix);
-        final Button btn7 = (Button) view.findViewById(R.id.btnSeven);
-        final Button btn8 = (Button) view.findViewById(R.id.btnEight);
-        final Button btn9 = (Button) view.findViewById(R.id.btnNine);
-        final Button btnPoint = (Button) view.findViewById(R.id.btnPoint);
-        final ImageButton btnBackspace = (ImageButton) view.findViewById(R.id.backspace);
-        final Button dontKnow = (Button) view.findViewById(R.id.btnNumericalDontKnow);
-        final EditText input = (EditText) view.findViewById(R.id.input);
-        final TextView swipe = (TextView) view.findViewById(R.id.numericalContinue);
+        btn0 = (Button)view.findViewById(R.id.btnZero);
+        btn0.setOnClickListener(this);
+        btn1 = (Button) view.findViewById(R.id.btnOne);
+        btn1.setOnClickListener(this);
+        btn2 = (Button) view.findViewById(R.id.btnTwo);
+        btn2.setOnClickListener(this);
+        btn3 = (Button) view.findViewById(R.id.btnThree);
+        btn3.setOnClickListener(this);
+        btn4 = (Button) view.findViewById(R.id.btnFour);
+        btn4.setOnClickListener(this);
+        btn5 = (Button) view.findViewById(R.id.btnFive);
+        btn5.setOnClickListener(this);
+        btn6 = (Button) view.findViewById(R.id.btnSix);
+        btn6.setOnClickListener(this);
+        btn7 = (Button) view.findViewById(R.id.btnSeven);
+        btn7.setOnClickListener(this);
+        btn8 = (Button) view.findViewById(R.id.btnEight);
+        btn8.setOnClickListener(this);
+        btn9 = (Button) view.findViewById(R.id.btnNine);
+        btn9.setOnClickListener(this);
+        btnPoint = (Button) view.findViewById(R.id.btnPoint);
+        btnPoint.setOnClickListener(this);
+        btnBackspace = (ImageButton) view.findViewById(R.id.backspace);
+        btnBackspace.setOnClickListener(this);
+        dontKnow = (Button) view.findViewById(R.id.btnNumericalDontKnow);
+        dontKnow.setOnClickListener(this);
+        input = (EditText) view.findViewById(R.id.input);
+        swipe = (TextView) view.findViewById(R.id.numericalContinue);
 
-        btn0.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+        return view;
+    }
 
+    public NumericalFragment(){}
+
+    public static NumericalFragment newInstance(int index) {
+        NumericalFragment f = new NumericalFragment();
+        Bundle args = new Bundle();
+        args.putInt("index", index);
+        f.setArguments(args);
+        return f;
+    }
+
+    public String eraseCharacter(String str) {
+        if (str.length() > 0) {
+            str = str.substring(0, str.length()-1);
+        }
+        return str;
+    }
+
+    public boolean isPoint(String str){
+
+        if(str.contains(".")){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()){
+            case R.id.btnZero:
                 input.setText(input.getText() + "0");
                 swipe.setVisibility(View.VISIBLE);
-            }
-        });
-
-        btn1.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
+                break;
+            case R.id.btnOne:
                 input.setText(input.getText() + "1");
                 swipe.setVisibility(View.VISIBLE);
-            }
-        });
-
-        btn2.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
+                break;
+            case R.id.btnTwo:
                 input.setText(input.getText() + "2");
                 swipe.setVisibility(View.VISIBLE);
-            }
-        });
-
-        btn3.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
+                break;
+            case R.id.btnThree:
                 input.setText(input.getText() + "3");
                 swipe.setVisibility(View.VISIBLE);
-            }
-        });
-
-        btn4.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
+                break;
+            case R.id.btnFour:
                 input.setText(input.getText() + "4");
                 swipe.setVisibility(View.VISIBLE);
-            }
-        });
-
-        btn5.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
+                break;
+            case R.id.btnFive:
                 input.setText(input.getText() + "5");
                 swipe.setVisibility(View.VISIBLE);
-            }
-        });
-
-        btn6.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
+                break;
+            case R.id.btnSix:
                 input.setText(input.getText() + "6");
                 swipe.setVisibility(View.VISIBLE);
-            }
-        });
-
-        btn7.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
+                break;
+            case R.id.btnSeven:
                 input.setText(input.getText() + "7");
                 swipe.setVisibility(View.VISIBLE);
-            }
-        });
-
-        btn8.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
+                break;
+            case R.id.btnEight:
                 input.setText(input.getText() + "8");
                 swipe.setVisibility(View.VISIBLE);
-            }
-        });
-
-        btn9.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
+                break;
+            case R.id.btnNine:
                 input.setText(input.getText() + "9");
                 swipe.setVisibility(View.VISIBLE);
-            }
-        });
-
-        btnPoint.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
+                break;
+            case R.id.btnPoint:
                 if(!isPoint(input.getText().toString())){
                     input.setText(input.getText() + ".");
                     swipe.setVisibility(View.VISIBLE);
                 }else{
                     return;
                 }
-
-
-            }
-        });
-
-        btnBackspace.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-                input.setText(method(input.getText().toString()));
-
-            }
-        });
-
-        dontKnow.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
+                break;
+            case R.id.backspace:
+                input.setText(eraseCharacter(input.getText().toString()));
+                break;
+            case R.id.btnNumericalDontKnow:
                 if(!dontKnowIsClicked){
                     dontKnow.setBackgroundColor(Color.rgb(7, 147, 194));
                     btn0.setEnabled(false);
@@ -203,36 +211,7 @@ public class NumericalFragment extends android.support.v4.app.Fragment {
                     btnBackspace.setBackgroundColor(Color.rgb(160, 200, 220));
                     dontKnowIsClicked = false;
                 }
-
-            }
-        });
-
-        return view;
-    }
-
-    public NumericalFragment(){}
-
-    public static NumericalFragment newInstance(int index) {
-        NumericalFragment f = new NumericalFragment();
-        Bundle args = new Bundle();
-        args.putInt("index", index);
-        f.setArguments(args);
-        return f;
-    }
-
-    public String method(String str) {
-        if (str.length() > 0) {
-            str = str.substring(0, str.length()-1);
-        }
-        return str;
-    }
-
-    public boolean isPoint(String str){
-
-        if(str.contains(".")){
-            return true;
-        }else{
-            return false;
+                break;
         }
     }
 }

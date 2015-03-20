@@ -13,8 +13,13 @@ import com.example.isabel.prototypestart.model.*;
 
 
 
-public class SingleChoiceFragment extends android.support.v4.app.Fragment {
+public class SingleChoiceFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
 
+    private Button btnOption1;
+    private Button btnOption2;
+    private Button dontKnow;
+    private TextView swipe;
+    private TextView questionText;
     private Boolean option1isClicked = false;
     private Boolean option2isClicked = false;
     private Boolean dontKnowIsClicked = false;
@@ -40,14 +45,25 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment {
         question = ((MainActivity)getActivity()).getDBInteractor().getQuestionFromId(questionID);
 
         View view = (RelativeLayout)inflater.inflate(R.layout.fragment_single_choice, container, false);
-        final Button btnOption1 = (Button)view.findViewById(R.id.btnAnswerOption1);
-        final Button btnOption2 = (Button) view.findViewById(R.id.btnAnswerOption2);
-        final Button dontKnow = (Button) view.findViewById(R.id.singleDontKnow);
-        final TextView swipe = (TextView) view.findViewById(R.id.singleChoiceContinue);
-        final TextView questionText = (TextView) view.findViewById(R.id.singleAnswerQuestion);
+        btnOption1 = (Button)view.findViewById(R.id.btnAnswerOption1);
+        btnOption1.setOnClickListener(this);
+        btnOption2 = (Button) view.findViewById(R.id.btnAnswerOption2);
+        btnOption2.setOnClickListener(this);
+        dontKnow = (Button) view.findViewById(R.id.singleDontKnow);
+        dontKnow.setOnClickListener(this);
+        swipe = (TextView) view.findViewById(R.id.singleChoiceContinue);
+        questionText = (TextView) view.findViewById(R.id.singleAnswerQuestion);
         questionText.setText(question.getQuestionText());
-        btnOption1.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+
+        return  view;
+    }
+
+    public SingleChoiceFragment(){}
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btnAnswerOption1:
                 if(!option1isClicked){
                     btnOption1.setBackgroundColor(Color.rgb(7, 147, 194));
                     btnOption2.setEnabled(false);
@@ -64,12 +80,8 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment {
                     dontKnow.setBackgroundColor(Color.rgb(160,200,220));
                     option1isClicked = false;
                 }
-
-            }
-        });
-
-        btnOption2.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+                break;
+            case R.id.btnAnswerOption2:
                 if(!option2isClicked){
                     btnOption2.setBackgroundColor(Color.rgb(7, 147, 194));
                     btnOption1.setEnabled(false);
@@ -86,12 +98,8 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment {
                     dontKnow.setBackgroundColor(Color.rgb(160,200,220));
                     option2isClicked = false;
                 }
-
-            }
-        });
-
-        dontKnow.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
+                break;
+            case R.id.singleDontKnow:
                 if(!dontKnowIsClicked){
                     dontKnow.setBackgroundColor(Color.rgb(7, 147, 194));
                     btnOption1.setEnabled(false);
@@ -108,12 +116,7 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment {
                     btnOption2.setBackgroundColor(Color.rgb(160,200,220));
                     dontKnowIsClicked = false;
                 }
-            }
-        });
-
-        return  view;
+                break;
+        }
     }
-
-    public SingleChoiceFragment(){}
-
 }
