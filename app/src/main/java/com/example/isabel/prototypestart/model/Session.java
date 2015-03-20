@@ -7,20 +7,17 @@ package com.example.isabel.prototypestart.model;
  *
  * Alias: Configuration file
  */
-public class ConfigurationData {
+public class Session {
     private String mExperimentName;
     private int mSessionID;
     private int mCrewID;
-    private String mOperatorID;
     private int mNumberOfRuns;
     private RunSetup[] mRunsToSetup;
 
-    public ConfigurationData(String experimentName, int sessionID, int crewID, String operatorID,
-                             RunSetup[] runsToSetup) {
+    public Session(String experimentName, int sessionID, int crewID, RunSetup[] runsToSetup) {
         this.mExperimentName = experimentName;
         this.mSessionID = sessionID;
         this.mCrewID = crewID;
-        this.mOperatorID = operatorID;
         this.mRunsToSetup = runsToSetup;
         setNumberOfRuns();
     }
@@ -39,10 +36,6 @@ public class ConfigurationData {
 
     public int getmCrewID() {
         return mCrewID;
-    }
-
-    public String getmOperatorID() {
-        return mOperatorID;
     }
 
     public int getmNumberOfRuns() {
