@@ -17,10 +17,6 @@ import java.util.List;
 public class MainActivity extends android.support.v4.app.FragmentActivity {
 
     private PagerAdapter mPagerAdapter;
-    private int oldX;
-    private int deltaX = 0;
-    private float x1;
-    private float x2;
     private IDbInteractor mDataManager;
 
 
@@ -36,51 +32,11 @@ public class MainActivity extends android.support.v4.app.FragmentActivity {
 
     private void initialisePaging() {
 
-       /* List<Fragment> fragments = new Vector<Fragment>();
-        fragments.add(Fragment.instantiate(this, StartScreenFragment.class.getName()));
-        fragments.add(Fragment.instantiate(this, SingleChoiceQuestionFragment.class.getName()));
-        fragments.add(Fragment.instantiate(this, MultipleChoiceFragment.class.getName()));
-        fragments.add(Fragment.instantiate(this, NumericalInputFragment.class.getName()));
-        fragments.add(Fragment.instantiate(this, NumericalResetFragment.class.getName()));
-        fragments.add(Fragment.instantiate(this, RunFinishedFragment.class.getName()));
-        fragments.add(Fragment.instantiate(this, SwipeToStartNewRunFragment.class.getName()));*/
         this.mPagerAdapter  = new PagerAdapter(super.getSupportFragmentManager(), getDBInteractor().getQuestions());
         //
         final ControlledViewPager pager = (ControlledViewPager)super.findViewById(R.id.viewpager);
         pager.setAdapter(this.mPagerAdapter);
-        pager.setOnTouchListener(new View.OnTouchListener()
-        {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
 
-                /*if (event.getAction() == MotionEvent.ACTION_MOVE || event.getAction() == MotionEvent.ACTION_DOWN) {
-                    int newX = (int) event.getX();
-                    deltaX = oldX - newX;
-                    oldX = newX;
-                }
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    oldX = 0;
-                }
-
-                return deltaX < 0;*/
-                if (event.getAction() == MotionEvent.ACTION_MOVE || event.getAction() == MotionEvent.ACTION_DOWN) {
-                    int newX = (int) event.getX();
-                    deltaX = oldX - newX;
-                    oldX = newX;
-                    x1 = (int)event.getX();
-                }
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    x2 = (int)event.getX();
-                    oldX = 0;
-                }
-
-                if(x1 < x2) {
-                    return false;//deltaX < 0;
-                }else{
-                    return true;
-                }
-            }
-        });
     }
 
     public IDbInteractor getDBInteractor() { return mDataManager; }
