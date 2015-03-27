@@ -2,6 +2,8 @@ package com.example.isabel.prototypestart.model;
 
 /**
  * Created by Isabel on 09.03.2015.
+ *
+ * Contains information from the Questions file
  */
 public class Question {
 

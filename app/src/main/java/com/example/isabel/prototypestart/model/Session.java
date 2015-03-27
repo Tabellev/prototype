@@ -5,7 +5,7 @@ package com.example.isabel.prototypestart.model;
  *
  * This class may be obsolete if we use information directly from configuration file
  *
- * Alias: Configuration file
+ * It represents the Configuration file
  */
 public class Session {
     private String mExperimentName;

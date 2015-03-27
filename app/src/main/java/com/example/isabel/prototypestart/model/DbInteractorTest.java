@@ -10,6 +10,7 @@ public class DbInteractorTest implements IDbInteractor {
 
     List<Question> questionList = new ArrayList<Question>();
 
+
     public DbInteractorTest(){
         questionList.add(new Question(1, "Hva heter du?", QuestionType.SingleChoice));
         questionList.add(new Question(2,"Hvor gammel er du?", QuestionType.MultipleChoice));

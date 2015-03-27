@@ -2,6 +2,8 @@ package com.example.isabel.prototypestart.model;
 
 /**
  * Created by oyvind on 16.03.2015.
+ *
+ * Contains information from the Configuration file
  */
 public class QuestionSet {
     private int mQuestionID;
@@ -12,11 +14,11 @@ public class QuestionSet {
         this.mTimeLimit = timeLimit;
     }
 
-    public int getmQuestionID() {
+    public int getQuestionID() {
         return mQuestionID;
     }
 
-    public long getmTimeLimit() {
+    public long getTimeLimit() {
         return mTimeLimit;
     }
 }
