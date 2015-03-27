@@ -76,18 +76,18 @@ public class MainActivity extends android.support.v4.app.FragmentActivity {
 
         @Override
         public Fragment getItem(int position) {
-            int qid = position;
-            Question q = questions.get(qid);
+
+            Question q = questions.get(position);
             Fragment f;
             switch ( q.getType()){
                 case SingleChoice:
-                    f =  SingleChoiceFragment.newInstance(qid);
+                    f =  SingleChoiceFragment.newInstance(position);
                     break;
                 case MultipleChoice:
-                    f = MultipleChoiceFragment.newInstance(qid);
+                    f = MultipleChoiceFragment.newInstance(position);
                     break;
                 case Numerical:
-                    f =  NumericalFragment.newInstance(qid);
+                    f =  NumericalFragment.newInstance(position);
                     break;
                 default:
                     f = StartScreenFragment.newInstance(position);
