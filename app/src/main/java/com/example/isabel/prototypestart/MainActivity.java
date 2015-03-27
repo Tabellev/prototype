@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -18,6 +19,8 @@ public class MainActivity extends android.support.v4.app.FragmentActivity {
     private PagerAdapter mPagerAdapter;
     private int oldX;
     private int deltaX = 0;
+    private float x1;
+    private float x2;
     private IDbInteractor mDataManager;
 
 
@@ -43,14 +46,14 @@ public class MainActivity extends android.support.v4.app.FragmentActivity {
         fragments.add(Fragment.instantiate(this, SwipeToStartNewRunFragment.class.getName()));*/
         this.mPagerAdapter  = new PagerAdapter(super.getSupportFragmentManager(), getDBInteractor().getQuestions());
         //
-        ControlledViewPager pager = (ControlledViewPager)super.findViewById(R.id.viewpager);
+        final ControlledViewPager pager = (ControlledViewPager)super.findViewById(R.id.viewpager);
         pager.setAdapter(this.mPagerAdapter);
         pager.setOnTouchListener(new View.OnTouchListener()
         {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
 
-                if (event.getAction() == MotionEvent.ACTION_MOVE || event.getAction() == MotionEvent.ACTION_DOWN) {
+                /*if (event.getAction() == MotionEvent.ACTION_MOVE || event.getAction() == MotionEvent.ACTION_DOWN) {
                     int newX = (int) event.getX();
                     deltaX = oldX - newX;
                     oldX = newX;
@@ -58,7 +61,24 @@ public class MainActivity extends android.support.v4.app.FragmentActivity {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     oldX = 0;
                 }
-                return deltaX < 0;
+
+                return deltaX < 0;*/
+                if (event.getAction() == MotionEvent.ACTION_MOVE || event.getAction() == MotionEvent.ACTION_DOWN) {
+                    int newX = (int) event.getX();
+                    deltaX = oldX - newX;
+                    oldX = newX;
+                    x1 = (int)event.getX();
+                }
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    x2 = (int)event.getX();
+                    oldX = 0;
+                }
+
+                if(x1 < x2) {
+                    return false;//deltaX < 0;
+                }else{
+                    return true;
+                }
             }
         });
     }

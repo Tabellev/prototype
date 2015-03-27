@@ -8,7 +8,8 @@ import android.view.View;
 
 public class ControlledViewPager extends ViewPager {
 
-    private boolean isPagingEnabled = true;
+    float mStartDragX;
+    boolean canceledGesture;
 
     public ControlledViewPager(Context context) {
         super(context);
@@ -20,27 +21,45 @@ public class ControlledViewPager extends ViewPager {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-
-        return this.isPagingEnabled && super.onTouchEvent(event);
+        float x = event.getX();
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_MOVE:
+                if (mStartDragX < x) {
+                    event.setAction(MotionEvent.ACTION_CANCEL);
+                } else if (mStartDragX > x) {
+                    // TODO: ALT 2015.03.25 - Ugly hack
+                    try {
+                        return super.onTouchEvent(event);
+                    } catch ( Exception e)
+                    {
+                        return true;
+                    }
+                }
+        }
+        return super.onTouchEvent(event);
     }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
-        return this.isPagingEnabled && super.onInterceptTouchEvent(event);
-    }
-
-    public void setPagingEnabled(boolean b) {
-        this.isPagingEnabled = b;
-    }
-
-    @Override
-    protected boolean canScroll(View v, boolean checkV, int dx, int x, int y) {
-
-        if (dx < 0) {
+        if ( event.getAction() == MotionEvent.ACTION_CANCEL )
+        {
             return false;
         }
-        /* let base class decide what to do */
-        return super.canScroll(v, checkV, dx, x, y);
 
+        float x = x = event.getX();
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                mStartDragX = x;
+                break;
+            case MotionEvent.ACTION_MOVE:
+                if (mStartDragX < x) {
+                    event.setAction(MotionEvent.ACTION_CANCEL);
+                    canceledGesture = true;
+                } else if (mStartDragX > x) {
+                    super.onInterceptTouchEvent(event);
+                }
+        }
+        return super.onInterceptTouchEvent(event);
     }
+
 }
