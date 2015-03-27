@@ -2,6 +2,8 @@ package com.example.isabel.prototypestart.model;
 
 /**
  * Created by oyvind on 16.03.2015.
+ *
+ * Will represent a question in the Output file
  */
 public class AnsweredQuestion {
     private int mQuestionID;  // From configuration file?
