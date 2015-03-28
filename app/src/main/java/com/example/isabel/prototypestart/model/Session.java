@@ -1,5 +1,7 @@
 package com.example.isabel.prototypestart.model;
 
+import java.util.ArrayList;
+
 /**
  * Created by oyvind on 16.03.2015.
  *
@@ -26,23 +28,21 @@ public class Session {
         this.mNumberOfRuns = mRunsToSetup.length;
     }
 
-    public String getmExperimentName() {
+    public String getExperimentName() {
         return mExperimentName;
     }
 
-    public int getmSessionID() {
+    public int getSessionID() {
         return mSessionID;
     }
 
-    public int getmCrewID() {
+    public int getCrewID() {
         return mCrewID;
     }
 
-    public int getmNumberOfRuns() {
-        return mNumberOfRuns;
-    }
+    public int getNumberOfRuns() { return mNumberOfRuns; }
 
-    public RunSetup[] getmRunsToSetup() {
+    public RunSetup[] getRunsToSetup() {
         return mRunsToSetup;
     }
 }

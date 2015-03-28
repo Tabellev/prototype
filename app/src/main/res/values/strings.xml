@@ -44,6 +44,131 @@
         <item>How many condensate pumps are running on turbine 40?</item>
     </string-array>
 
+    <string-array name="mock_questions">
+        <item>How many condensate pumps are running on turbine 31?</item>
+        <item>On turbine 31, what is the status of pump P204?</item>
+        <item>Which pump is in manual on turbine 32?</item>
+        <item>On turbine 32, what is the status of the MFW pump 2?</item>
+        <item>On turbine 31, which high temperature drain pump has the lowest current?</item>
+        <item>On turbine 32, which MFW pump has tripped?</item>
+        <item>On turbine 31, what is the status of P108?</item>
+        <item>What is the pressure from the MFW pumps on turbine 31?</item>
+        <item>Which MFW pump on turbine 32 has the highest current?</item>
+        <item>Which turbine has a switchgear error or fault indication?</item>
+        <item>Are the high temperature preheaters by-passed?</item>
+        <item>Are any of the turbine regulating valves throttled?</item>
+        <item>Are all turbine 32 stop valves open?</item>
+        <item>What is the condenser pressure on turbine 31?</item>
+        <item>Are operating MFW pumps on turbine 31 operating properly?</item>
+        <item>Are any AFW cross over valves miss-positioned?</item>
+        <item>On which SG is a MFW bypass valve miss-positioned?</item>
+        <item>Which SG atmospheric control valve is in manual control?</item>
+        <item>Are all MSIVs closed?</item>
+        <item>Is the stop valve to the turbine-driven AFW pump closed?</item>
+        <item>How many condensate pumps are running on turbine 31?</item>
+        <item>On turbine 31, what is the status of pump P204?</item>
+        <item>Which pump is in manual on turbine 32?</item>
+        <item>On turbine 32, what is the status of the MFW pump 2?</item>
+        <item>On turbine 31, which high temperature drain pump has the lowest current?</item>
+        <item>On turbine 32, which MFW pump has tripped?</item>
+        <item>On turbine 31, what is the status of P108?</item>
+        <item>What is the pressure from the MFW pumps on turbine 31?</item>
+        <item>Which MFW pump on turbine 32 has the highest current?</item>
+        <item>Which turbine has a switchgear error or fault indication?</item>
+        <item>Are the high temperature preheaters by-passed?</item>
+        <item>Are any of the turbine regulating valves throttled?</item>
+        <item>Are all turbine 32 stop valves open?</item>
+        <item>What is the condenser pressure on turbine 31?</item>
+        <item>Are operating MFW pumps on turbine 31 operating properly?</item>
+        <item>Are any AFW cross over valves miss-positioned?</item>
+        <item>On which SG is a MFW bypass valve miss-positioned?</item>
+        <item>Which SG atmospheric control valve is in manual control?</item>
+        <item>Are all MSIVs closed?</item>
+        <item>Is the stop valve to the turbine-driven AFW pump closed?</item>
+        <item>How many condensate pumps are running on turbine 31?</item>
+        <item>On turbine 31, what is the status of pump P204?</item>
+        <item>Which pump is in manual on turbine 32?</item>
+        <item>On turbine 32, what is the status of the MFW pump 2?</item>
+        <item>On turbine 31, which high temperature drain pump has the lowest current?</item>
+        <item>On turbine 32, which MFW pump has tripped?</item>
+        <item>On turbine 31, what is the status of P108?</item>
+        <item>What is the pressure from the MFW pumps on turbine 31?</item>
+        <item>Which MFW pump on turbine 32 has the highest current?</item>
+        <item>Which turbine has a switchgear error or fault indication?</item>
+        <item>Are the high temperature preheaters by-passed?</item>
+        <item>Are any of the turbine regulating valves throttled?</item>
+        <item>Are all turbine 32 stop valves open?</item>
+        <item>What is the condenser pressure on turbine 31?</item>
+        <item>Are operating MFW pumps on turbine 31 operating properly?</item>
+        <item>Are any AFW cross over valves miss-positioned?</item>
+        <item>On which SG is a MFW bypass valve miss-positioned?</item>
+        <item>Which SG atmospheric control valve is in manual control?</item>
+        <item>Are all MSIVs closed?</item>
+        <item>Is the stop valve to the turbine-driven AFW pump closed?</item>
+    </string-array>
+    <string-array name="mock_correct_answer">
+        <item>3</item>
+        <item>Stopped</item>
+        <item>2</item>
+        <item>Tripped</item>
+        <item>P104</item>
+        <item>2</item>
+        <item>Running</item>
+        <item>1139</item>
+        <item>1</item>
+        <item>32</item>
+        <item>NO</item>
+        <item>NO</item>
+        <item>YES</item>
+        <item>0.70</item>
+        <item>YES</item>
+        <item>YES</item>
+        <item>3</item>
+        <item>SG-2</item>
+        <item>YES</item>
+        <item>NO</item>
+        <item>3</item>
+        <item>Stopped</item>
+        <item>2</item>
+        <item>Tripped</item>
+        <item>P104</item>
+        <item>2</item>
+        <item>Running</item>
+        <item>1139</item>
+        <item>1</item>
+        <item>32</item>
+        <item>NO</item>
+        <item>NO</item>
+        <item>YES</item>
+        <item>0.70</item>
+        <item>YES</item>
+        <item>YES</item>
+        <item>3</item>
+        <item>SG-2</item>
+        <item>YES</item>
+        <item>NO</item>
+        <item>3</item>
+        <item>Stopped</item>
+        <item>2</item>
+        <item>Tripped</item>
+        <item>P104</item>
+        <item>2</item>
+        <item>Running</item>
+        <item>1139</item>
+        <item>1</item>
+        <item>32</item>
+        <item>NO</item>
+        <item>NO</item>
+        <item>YES</item>
+        <item>0.70</item>
+        <item>YES</item>
+        <item>YES</item>
+        <item>3</item>
+        <item>SG-2</item>
+        <item>YES</item>
+        <item>NO</item>
+    </string-array>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

@@ -10,7 +10,7 @@ public class Question {
     private int mID;
     private QuestionType mType;
     private String mQuestionText;
-    private String[] mResponseOptions;
+    //private String[] mResponseOptions;
 
     public Question(int id, String questionText, QuestionType type){
         this.mID = id;
@@ -18,9 +18,9 @@ public class Question {
         this.mType = type;
     }
 
-    public String[] getResponseOptions() {
+    /*public String[] getResponseOptions() {
         return mResponseOptions;
-    }
+    }*/
 
     public String getQuestionText() {
         return mQuestionText;

@@ -9,8 +9,7 @@ import java.util.List;
 public class DbInteractorTest implements IDbInteractor {
 
     List<Question> questionList = new ArrayList<Question>();
-
-
+    private JsonManager dummyDataProvider = new JsonManager();
 
     public DbInteractorTest(){
         questionList.add(new Question(1, "Hva heter du?", QuestionType.SingleChoice));
