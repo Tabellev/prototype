@@ -5,13 +5,21 @@ package com.example.isabel.prototypestart.model;
  */
 public class MockQuestion extends Question {
     private String[] mResponseOptions;
+    //private String[] mCorrectAnswer;
+    private String mCorrectAnswer;
 
-    public MockQuestion(int id, String questionText, QuestionType type, String[] options) {
+    public MockQuestion(int id, String questionText, QuestionType type, String[] options,
+                        String correctAnswer) {
         super(id, questionText, type);
         this.mResponseOptions = options;
+        this.mCorrectAnswer = correctAnswer;
     }
 
-    public String[] getmResponseOptions() {
+    public String[] getResponseOptions() {
         return mResponseOptions;
+    }
+
+    public String getCorrectAnswer() {
+        return mCorrectAnswer;
     }
 }

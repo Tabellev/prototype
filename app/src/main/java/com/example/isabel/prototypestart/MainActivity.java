@@ -23,7 +23,7 @@ public class MainActivity extends android.support.v4.app.FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mDataManager = new DbInteractorTest();
+        mDataManager = new DbInteractorTest(getApplicationContext());
 
         super.setContentView(R.layout.activity_main);
 
