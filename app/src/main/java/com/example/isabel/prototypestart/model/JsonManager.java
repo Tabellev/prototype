@@ -22,7 +22,8 @@ public class JsonManager {
         // TODO: create HashMap<Integer, String[]> alternativesForSingleAndMultipleChoice
         // Unable to use Array with empty string for Numerical questions.
         // 1. convert mMockAlternatives to HashMap<Integer, String[]>, find key from QuestionSets
-        // 2. may need to move this operation after the Session creation here in constructor?
+        // 2. may need to use HarshMap<Integer, QuestionSet> and the same for
+        // 3. may need to move this operation after the Session creation here in constructor?
         mMockAlternatives = new String[20][];
         // Q1 - Numerical
         mMockAlternatives[0][0] = "";
