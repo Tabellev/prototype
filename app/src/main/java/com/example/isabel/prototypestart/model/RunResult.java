@@ -16,11 +16,11 @@ public class RunResult extends Run {
         this.mAnsweredQuestions = answeredQuestions;
     }
 
-    public long getmRunTimeUsed() {
+    public long getRunTimeUsed() {
         return mRunTimeUsed;
     }
 
-    public AnsweredQuestion[] getmAnsweredQuestions() {
+    public AnsweredQuestion[] getAnsweredQuestions() {
         return mAnsweredQuestions;
     }
 }

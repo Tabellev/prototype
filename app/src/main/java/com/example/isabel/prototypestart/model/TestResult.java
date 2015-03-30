@@ -30,11 +30,11 @@ public class TestResult {
         setNumberOfRuns();
     }
 
-    public long getmStartTime() {
+    public long getStartTime() {
         return mStartTime;
     }
 
-    public long getmStopTime() {
+    public long getStopTime() {
         return mStopTime;
     }
 
@@ -42,23 +42,23 @@ public class TestResult {
         this.mNumberOfRuns = mRunResults.length;
     }
 
-    public String getmExperimentName() {
+    public String getExperimentName() {
         return mExperimentName;
     }
 
-    public int getmSessionID() {
+    public int getSessionID() {
         return mSessionID;
     }
 
-    public int getmCrewID() {
+    public int getCrewID() {
         return mCrewID;
     }
 
-    public int getmNumberOfRuns() {
+    public int getNumberOfRuns() {
         return mNumberOfRuns;
     }
 
-    public RunResult[] getmRunResults() {
+    public RunResult[] getRunResults() {
         return mRunResults;
     }
 }

@@ -10,12 +10,12 @@ public class AnsweredQuestion {
     private long mTimeLimit; // From configuration file
     private long mTimeUsed;
     private boolean mSkippedQuestion;
-    private String mGivenAnswer; // Maybe given answer must be String for all questionTypes?
+    private String[] mGivenAnswer; // Maybe given answer must be String for all questionTypes?
     private String mCorrectAnswer; // Same as above?
     private boolean mAnswerWasCorrect;
 
     public AnsweredQuestion(int questionID, long timeLimit, long timeUsed, boolean skipped,
-                            String givenAnswer, String correctAnswer, boolean answerWasCorrect) {
+                            String[] givenAnswer, String correctAnswer, boolean answerWasCorrect) {
         this.mQuestionID = questionID;
         this.mTimeLimit = timeLimit;
         this.mTimeUsed = timeUsed;
@@ -25,31 +25,31 @@ public class AnsweredQuestion {
         this.mAnswerWasCorrect = answerWasCorrect;
     }
 
-    public int getmQuestionID() {
+    public int getQuestionID() {
         return mQuestionID;
     }
 
-    public long getmTimeLimit() {
+    public long getTimeLimit() {
         return mTimeLimit;
     }
 
-    public long getmTimeUsed() {
+    public long getTimeUsed() {
         return mTimeUsed;
     }
 
-    public boolean ismSkippedQuestion() {
+    public boolean isSkippedQuestion() {
         return mSkippedQuestion;
     }
 
-    public String getmGivenAnswer() {
+    public String[] getGivenAnswer() {
         return mGivenAnswer;
     }
 
-    public String getmCorrectAnswer() {
+    public String getCorrectAnswer() {
         return mCorrectAnswer;
     }
 
-    public boolean ismAnswerWasCorrect() {
+    public boolean isAnswerWasCorrect() {
         return mAnswerWasCorrect;
     }
 }
