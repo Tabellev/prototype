@@ -6,10 +6,10 @@ package com.example.isabel.prototypestart.model;
 public class MockQuestion extends Question {
     private String[] mResponseOptions;
     //private String[] mCorrectAnswer;
-    private String mCorrectAnswer;
+    private String[] mCorrectAnswer;
 
     public MockQuestion(int id, String questionText, QuestionType type, String[] options,
-                        String correctAnswer) {
+                        String[] correctAnswer) {
         super(id, questionText, type);
         this.mResponseOptions = options;
         this.mCorrectAnswer = correctAnswer;
@@ -19,7 +19,7 @@ public class MockQuestion extends Question {
         return mResponseOptions;
     }
 
-    public String getCorrectAnswer() {
+    public String[] getCorrectAnswer() {
         return mCorrectAnswer;
     }
 }
