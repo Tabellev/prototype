@@ -12,7 +12,7 @@ public class JsonManager {
     private Context context;
     // Placeholders for actual data from JSON Configuration file
     private Session mMockSession;
-    private HashMap<Integer, MockQuestion> questionMap;
+    private HashMap<Integer, Question> questionMap;
 
     public JsonManager(Context context) {
         this.context = context;
@@ -22,12 +22,12 @@ public class JsonManager {
         createQuestions();
     }
 
-    public HashMap<Integer, QuestionSet> importDataFromQuestionsFile() {
+    public HashMap<Integer, QuestionSetup> importDataFromQuestionsFile() {
         // Populate a HashMap with QuestionSets
         return null;
     }
 
-    // The actual Questions will be fetched when needed based on QuestionSet-id
+    // The actual Questions will be fetched when needed based on QuestionSetup-id
     public Session buildSessionFromJson() {
         // Instantiate a Session object with data from Configuration and Questions file
         return null;
@@ -57,11 +57,11 @@ public class JsonManager {
     }
 
     // Placeholder method for providing mock-data while implementing the View(UI)
-    private QuestionSet[] getConfigQuestionsForOneRun(int numberOfQuestions, int startId) {
-        QuestionSet[] configQuestionsReturned = new QuestionSet[numberOfQuestions];
+    private QuestionSetup[] getConfigQuestionsForOneRun(int numberOfQuestions, int startId) {
+        QuestionSetup[] configQuestionsReturned = new QuestionSetup[numberOfQuestions];
         int id = startId - 1;
         for(int i = 0; i < numberOfQuestions; i++) {
-            configQuestionsReturned[i] = new QuestionSet(++id, 30000);
+            configQuestionsReturned[i] = new QuestionSetup(++id, 30000);
         }
 
         // Returns array of QuestionSets with amount given when creating a RunSetup
@@ -69,7 +69,7 @@ public class JsonManager {
     }
 
     // Placeholder method to provide Question objects for populating the fragments
-    public HashMap<Integer, MockQuestion> getQuestionMap() {
+    public HashMap<Integer, Question> getQuestionMap() {
         return this.questionMap;
     }
 
@@ -78,31 +78,31 @@ public class JsonManager {
         // Create all the questions
         // Take real questions with real alternatives from IFE material(20 x 3)
         // Create all the Questions --> add to this.questionMap
-        HashMap<Integer, MockQuestion> returnedMockQuestions = new HashMap<>();
+        HashMap<Integer, Question> returnedMockQuestions = new HashMap<>();
         //int startId = 99;
 
         // Run 1
-        questionMap.put(100, new MockQuestion(100, "How many condensate pumps are running on turbine 31?",
+        questionMap.put(100, new Question(100, "How many condensate pumps are running on turbine 31?",
                 QuestionType.Numerical, new String[]{}, new String[]{"3"}));
-        questionMap.put(101, new MockQuestion(101, "On Turbine 31, what is the status of pump P204?",
+        questionMap.put(101, new Question(101, "On Turbine 31, what is the status of pump P204?",
                 QuestionType.SingleChoice, new String[]{"Running", "Stopped"}, new String[]{"Stopped"}));
-        questionMap.put(102, new MockQuestion(102, "Which SG atmospheric valves are in manual control?",
+        questionMap.put(102, new Question(102, "Which SG atmospheric valves are in manual control?",
                 QuestionType.MultipleChoice, new String[]{"SG-1", "SG-2", "SG-3"}, new String[]{"SG-2", "SG-3"}));
 
         // Run 2
-        questionMap.put(103, new MockQuestion(103, "How many condensate pumps are running on turbine 31?",
+        questionMap.put(103, new Question(103, "How many condensate pumps are running on turbine 31?",
                 QuestionType.Numerical, new String[]{}, new String[]{"3"}));
-        questionMap.put(104, new MockQuestion(104, "On Turbine 31, what is the status of pump P204?",
+        questionMap.put(104, new Question(104, "On Turbine 31, what is the status of pump P204?",
                 QuestionType.SingleChoice, new String[]{"Running", "Stopped"}, new String[]{"Stopped"}));
-        questionMap.put(105, new MockQuestion(105, "Which SG atmospheric valves are in manual control?",
+        questionMap.put(105, new Question(105, "Which SG atmospheric valves are in manual control?",
                 QuestionType.MultipleChoice, new String[]{"SG-1", "SG-2", "SG-3"}, new String[]{"SG-2", "SG-3"}));
 
         // Run 3
-        questionMap.put(106, new MockQuestion(106, "How many condensate pumps are running on turbine 31?",
+        questionMap.put(106, new Question(106, "How many condensate pumps are running on turbine 31?",
                 QuestionType.Numerical, new String[]{}, new String[]{"3"}));
-        questionMap.put(107, new MockQuestion(107, "On Turbine 31, what is the status of pump P204?",
+        questionMap.put(107, new Question(107, "On Turbine 31, what is the status of pump P204?",
                 QuestionType.SingleChoice, new String[]{"Running", "Stopped"}, new String[]{"Stopped"}));
-        questionMap.put(108, new MockQuestion(108, "Which SG atmospheric valves are in manual control?",
+        questionMap.put(108, new Question(108, "Which SG atmospheric valves are in manual control?",
                 QuestionType.MultipleChoice, new String[]{"SG-1", "SG-2", "SG-3"}, new String[]{"SG-2", "SG-3"}));
 
 //        String[] questions = context.getResources().getStringArray(R.array.mock_questions);
@@ -111,11 +111,11 @@ public class JsonManager {
 //        String[] questionTypes = context.getResources().getStringArray(R.array.mock_question_types);
 //
 //
-//        /*MockQuestion q = new MockQuestion(100, "spørsmålet", QuestionType.MultipleChoice,
+//        /*Question q = new Question(100, "spørsmålet", QuestionType.MultipleChoice,
 //                                        mMockAlternatives[0]);*/
 //        // int id, String questionText, QuestionType type, String[] options
 //        for (int i = 0; i <= questions.length; i++) {
-//            MockQuestion q = new MockQuestion(++startId, questions[i], QuestionType.valueOf(questionTypes[i]),
+//            Question q = new Question(++startId, questions[i], QuestionType.valueOf(questionTypes[i]),
 //                                                mMockAlternatives[0], correctAnswers[i]);
 
 

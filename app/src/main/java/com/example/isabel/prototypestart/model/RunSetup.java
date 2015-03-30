@@ -1,7 +1,5 @@
 package com.example.isabel.prototypestart.model;
 
-import java.util.ArrayList;
-
 /**
  * Created by oyvind on 16.03.2015.
  *
@@ -9,24 +7,24 @@ import java.util.ArrayList;
  */
 public class RunSetup extends Run {
     private int mNumberOfQuestions;
-    private QuestionSet[] mQuestionSet;
+    private QuestionSetup[] mQuestionSetup;
 
     public RunSetup(int runID, String operatorID, String scenario, long runTimeLimit,
-                    QuestionSet[] questionSet) {
+                    QuestionSetup[] questionSetup) {
         super(runID, operatorID, scenario, runTimeLimit);
-        this.mQuestionSet = questionSet;
+        this.mQuestionSetup = questionSetup;
         setNumberOfQuestions();
     }
 
     private void setNumberOfQuestions() {
-        this.mNumberOfQuestions = mQuestionSet.length;
+        this.mNumberOfQuestions = mQuestionSetup.length;
     }
 
     public int getNumberOfQuestions() {
         return mNumberOfQuestions;
     }
 
-    public QuestionSet[] getQuestionSet() {
-        return mQuestionSet;
+    public QuestionSetup[] getQuestionSet() {
+        return mQuestionSetup;
     }
 }

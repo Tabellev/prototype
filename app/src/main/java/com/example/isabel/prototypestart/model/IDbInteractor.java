@@ -5,7 +5,6 @@ import java.util.List;
 /**
  * Created by Isabel on 09.03.2015.
  */
-import java.util.List;
 
 /**
  * Created by Isabel on 09.03.2015.

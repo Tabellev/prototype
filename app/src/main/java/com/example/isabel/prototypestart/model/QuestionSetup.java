@@ -5,11 +5,11 @@ package com.example.isabel.prototypestart.model;
  *
  * Contains information from the Configuration file
  */
-public class QuestionSet {
+public class QuestionSetup {
     private int mQuestionID;
     private long mTimeLimit;
 
-    public QuestionSet(int questionID, long timeLimit) {
+    public QuestionSetup(int questionID, long timeLimit) {
         this.mQuestionID = questionID;
         this.mTimeLimit = timeLimit;
     }

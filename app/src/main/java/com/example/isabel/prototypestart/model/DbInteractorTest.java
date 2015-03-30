@@ -14,7 +14,7 @@ public class DbInteractorTest implements IDbInteractor {
     private Context mContext;
     private JsonManager mockDataProvider;
     // Collection to hold Question objects from Questions file
-    private HashMap<Integer, MockQuestion> mockQuestions;
+    private HashMap<Integer, Question> mockQuestions;
     private Session mockSession;
     List<Question> questionList = new ArrayList<Question>();
 
@@ -30,9 +30,11 @@ public class DbInteractorTest implements IDbInteractor {
             Log.d("Questions-content",String.valueOf(mockQuestions.get(i).getID()) + " : " +
                     mockQuestions.get(i).getQuestionText());
         }
-        questionList.add(new Question(1, "Hva heter du?", QuestionType.SingleChoice));
-        questionList.add(new Question(2,"Hvor gammel er du?", QuestionType.MultipleChoice));
-        questionList.add(new Question(3, "Hva er 5/2?", QuestionType.Numerical));
+        questionList.add(new Question(1, "Hva heter du?", QuestionType.SingleChoice, new String[]{"YES", "NO"},
+                                            new String[]{"NO"}));
+        questionList.add(new Question(2,"Hvor gammel er du?", QuestionType.MultipleChoice, new String[]{"Two", "Three", "Four", "Five"},
+                                            new String[]{"Three"}));
+        questionList.add(new Question(3, "Hva er 5/2?", QuestionType.Numerical, new String[]{}, new String[]{"2.5"}));
     }
     @Override
     public List<Question> getQuestions() {
