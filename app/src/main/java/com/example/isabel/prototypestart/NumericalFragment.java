@@ -14,6 +14,9 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.isabel.prototypestart.model.AnsweredQuestion;
+import com.example.isabel.prototypestart.model.Question;
+
 public class NumericalFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
 
     private Boolean dontKnowIsClicked = false;
@@ -32,12 +35,25 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
     private  Button btnPoint;
     private Button dontKnow;
     private ImageButton btnBackspace;
+    private TextView questionText;
+    // New---------------------------------------------
+    private int questionID;
+    private Question question;
+    private static final String QUESTIONID = "questionID";
+    private AnsweredQuestion answeredQuestion;
+    // --------------------------------------------------------
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if (container == null) {
             return null;
         }
+
+        // New ---------------------------------------------------------------------------------------
+        questionID = getArguments().getInt(QUESTIONID);
+
+        question = ((MainActivity)getActivity()).getDBInteractor().getMockQuestions().get(questionID);
+        //------------------------------------------------------------------------------------------------
 
         View view = (RelativeLayout)inflater.inflate(R.layout.fragment_numerical, container, false);
         btn0 = (Button)view.findViewById(R.id.btnZero);
@@ -68,16 +84,19 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
         dontKnow.setOnClickListener(this);
         input = (EditText) view.findViewById(R.id.input);
         swipe = (TextView) view.findViewById(R.id.numericalContinue);
+        questionText = (TextView) view.findViewById(R.id.numericalQuestion);
+        questionText.setText(question.getQuestionText());
 
         return view;
     }
 
     public NumericalFragment(){}
 
-    public static NumericalFragment newInstance(int index) {
+    public static NumericalFragment newInstance(int questionID/*index*/) {
         NumericalFragment f = new NumericalFragment();
         Bundle args = new Bundle();
-        args.putInt("index", index);
+        //args.putInt("index", index);
+        args.putInt(QUESTIONID, questionID);
         f.setArguments(args);
         return f;
     }

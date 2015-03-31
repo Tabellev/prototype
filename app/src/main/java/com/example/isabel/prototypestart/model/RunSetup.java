@@ -24,7 +24,7 @@ public class RunSetup extends Run {
         return mNumberOfQuestions;
     }
 
-    public QuestionSetup[] getQuestionSet() {
+    public QuestionSetup[] getQuestionSetup() {
         return mQuestionSetup;
     }
 }

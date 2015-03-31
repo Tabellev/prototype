@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import com.example.isabel.prototypestart.MainActivity;
 import com.example.isabel.prototypestart.R;
+import com.example.isabel.prototypestart.model.AnsweredQuestion;
+import com.example.isabel.prototypestart.model.Question;
 
 public class MultipleChoiceFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
     private Boolean option1isClicked = false;
@@ -28,13 +30,24 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
     private Button dontKnow;
     private TextView swipe;
 
+    private TextView questionText;
+    // New---------------------------------------------
+    private int questionID;
+    private Question question;
+    private static final String QUESTIONID = "questionID";
+    private AnsweredQuestion answeredQuestion;
+    // --------------------------------------------------------
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if (container == null) {
             return null;
         }
-        ((MainActivity)getActivity()).getDBInteractor();
+        // New ---------------------------------------------------------------------------------------
+        questionID = getArguments().getInt(QUESTIONID);
 
+        question = ((MainActivity)getActivity()).getDBInteractor().getMockQuestions().get(questionID);
+        //------------------------------------------------------------------------------------------------
         View view = (RelativeLayout)inflater.inflate(R.layout.fragment_multiple_choice, container, false);
         btnOption1 = (Button)view.findViewById(R.id.btnMulAnsOne);
         btnOption1.setOnClickListener(this);
@@ -47,16 +60,26 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
         dontKnow = (Button) view.findViewById(R.id.multipleDontKnow);
         dontKnow.setOnClickListener(this);
         swipe = (TextView) view.findViewById(R.id.multipleChoiceContinue);
+        questionText = (TextView) view.findViewById(R.id.multipleAnswerQuestion);
+        questionText.setText(question.getQuestionText());
+
+        // Must find a more dynamic way of doing this-------------------------------
+        btnOption1.setText(question.getResponseOptions()[0]);
+        btnOption2.setText(question.getResponseOptions()[1]);
+        btnOption3.setText(question.getResponseOptions()[2]);
+        btnOption4.setText("Skulibuli");
+        //----------------------------------------------------------------------------
 
         return view;
     }
 
     public MultipleChoiceFragment(){}
 
-    public static MultipleChoiceFragment newInstance(int index) {
+    public static MultipleChoiceFragment newInstance(int questionID/*index*/) {
         MultipleChoiceFragment f = new MultipleChoiceFragment();
         Bundle args = new Bundle();
-        args.putInt("index", index);
+        //args.putInt("index", index);
+        args.putInt(QUESTIONID, questionID);
         f.setArguments(args);
         return f;
     }

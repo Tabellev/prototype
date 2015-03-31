@@ -14,6 +14,10 @@ public class AnsweredQuestion {
     private String mCorrectAnswer; // Same as above?
     private boolean mAnswerWasCorrect;
 
+    // We may need this constructor when initializing a private instance in the Fragments
+    public AnsweredQuestion(int questionID) {
+        this.mQuestionID = questionID;
+    }
     public AnsweredQuestion(int questionID, long timeLimit, long timeUsed, boolean skipped,
                             String[] givenAnswer, String correctAnswer, boolean answerWasCorrect) {
         this.mQuestionID = questionID;

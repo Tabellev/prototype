@@ -24,6 +24,7 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
     private int questionID;
     private Question question;
     private static final String QUESTIONID = "questionID";
+    private AnsweredQuestion answeredQuestion;
 
     public static SingleChoiceFragment newInstance(int questionID) {
         SingleChoiceFragment fragmentSingleChoice = new SingleChoiceFragment();
@@ -41,7 +42,11 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
         }
         questionID = getArguments().getInt(QUESTIONID);
         // This is where the Fragment gets hold of the question
-        question = ((MainActivity)getActivity()).getDBInteractor().getQuestionFromId(questionID);
+        // Old before test with HashMap
+        //question = ((MainActivity)getActivity()).getDBInteractor().getQuestionFromId(questionID);
+
+        // Test with HashMap for Questions
+        question = ((MainActivity)getActivity()).getDBInteractor().getMockQuestions().get(questionID);
 
         // The comments below is just examples of how to interact with the data structures
         //((MainActivity)getActivity()).getDBInteractor().getTestResult().getRunResults()[0].getRunID();
@@ -57,6 +62,11 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
         swipe = (TextView) view.findViewById(R.id.singleChoiceContinue);
         questionText = (TextView) view.findViewById(R.id.singleAnswerQuestion);
         questionText.setText(question.getQuestionText());
+
+        // Must find a more dynamic way of doing this-------------------------------
+        btnOption1.setText(question.getResponseOptions()[0]);
+        btnOption2.setText(question.getResponseOptions()[1]);
+        //-----------------------------------------------------------------------
 
         return  view;
     }
