@@ -11,6 +11,7 @@ import java.util.List;
  * Created by Isabel on 09.03.2015.
  */
 public class DbInteractorTest implements IDbInteractor {
+    // The context is needed if we intend to use resources (context.getResources()...)
     private Context mContext;
     private JsonManager mockDataProvider;
     // Collection to hold Question objects from Questions file
