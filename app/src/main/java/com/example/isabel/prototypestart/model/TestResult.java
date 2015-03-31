@@ -1,5 +1,8 @@
 package com.example.isabel.prototypestart.model;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * Created by oyvind on 16.03.2015.
  *
@@ -18,7 +21,18 @@ public class TestResult {
     private int mNumberOfRuns;
     private RunResult[] mRunResults;
 
-    public TestResult(long startTime, long stopTime, String experimentName, int sessionID,
+
+    public TestResult(String experimentName, int sessionID, int crewID, int numberOfRuns) {
+        this.mExperimentName = experimentName;
+        this.mSessionID = sessionID;
+        this.mCrewID = crewID;
+        this.mNumberOfRuns = numberOfRuns;
+        this.mStartTime = 0;
+        this.mStopTime = 0;
+        this.mRunResults = new RunResult[numberOfRuns];
+    }
+
+    /*public TestResult(long startTime, long stopTime, String experimentName, int sessionID,
                       int crewID, RunResult[] runResults) {
 
         this.mStartTime = startTime;
@@ -27,20 +41,25 @@ public class TestResult {
         this.mSessionID = sessionID;
         this.mCrewID = crewID;
         this.mRunResults = runResults;
-        setNumberOfRuns();
-    }
+        // Will get numberOfRuns from Session object
+        //setNumberOfRuns();
+    }*/
 
-    public long getStartTime() {
+    /*public long getStartTime() {
         return mStartTime;
-    }
+    }*/
 
-    public long getStopTime() {
+    public void setStartTime(long startTime) { this.mStartTime = startTime; }
+
+    /*public long getStopTime() {
         return mStopTime;
-    }
+    }*/
 
-    private void setNumberOfRuns() {
+    public void setStopTime(long stopTime) { this.mStopTime = stopTime; }
+
+    /*private void setNumberOfRuns() {
         this.mNumberOfRuns = mRunResults.length;
-    }
+    }*/
 
     public String getExperimentName() {
         return mExperimentName;
@@ -60,5 +79,15 @@ public class TestResult {
 
     public RunResult[] getRunResults() {
         return mRunResults;
+    }
+
+    public void addRunResult(RunResult newRunResult) {
+        this.mRunResults = appendRunResult(this.mRunResults, newRunResult);
+    }
+
+    private RunResult[] appendRunResult(RunResult[] runResults, RunResult newRunResult) {
+        ArrayList<RunResult> temp = new ArrayList<>(Arrays.asList(runResults));
+        temp.add(newRunResult);
+        return (RunResult[]) temp.toArray();
     }
 }

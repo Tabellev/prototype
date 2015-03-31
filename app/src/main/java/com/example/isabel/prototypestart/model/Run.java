@@ -16,19 +16,19 @@ public class Run {
         this.mRunTimeLimit = runTimeLimit;
     }
 
-    public int getmRunID() {
+    public int getRunID() {
         return mRunID;
     }
 
-    public String getmOperatorID() {
+    public String getOperatorID() {
         return mOperatorID;
     }
 
-    public String getmScenario() {
+    public String getScenario() {
         return mScenario;
     }
 
-    public long getmRunTimeLimit() {
+    public long getRunTimeLimit() {
         return mRunTimeLimit;
     }
 }

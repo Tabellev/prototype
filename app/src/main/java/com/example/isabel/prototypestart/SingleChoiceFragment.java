@@ -11,8 +11,6 @@ import android.widget.TextView;
 
 import com.example.isabel.prototypestart.model.*;
 
-
-
 public class SingleChoiceFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
 
     private Button btnOption1;
@@ -42,7 +40,12 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
             return null;
         }
         questionID = getArguments().getInt(QUESTIONID);
+        // This is where the Fragment gets hold of the question
         question = ((MainActivity)getActivity()).getDBInteractor().getQuestionFromId(questionID);
+
+        // The comments below is just examples of how to interact with the data structures
+        //((MainActivity)getActivity()).getDBInteractor().getTestResult().getRunResults()[0].getRunID();
+        //((MainActivity)getActivity()).getDBInteractor().getTestResult().getRunResults()[0].addAnsweredQuestion(questionToAdd);
 
         View view = (RelativeLayout)inflater.inflate(R.layout.fragment_single_choice, container, false);
         btnOption1 = (Button)view.findViewById(R.id.btnAnswerOption1);

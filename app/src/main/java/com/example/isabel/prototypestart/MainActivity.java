@@ -36,11 +36,12 @@ public class MainActivity extends android.support.v4.app.FragmentActivity {
 
     }
 
+    // This is called from the fragments
     public IDbInteractor getDBInteractor() { return mDataManager; }
 
     public class PagerAdapter extends FragmentStatePagerAdapter {
 
-        private List<Question> questions;
+        private List<Question> questions; // Needs to be HashMap<Integer, Question>, get from mDataManager
 
         public PagerAdapter(FragmentManager fm, List<Question> questions) {
             super(fm);
