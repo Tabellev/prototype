@@ -25,6 +25,9 @@ public class DbInteractorTest implements IDbInteractor {
     private Session mockSession;
     // Will be a data-buffer for input during the test session
     private  TestResult mTestResult;
+    // Key: runSetup ID , Values: HashMap(Key: questionSetup ID , Values: QuestionSetup objects from "Configuaration file")
+    // Used in the Fragments to access a Question's time limit
+    private HashMap<Integer, HashMap<Integer, QuestionSetup>> runSetupQuestions;
     // Deprecated!
     List<Question> questionList = new ArrayList<Question>();
 
@@ -33,6 +36,7 @@ public class DbInteractorTest implements IDbInteractor {
         this.mContext = context;
         mockDataProvider = new JsonManager(mContext);
         mockQuestions = new HashMap<>();
+        runSetupQuestions = new HashMap<Integer, HashMap<Integer, QuestionSetup>>();
         this.mockQuestions = mockDataProvider.getQuestionMap();
         this.mockSession = mockDataProvider.getMockSession();
 
@@ -41,7 +45,11 @@ public class DbInteractorTest implements IDbInteractor {
         mTestResult = new TestResult(mockSession.getExperimentName(), mockSession.getSessionID(),
                                     mockSession.getCrewID(), mockSession.getNumberOfRuns());
 
+        // The data used to access a Question's time limit when populating an AnsweredQuestion object in the Fragments
+        createAccessibleQuestionSetupList();
 
+
+        // Old-----------------------------------------------------------------------------------------------
         /*information from questionList must be switched out with information from mockQuestions
         constructed from the information in mockSession*/
         questionList.add(new Question(1, "Hva heter du?", QuestionType.SingleChoice, new String[]{"YES", "NO"},
@@ -49,6 +57,23 @@ public class DbInteractorTest implements IDbInteractor {
         questionList.add(new Question(2,"Hvor gammel er du?", QuestionType.MultipleChoice, new String[]{"Two", "Three", "Four", "Five"},
                                             new String[]{"Three"}));
         questionList.add(new Question(3, "Hva er 5/2?", QuestionType.Numerical, new String[]{}, new String[]{"2.5"}));
+        //-------------------------------------------------------------------------------------------------------------------
+    }
+
+    private void createAccessibleQuestionSetupList() {
+        int lengthRuns = mockSession.getRunsToSetup().length;
+
+        for (int i = 0; i < lengthRuns; i++) {
+            HashMap<Integer, QuestionSetup> temp = new HashMap<>();
+            int runId = mockSession.getRunsToSetup()[i].getRunID();
+            int lengthQuestions = mockSession.getRunsToSetup()[i].getQuestionSetup().length;
+
+            for (int j = 0; j < lengthQuestions; j++) {
+                int questionId = mockSession.getRunsToSetup()[i].getQuestionSetup()[j].getQuestionID();
+                temp.put(questionId, mockSession.getRunsToSetup()[i].getQuestionSetup()[j]);
+            }
+            runSetupQuestions.put(mockSession.getRunsToSetup()[i].getRunID(), temp);
+        }
     }
 
     // TODO: Change to HashMap<Integer, Question> when things are working
@@ -82,5 +107,10 @@ public class DbInteractorTest implements IDbInteractor {
     @Override
     public TestResult getTestResult() {
         return mTestResult;
+    }
+
+    @Override
+    public HashMap<Integer, HashMap<Integer, QuestionSetup>> getRunSetupQuestions() {
+        return runSetupQuestions;
     }
 }

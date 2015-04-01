@@ -16,6 +16,9 @@ import android.widget.TextView;
 
 import com.example.isabel.prototypestart.model.AnsweredQuestion;
 import com.example.isabel.prototypestart.model.Question;
+import com.example.isabel.prototypestart.model.QuestionSetup;
+
+import java.util.HashMap;
 
 public class NumericalFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
 
@@ -40,6 +43,8 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
     private int questionID;
     private Question question;
     private static final String QUESTIONID = "questionID";
+
+    private HashMap<Integer, HashMap<Integer, QuestionSetup>> questionConfigurationData;
     private AnsweredQuestion answeredQuestion;
     // --------------------------------------------------------
 
@@ -53,7 +58,25 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
         questionID = getArguments().getInt(QUESTIONID);
 
         question = ((MainActivity)getActivity()).getDBInteractor().getMockQuestions().get(questionID);
-        //------------------------------------------------------------------------------------------------
+        // argument to AnsweredQuestion constructor
+        String[] correctAnswer = question.getCorrectAnswer();
+                //------------------------------------------------------------------------------------------------
+
+        // Experimental code ------------------------------------------------------------------------------------
+        // Get information about the current Question(time limit, etc.)
+        questionConfigurationData = ((MainActivity)getActivity()).getDBInteractor().getRunSetupQuestions();
+        int runId = 7000; // this ID must come from the current run which the current Question belongs to
+        HashMap<Integer, QuestionSetup> run1QuestionSetups = questionConfigurationData.get(runId);
+        // argument to AnsweredQuestion constructor
+        long timeLimit = run1QuestionSetups.get(questionID).getTimeLimit();
+
+        // instantiate answeredQuestion
+        // TODO: mTimeUsed, mSkippedQuestion, mGivenAnswer og mAnswerWasCorrect must be set when user navigates to next question
+        answeredQuestion = new AnsweredQuestion(questionID, timeLimit, correctAnswer);
+
+        //-------------------------------------------------------------------------------------------------------
+
+
 
         View view = (RelativeLayout)inflater.inflate(R.layout.fragment_numerical, container, false);
         btn0 = (Button)view.findViewById(R.id.btnZero);

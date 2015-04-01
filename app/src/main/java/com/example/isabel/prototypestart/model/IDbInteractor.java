@@ -25,4 +25,6 @@ public interface IDbInteractor {
     Session getMockSession();
 
     TestResult getTestResult();
+
+    HashMap<Integer, HashMap<Integer, QuestionSetup>> getRunSetupQuestions();
 }

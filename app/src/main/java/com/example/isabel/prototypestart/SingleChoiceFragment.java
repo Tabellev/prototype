@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.example.isabel.prototypestart.model.*;
 
+import java.util.HashMap;
+
 public class SingleChoiceFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
 
     private Button btnOption1;
@@ -24,6 +26,8 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
     private int questionID;
     private Question question;
     private static final String QUESTIONID = "questionID";
+
+    private HashMap<Integer, HashMap<Integer, QuestionSetup>> questionConfigurationData;
     private AnsweredQuestion answeredQuestion;
 
     public static SingleChoiceFragment newInstance(int questionID) {
@@ -47,6 +51,23 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
 
         // Test with HashMap for Questions
         question = ((MainActivity)getActivity()).getDBInteractor().getMockQuestions().get(questionID);
+        // argument to AnsweredQuestion constructor
+        String[] correctAnswer = question.getCorrectAnswer();
+        //------------------------------------------------------------------------------------------------
+
+        // Experimental code ------------------------------------------------------------------------------------
+        // Get information about the current Question(time limit, etc.)
+        questionConfigurationData = ((MainActivity)getActivity()).getDBInteractor().getRunSetupQuestions();
+        int runId = 7000; // this ID must come from the current run which the current Question belongs to
+        HashMap<Integer, QuestionSetup> run1QuestionSetups = questionConfigurationData.get(runId);
+        // argument to AnsweredQuestion constructor
+        long timeLimit = run1QuestionSetups.get(questionID).getTimeLimit();
+
+        // instantiate answeredQuestion
+        answeredQuestion = new AnsweredQuestion(questionID, timeLimit, correctAnswer);
+
+        //-------------------------------------------------------------------------------------------------------
+
 
         // The comments below is just examples of how to interact with the data structures
         //((MainActivity)getActivity()).getDBInteractor().getTestResult().getRunResults()[0].getRunID();

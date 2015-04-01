@@ -16,6 +16,9 @@ import com.example.isabel.prototypestart.MainActivity;
 import com.example.isabel.prototypestart.R;
 import com.example.isabel.prototypestart.model.AnsweredQuestion;
 import com.example.isabel.prototypestart.model.Question;
+import com.example.isabel.prototypestart.model.QuestionSetup;
+
+import java.util.HashMap;
 
 public class MultipleChoiceFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
     private Boolean option1isClicked = false;
@@ -35,6 +38,8 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
     private int questionID;
     private Question question;
     private static final String QUESTIONID = "questionID";
+
+    private HashMap<Integer, HashMap<Integer, QuestionSetup>> questionConfigurationData;
     private AnsweredQuestion answeredQuestion;
     // --------------------------------------------------------
 
@@ -47,7 +52,23 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
         questionID = getArguments().getInt(QUESTIONID);
 
         question = ((MainActivity)getActivity()).getDBInteractor().getMockQuestions().get(questionID);
+        // argument to AnsweredQuestion constructor
+        String[] correctAnswer = question.getCorrectAnswer();
         //------------------------------------------------------------------------------------------------
+
+        // Experimental code ------------------------------------------------------------------------------------
+        // Get information about the current Question(time limit, etc.)
+        questionConfigurationData = ((MainActivity)getActivity()).getDBInteractor().getRunSetupQuestions();
+        int runId = 7000; // this ID must come from the current run which the current Question belongs to
+        HashMap<Integer, QuestionSetup> run1QuestionSetups = questionConfigurationData.get(runId);
+        // argument to AnsweredQuestion constructor
+        long timeLimit = run1QuestionSetups.get(questionID).getTimeLimit();
+
+        // instantiate answeredQuestion
+        answeredQuestion = new AnsweredQuestion(questionID, timeLimit, correctAnswer);
+
+        //-------------------------------------------------------------------------------------------------------
+
         View view = (RelativeLayout)inflater.inflate(R.layout.fragment_multiple_choice, container, false);
         btnOption1 = (Button)view.findViewById(R.id.btnMulAnsOne);
         btnOption1.setOnClickListener(this);
