@@ -1,11 +1,13 @@
 package com.example.isabel.prototypestart;
 
 import android.app.Activity;
+import android.app.Notification;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -20,7 +22,7 @@ import com.example.isabel.prototypestart.model.QuestionSetup;
 
 import java.util.HashMap;
 
-public class NumericalFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
+public class NumericalFragment extends android.support.v4.app.Fragment implements View.OnTouchListener, View.OnLongClickListener{
 
     private Boolean dontKnowIsClicked = false;
     private EditText input;
@@ -80,31 +82,32 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
 
         View view = (RelativeLayout)inflater.inflate(R.layout.fragment_numerical, container, false);
         btn0 = (Button)view.findViewById(R.id.btnZero);
-        btn0.setOnClickListener(this);
+        btn0.setOnTouchListener(this);
         btn1 = (Button) view.findViewById(R.id.btnOne);
-        btn1.setOnClickListener(this);
+        btn1.setOnTouchListener(this);
         btn2 = (Button) view.findViewById(R.id.btnTwo);
-        btn2.setOnClickListener(this);
+        btn2.setOnTouchListener(this);
         btn3 = (Button) view.findViewById(R.id.btnThree);
-        btn3.setOnClickListener(this);
+        btn3.setOnTouchListener(this);
         btn4 = (Button) view.findViewById(R.id.btnFour);
-        btn4.setOnClickListener(this);
+        btn4.setOnTouchListener(this);
         btn5 = (Button) view.findViewById(R.id.btnFive);
-        btn5.setOnClickListener(this);
+        btn5.setOnTouchListener(this);
         btn6 = (Button) view.findViewById(R.id.btnSix);
-        btn6.setOnClickListener(this);
+        btn6.setOnTouchListener(this);
         btn7 = (Button) view.findViewById(R.id.btnSeven);
-        btn7.setOnClickListener(this);
+        btn7.setOnTouchListener(this);
         btn8 = (Button) view.findViewById(R.id.btnEight);
-        btn8.setOnClickListener(this);
+        btn8.setOnTouchListener(this);
         btn9 = (Button) view.findViewById(R.id.btnNine);
-        btn9.setOnClickListener(this);
+        btn9.setOnTouchListener(this);
         btnPoint = (Button) view.findViewById(R.id.btnPoint);
-        btnPoint.setOnClickListener(this);
+        btnPoint.setOnTouchListener(this);
         btnBackspace = (ImageButton) view.findViewById(R.id.backspace);
-        btnBackspace.setOnClickListener(this);
+        btnBackspace.setOnTouchListener(this);
+        btnBackspace.setOnLongClickListener(this);
         dontKnow = (Button) view.findViewById(R.id.btnNumericalDontKnow);
-        dontKnow.setOnClickListener(this);
+        dontKnow.setOnTouchListener(this);
         input = (EditText) view.findViewById(R.id.input);
         swipe = (TextView) view.findViewById(R.id.numericalContinue);
         questionText = (TextView) view.findViewById(R.id.numericalQuestion);
@@ -140,7 +143,130 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
         }
     }
 
+
+
     @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        if(event.getAction() == MotionEvent.ACTION_DOWN){
+            switch (v.getId()) {
+                case R.id.btnZero:
+                    v.setBackgroundColor(Color.rgb(7, 147, 194));
+                    break;
+                case R.id.btnOne:
+                    v.setBackgroundColor(Color.rgb(7, 147, 194));
+                    break;
+                case R.id.btnTwo:
+                    v.setBackgroundColor(Color.rgb(7, 147, 194));
+                    break;
+                case R.id.btnThree:
+                    v.setBackgroundColor(Color.rgb(7, 147, 194));
+                    break;
+                case R.id.btnFour:
+                    v.setBackgroundColor(Color.rgb(7, 147, 194));
+                    break;
+                case R.id.btnFive:
+                    v.setBackgroundColor(Color.rgb(7, 147, 194));
+                    break;
+                case R.id.btnSix:
+                    v.setBackgroundColor(Color.rgb(7, 147, 194));
+                    break;
+                case R.id.btnSeven:
+                    v.setBackgroundColor(Color.rgb(7, 147, 194));
+                    break;
+                case R.id.btnEight:
+                    v.setBackgroundColor(Color.rgb(7, 147, 194));
+                    break;
+                case R.id.btnNine:
+                    v.setBackgroundColor(Color.rgb(7, 147, 194));
+                    break;
+                case R.id.btnPoint:
+                    v.setBackgroundColor(Color.rgb(7, 147, 194));
+                    break;
+                case R.id.backspace:
+                    v.setBackgroundColor(Color.rgb(7, 147, 194));
+                    break;
+                case R.id.btnNumericalDontKnow:
+                    v.setBackgroundColor(Color.rgb(7, 147, 194));
+                    break;
+            }
+        } else if(event.getAction() == MotionEvent.ACTION_UP){
+            switch (v.getId()) {
+                case R.id.btnZero:
+                    input.setText(input.getText() + "0");
+                    swipe.setVisibility(View.VISIBLE);
+                    v.setBackgroundColor(Color.rgb(160, 200, 220));
+                    break;
+                case R.id.btnOne:
+                    input.setText(input.getText() + "1");
+                    swipe.setVisibility(View.VISIBLE);
+                    v.setBackgroundColor(Color.rgb(160, 200, 220));
+                    break;
+                case R.id.btnTwo:
+                    input.setText(input.getText() + "2");
+                    swipe.setVisibility(View.VISIBLE);
+                    v.setBackgroundColor(Color.rgb(160, 200, 220));
+                    break;
+                case R.id.btnThree:
+                    input.setText(input.getText() + "3");
+                    swipe.setVisibility(View.VISIBLE);
+                    v.setBackgroundColor(Color.rgb(160, 200, 220));
+                    break;
+                case R.id.btnFour:
+                    input.setText(input.getText() + "4");
+                    swipe.setVisibility(View.VISIBLE);
+                    v.setBackgroundColor(Color.rgb(160, 200, 220));
+                    break;
+                case R.id.btnFive:
+                    input.setText(input.getText() + "5");
+                    swipe.setVisibility(View.VISIBLE);
+                    v.setBackgroundColor(Color.rgb(160, 200, 220));
+                    break;
+                case R.id.btnSix:
+                    input.setText(input.getText() + "6");
+                    swipe.setVisibility(View.VISIBLE);
+                    v.setBackgroundColor(Color.rgb(160, 200, 220));
+                    break;
+                case R.id.btnSeven:
+                    input.setText(input.getText() + "7");
+                    swipe.setVisibility(View.VISIBLE);
+                    v.setBackgroundColor(Color.rgb(160, 200, 220));
+                    break;
+                case R.id.btnEight:
+                    input.setText(input.getText() + "8");
+                    swipe.setVisibility(View.VISIBLE);
+                    v.setBackgroundColor(Color.rgb(160, 200, 220));
+                    break;
+                case R.id.btnNine:
+                    input.setText(input.getText() + "9");
+                    swipe.setVisibility(View.VISIBLE);
+                    v.setBackgroundColor(Color.rgb(160, 200, 220));
+                    break;
+                case R.id.btnPoint:
+                    if (!isPoint(input.getText().toString())) {
+                        input.setText(input.getText() + ".");
+                        swipe.setVisibility(View.VISIBLE);
+                        v.setBackgroundColor(Color.rgb(160, 200, 220));
+                    } else {
+                        v.setBackgroundColor(Color.rgb(160, 200, 220));
+                    }
+                    break;
+                case R.id.backspace:
+                    input.setText(eraseCharacter(input.getText().toString()));
+                    v.setBackgroundColor(Color.rgb(160, 200, 220));
+                    break;
+            }
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        input.setText("");
+        return true;
+    }
+
+   /* @Override
     public void onClick(View v) {
 
         switch (v.getId()){
@@ -255,5 +381,5 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
                 }
                 break;
         }
-    }
+    }*/
 }
