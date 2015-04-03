@@ -147,7 +147,7 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        if(event.getAction() == MotionEvent.ACTION_DOWN){
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
             switch (v.getId()) {
                 case R.id.btnZero:
                     v.setBackgroundColor(Color.rgb(7, 147, 194));
@@ -189,7 +189,7 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
                     v.setBackgroundColor(Color.rgb(7, 147, 194));
                     break;
             }
-        } else if(event.getAction() == MotionEvent.ACTION_UP){
+        } else if (event.getAction() == MotionEvent.ACTION_UP) {
             switch (v.getId()) {
                 case R.id.btnZero:
                     input.setText(input.getText() + "0");
@@ -275,151 +275,36 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
         }
 
         return false;
-    /**
-     * Called when the Fragment is no longer resumed.  This is generally
-     * tied to {@link android.app.Activity#onPause() Activity.onPause} of the containing
-     * Activity's lifecycle.
-     */
-    @Override
-    public void onPause() {
-        Log.d("IN ON_PAUSE():", "Fragment got paused.");
-        super.onPause();
     }
+        /**
+         * Called when the Fragment is no longer resumed.  This is generally
+         * tied to {@link android.app.Activity#onPause() Activity.onPause} of the containing
+         * Activity's lifecycle.
+         */
+        @Override
+        public void onPause () {
+            Log.d("IN ON_PAUSE():", "Fragment got paused.");
+            super.onPause();
+        }
 
-    /**
-     * Called when the Fragment is no longer resumed.  This is generally
-     * tied to {@link android.app.Activity#onPause() Activity.onPause} of the containing
-     * Activity's lifecycle.
-     */
-    @Override
-    public void onStop() {
-        Log.d("IN ON_STOP():", "Fragment got stopped.");
-        String[] answerFromInput = new String[]{input.getText().toString()};
-        answeredQuestion.setGivenAnswer(answerFromInput);
+        /**
+         * Called when the Fragment is no longer resumed.  This is generally
+         * tied to {@link android.app.Activity#onPause() Activity.onPause} of the containing
+         * Activity's lifecycle.
+         */
+        @Override
+        public void onStop () {
+            Log.d("IN ON_STOP():", "Fragment got stopped.");
+            String[] answerFromInput = new String[]{input.getText().toString()};
+            answeredQuestion.setGivenAnswer(answerFromInput);
 
-        super.onStop();
-    }
+            super.onStop();
+        }
+
 
     @Override
     public boolean onLongClick(View v) {
         input.setText("");
         return true;
     }
-
-   /* @Override
-    public void onClick(View v) {
-
-        switch (v.getId()){
-            case R.id.btnZero:
-                input.setText(input.getText() + "0");
-                swipe.setVisibility(View.VISIBLE);
-                break;
-            case R.id.btnOne:
-                input.setText(input.getText() + "1");
-                swipe.setVisibility(View.VISIBLE);
-                break;
-            case R.id.btnTwo:
-                input.setText(input.getText() + "2");
-                swipe.setVisibility(View.VISIBLE);
-                break;
-            case R.id.btnThree:
-                input.setText(input.getText() + "3");
-                swipe.setVisibility(View.VISIBLE);
-                break;
-            case R.id.btnFour:
-                input.setText(input.getText() + "4");
-                swipe.setVisibility(View.VISIBLE);
-                break;
-            case R.id.btnFive:
-                input.setText(input.getText() + "5");
-                swipe.setVisibility(View.VISIBLE);
-                break;
-            case R.id.btnSix:
-                input.setText(input.getText() + "6");
-                swipe.setVisibility(View.VISIBLE);
-                break;
-            case R.id.btnSeven:
-                input.setText(input.getText() + "7");
-                swipe.setVisibility(View.VISIBLE);
-                break;
-            case R.id.btnEight:
-                input.setText(input.getText() + "8");
-                swipe.setVisibility(View.VISIBLE);
-                break;
-            case R.id.btnNine:
-                input.setText(input.getText() + "9");
-                swipe.setVisibility(View.VISIBLE);
-                break;
-            case R.id.btnPoint:
-                if(!isPoint(input.getText().toString())){
-                    input.setText(input.getText() + ".");
-                    swipe.setVisibility(View.VISIBLE);
-                }else{
-                    return;
-                }
-                break;
-            case R.id.backspace:
-                input.setText(eraseCharacter(input.getText().toString()));
-                break;
-            case R.id.btnNumericalDontKnow:
-                if(!dontKnowIsClicked){
-                    dontKnow.setBackgroundColor(Color.rgb(7, 147, 194));
-                    btn0.setEnabled(false);
-                    btn0.setBackgroundColor(Color.argb(50,160, 200, 220));
-                    btn1.setEnabled(false);
-                    btn1.setBackgroundColor(Color.argb(50,160, 200, 220));
-                    btn2.setEnabled(false);
-                    btn2.setBackgroundColor(Color.argb(50,160, 200, 220));
-                    btn3.setEnabled(false);
-                    btn3.setBackgroundColor(Color.argb(50,160, 200, 220));
-                    btn4.setEnabled(false);
-                    btn4.setBackgroundColor(Color.argb(50,160, 200, 220));
-                    btn5.setEnabled(false);
-                    btn5.setBackgroundColor(Color.argb(50,160, 200, 220));
-                    btn6.setEnabled(false);
-                    btn6.setBackgroundColor(Color.argb(50,160, 200, 220));
-                    btn7.setEnabled(false);
-                    btn7.setBackgroundColor(Color.argb(50,160, 200, 220));
-                    btn8.setEnabled(false);
-                    btn8.setBackgroundColor(Color.argb(50,160, 200, 220));
-                    btn9.setEnabled(false);
-                    btn9.setBackgroundColor(Color.argb(50,160, 200, 220));
-                    btnPoint.setEnabled(false);
-                    btnPoint.setBackgroundColor(Color.argb(50,160, 200, 220));
-                    btnBackspace.setEnabled(false);
-                    btnBackspace.setBackgroundColor(Color.argb(50,160, 200, 220));
-                    input.setText("");
-                    swipe.setVisibility(View.VISIBLE);
-                    dontKnowIsClicked = true;
-                }else{
-                    dontKnow.setBackgroundColor(Color.rgb(160, 200, 220));
-                    btn0.setEnabled(true);
-                    btn0.setBackgroundColor(Color.rgb(160, 200, 220));
-                    btn1.setEnabled(true);
-                    btn1.setBackgroundColor(Color.rgb(160, 200, 220));
-                    btn2.setEnabled(true);
-                    btn2.setBackgroundColor(Color.rgb(160, 200, 220));
-                    btn3.setEnabled(true);
-                    btn3.setBackgroundColor(Color.rgb(160, 200, 220));
-                    btn4.setEnabled(true);
-                    btn4.setBackgroundColor(Color.rgb(160, 200, 220));
-                    btn5.setEnabled(true);
-                    btn5.setBackgroundColor(Color.rgb(160, 200, 220));
-                    btn6.setEnabled(true);
-                    btn6.setBackgroundColor(Color.rgb(160, 200, 220));
-                    btn7.setEnabled(true);
-                    btn7.setBackgroundColor(Color.rgb(160, 200, 220));
-                    btn8.setEnabled(true);
-                    btn8.setBackgroundColor(Color.rgb(160, 200, 220));
-                    btn9.setEnabled(true);
-                    btn9.setBackgroundColor(Color.rgb(160, 200, 220));
-                    btnPoint.setEnabled(true);
-                    btnPoint.setBackgroundColor(Color.rgb(160, 200, 220));
-                    btnBackspace.setEnabled(true);
-                    btnBackspace.setBackgroundColor(Color.rgb(160, 200, 220));
-                    dontKnowIsClicked = false;
-                }
-                break;
-        }
-    }*/
 }
