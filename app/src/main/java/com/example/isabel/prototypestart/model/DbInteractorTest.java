@@ -11,6 +11,7 @@ import java.util.List;
  * Created by Isabel on 09.03.2015.
  *
  * This class is the central provider of data for the application
+ * TODO: We may be forced to build the AnsweredQuestion objects tied to the Fragments here, and save input to this object with the ViewPager.OnPageChangeListeners methods
  *
  * TODO: Rename everything containing mock[....] when things are working as expected
  */
