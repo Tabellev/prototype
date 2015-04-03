@@ -195,64 +195,81 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
                     input.setText(input.getText() + "0");
                     swipe.setVisibility(View.VISIBLE);
                     v.setBackgroundColor(Color.rgb(160, 200, 220));
+                    dontKnow.setBackgroundColor(Color.rgb(160, 200, 220));
                     break;
                 case R.id.btnOne:
                     input.setText(input.getText() + "1");
                     swipe.setVisibility(View.VISIBLE);
                     v.setBackgroundColor(Color.rgb(160, 200, 220));
+                    dontKnow.setBackgroundColor(Color.rgb(160, 200, 220));
                     break;
                 case R.id.btnTwo:
                     input.setText(input.getText() + "2");
                     swipe.setVisibility(View.VISIBLE);
                     v.setBackgroundColor(Color.rgb(160, 200, 220));
+                    dontKnow.setBackgroundColor(Color.rgb(160, 200, 220));
                     break;
                 case R.id.btnThree:
                     input.setText(input.getText() + "3");
                     swipe.setVisibility(View.VISIBLE);
                     v.setBackgroundColor(Color.rgb(160, 200, 220));
+                    dontKnow.setBackgroundColor(Color.rgb(160, 200, 220));
                     break;
                 case R.id.btnFour:
                     input.setText(input.getText() + "4");
                     swipe.setVisibility(View.VISIBLE);
                     v.setBackgroundColor(Color.rgb(160, 200, 220));
+                    dontKnow.setBackgroundColor(Color.rgb(160, 200, 220));
                     break;
                 case R.id.btnFive:
                     input.setText(input.getText() + "5");
                     swipe.setVisibility(View.VISIBLE);
                     v.setBackgroundColor(Color.rgb(160, 200, 220));
+                    dontKnow.setBackgroundColor(Color.rgb(160, 200, 220));
                     break;
                 case R.id.btnSix:
                     input.setText(input.getText() + "6");
                     swipe.setVisibility(View.VISIBLE);
                     v.setBackgroundColor(Color.rgb(160, 200, 220));
+                    dontKnow.setBackgroundColor(Color.rgb(160, 200, 220));
                     break;
                 case R.id.btnSeven:
                     input.setText(input.getText() + "7");
                     swipe.setVisibility(View.VISIBLE);
                     v.setBackgroundColor(Color.rgb(160, 200, 220));
+                    dontKnow.setBackgroundColor(Color.rgb(160, 200, 220));
                     break;
                 case R.id.btnEight:
                     input.setText(input.getText() + "8");
                     swipe.setVisibility(View.VISIBLE);
                     v.setBackgroundColor(Color.rgb(160, 200, 220));
+                    dontKnow.setBackgroundColor(Color.rgb(160, 200, 220));
                     break;
                 case R.id.btnNine:
                     input.setText(input.getText() + "9");
                     swipe.setVisibility(View.VISIBLE);
                     v.setBackgroundColor(Color.rgb(160, 200, 220));
+                    dontKnow.setBackgroundColor(Color.rgb(160, 200, 220));
+                    break;
+                case R.id.btnNumericalDontKnow:
+                    v.setBackgroundColor(Color.rgb(7, 147, 194));
+                    input.setText("");
                     break;
                 case R.id.btnPoint:
                     if (!isPoint(input.getText().toString())) {
                         input.setText(input.getText() + ".");
                         swipe.setVisibility(View.VISIBLE);
                         v.setBackgroundColor(Color.rgb(160, 200, 220));
+                        dontKnow.setBackgroundColor(Color.rgb(160, 200, 220));
                     } else {
                         v.setBackgroundColor(Color.rgb(160, 200, 220));
+                        dontKnow.setBackgroundColor(Color.rgb(160, 200, 220));
                     }
                     break;
                 case R.id.backspace:
                     input.setText(eraseCharacter(input.getText().toString()));
                     v.setBackgroundColor(Color.rgb(160, 200, 220));
+                    dontKnow.setBackgroundColor(Color.rgb(160, 200, 220));
                     break;
             }
         }
