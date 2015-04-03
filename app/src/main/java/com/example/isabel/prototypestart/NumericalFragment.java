@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -138,6 +139,31 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
         }else{
             return false;
         }
+    }
+
+    /**
+     * Called when the Fragment is no longer resumed.  This is generally
+     * tied to {@link android.app.Activity#onPause() Activity.onPause} of the containing
+     * Activity's lifecycle.
+     */
+    @Override
+    public void onPause() {
+        Log.d("IN ON_PAUSE():", "Fragment got paused.");
+        super.onPause();
+    }
+
+    /**
+     * Called when the Fragment is no longer resumed.  This is generally
+     * tied to {@link android.app.Activity#onPause() Activity.onPause} of the containing
+     * Activity's lifecycle.
+     */
+    @Override
+    public void onStop() {
+        Log.d("IN ON_STOP():", "Fragment got stopped.");
+        String[] answerFromInput = new String[]{input.getText().toString()};
+        answeredQuestion.setGivenAnswer(answerFromInput);
+
+        super.onStop();
     }
 
     @Override

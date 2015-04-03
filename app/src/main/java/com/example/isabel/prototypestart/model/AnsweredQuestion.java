@@ -73,11 +73,21 @@ public class AnsweredQuestion {
         this.mSkippedQuestion = mSkippedQuestion;
     }
 
-    public void setGivenAnswer(String[] mGivenAnswer) {
-        this.mGivenAnswer = mGivenAnswer;
+    public void setGivenAnswer(String[] givenAnswer) {
+        this.mGivenAnswer = givenAnswer;
+        for (int i = 0; i < mCorrectAnswer.length; i++) {
+            for (int j = 0; j < givenAnswer.length; j++) {
+                if (mCorrectAnswer[i].equals(givenAnswer[j])) {
+                    this.mAnswerWasCorrect = true;
+                } else {
+                    this.mAnswerWasCorrect = false;
+                }
+            }
+        }
     }
 
-    public void setAnswerWasCorrect(boolean mAnswerWasCorrect) {
-        this.mAnswerWasCorrect = mAnswerWasCorrect;
-    }
+    /*private void setAnswerWasCorrect(boolean answerWasCorrect) {
+
+        this.mAnswerWasCorrect = answerWasCorrect;
+    }*/
 }
