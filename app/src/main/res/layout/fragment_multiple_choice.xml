@@ -12,7 +12,13 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="106dp" />
 
-    <Button
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:id="@+id/buttonLayout"/>
+    <!--<Button
         style="@style/ButtonAnswerStyle"
         android:text="@string/griffindor"
         android:id="@+id/btnMulAnsOne"
@@ -38,7 +44,7 @@
         android:text="@string/rawenclaw"
         android:id="@+id/btnMulAnsFour"
         android:layout_alignTop="@+id/btnMulAnsThree"
-        android:layout_alignEnd="@+id/multipleAnswerQuestion" />
+        android:layout_alignEnd="@+id/multipleAnswerQuestion" /> -->
 
     <Button
         style="@style/ButtonDontKnowStyle"
