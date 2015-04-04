@@ -5,4 +5,10 @@
     <item name="btnOption3Id" type="id"/>
     <item name="btnOption4Id" type="id"/>
     <item name="btnOption5Id" type="id"/>
+
+    <item name="btnSingleOption1Id" type="id"/>
+    <item name="btnSingleOption2Id" type="id"/>
+    <item name="btnSingleOption3Id" type="id"/>
+    <item name="btnSingleOption4Id" type="id"/>
+    <item name="btnSingleOption5Id" type="id"/>
 </resources>

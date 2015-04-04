@@ -29,7 +29,6 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
     private Boolean option3isClicked = false;
     private Boolean option4isClicked = false;
     private Boolean option5isClicked = false;
-    private Boolean dontKnowIsClicked = false;
     private Button btnOption1;
     private Button btnOption2;
     private Button btnOption3;
