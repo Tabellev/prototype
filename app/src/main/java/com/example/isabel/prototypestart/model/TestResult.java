@@ -1,5 +1,7 @@
 package com.example.isabel.prototypestart.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -13,12 +15,17 @@ import java.util.Arrays;
  * Alias: Output file
  */
 public class TestResult {
-    private long mStartTime;
-    private long mStopTime;
+    /*private long mStartTime;
+    private long mStopTime;*/
+    @SerializedName("experimentName")
     private String mExperimentName;
+    @SerializedName("sessionID")
     private int mSessionID;
+    @SerializedName("crewID")
     private int mCrewID;
+    @SerializedName("numberOfRuns")
     private int mNumberOfRuns;
+    @SerializedName("runs")
     private RunResult[] mRunResults;
 
 
@@ -27,8 +34,8 @@ public class TestResult {
         this.mSessionID = sessionID;
         this.mCrewID = crewID;
         this.mNumberOfRuns = numberOfRuns;
-        this.mStartTime = 0;
-        this.mStopTime = 0;
+        /*this.mStartTime = 0;
+        this.mStopTime = 0;*/
         this.mRunResults = new RunResult[numberOfRuns];
     }
 
@@ -49,13 +56,13 @@ public class TestResult {
         return mStartTime;
     }*/
 
-    public void setStartTime(long startTime) { this.mStartTime = startTime; }
+    /*public void setStartTime(long startTime) { this.mStartTime = startTime; }*/
 
     /*public long getStopTime() {
         return mStopTime;
     }*/
 
-    public void setStopTime(long stopTime) { this.mStopTime = stopTime; }
+    /*public void setStopTime(long stopTime) { this.mStopTime = stopTime; }*/
 
     /*private void setNumberOfRuns() {
         this.mNumberOfRuns = mRunResults.length;
@@ -85,6 +92,7 @@ public class TestResult {
         this.mRunResults = appendRunResult(this.mRunResults, newRunResult);
     }
 
+    // If this fails, build RunResult[] in DBInteractorTest
     private RunResult[] appendRunResult(RunResult[] runResults, RunResult newRunResult) {
         ArrayList<RunResult> temp = new ArrayList<>(Arrays.asList(runResults));
         temp.add(newRunResult);

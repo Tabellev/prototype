@@ -1,5 +1,7 @@
 package com.example.isabel.prototypestart.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -9,7 +11,15 @@ import java.util.Arrays;
  * A run holding results from test
  */
 public class RunResult extends Run {
+    @SerializedName("startTime")
+    private long mStartTime; // Must be a Date, not long
+    @SerializedName("stopTime")
+    private long mStopTime; // Must be a Date, not long
+    @SerializedName("runTimeUsed")
     private long mRunTimeUsed;
+    @SerializedName("numberOfQuestions")
+    private int mNumberOfQuestions;
+    @SerializedName("answeredQuestions")
     private AnsweredQuestion[] mAnsweredQuestions; // initialize with numberOfQuestions from RunSetup (1)
 
     // Add parameter int numberOfQuestions (2)
@@ -17,12 +27,20 @@ public class RunResult extends Run {
                      long runTimeUsed, int numberOfQuestions /*AnsweredQuestion[] answeredQuestions*/) {
         super(runID, operatorID, scenario, runTimeLimit);
         this.mRunTimeUsed = runTimeUsed;
-
+        this.mNumberOfQuestions = numberOfQuestions;
         // Initialize mAnsweredQuestions here (3)
         this.mAnsweredQuestions = new AnsweredQuestion[numberOfQuestions];
         //this.mAnsweredQuestions = answeredQuestions;
     }
 
+    private void setStartTime() {
+        this.mStartTime = 0;
+        // Convert to Date with timezone!!!!!!!!!!
+    }
+    public void setStopTime() {
+        this.mStopTime = 0;
+        // Convert to Date with timezone!!!!!!!!!
+    }
     public long getRunTimeUsed() {
         return mRunTimeUsed;
     }
@@ -38,6 +56,7 @@ public class RunResult extends Run {
         this.mAnsweredQuestions = appendQuestion(this.mAnsweredQuestions, question);
     }
 
+    // If this fails, build AnsweredQuestion[] in DBInteractorTest
     private AnsweredQuestion[] appendQuestion(AnsweredQuestion[] answeredQuestions, AnsweredQuestion newQuestion) {
         ArrayList<AnsweredQuestion> temp = new ArrayList<>(Arrays.asList(answeredQuestions));
         temp.add(newQuestion);

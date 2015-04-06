@@ -1,0 +1,151 @@
+{
+  "experimentName": "Micro-Tasks",
+  "sessionID": "5000",
+  "crewID": "800",
+  "runs": [
+    {
+      "runID": "7000",
+      "operatorID": "SS",
+      "scenario": "c2",
+      "runTimeLimit": 300000,
+      "questionSetups": [
+        {
+          "questionID": "100",
+          "timeLimit": 30000
+        },
+        {
+          "questionID": "101",
+          "timeLimit": 20000
+        },
+        {
+          "questionID": "102",
+          "timeLimit": 40000
+        },
+        {
+          "questionID": "103",
+          "timeLimit": 30000
+        },
+        {
+          "questionID": "104",
+          "timeLimit": 40000
+        },
+        {
+          "questionID": "105",
+          "timeLimit": 30000
+        },
+        {
+          "questionID": "106",
+          "timeLimit": 40000
+        },
+        {
+          "questionID": "107",
+          "timeLimit": 20000
+        },
+        {
+          "questionID": "108",
+          "timeLimit": 30000
+        },
+        {
+          "questionID": "109",
+          "timeLimit": 20000
+        }
+      ]
+    },
+    {
+      "runID": "7001",
+      "operatorID": "SS",
+      "scenario": "c1",
+      "runTimeLimit": 300,
+      "questionSetups": [
+        {
+          "questionID": "110",
+          "timeLimit": 30
+        },
+        {
+          "questionID": "111",
+          "timeLimit": 20
+        },
+        {
+          "questionID": "112",
+          "timeLimit": 40
+        },
+        {
+          "questionID": "113",
+          "timeLimit": 30
+        },
+        {
+          "questionID": "114",
+          "timeLimit": 40
+        },
+        {
+          "questionID": "115",
+          "timeLimit": 30
+        },
+        {
+          "questionID": "116",
+          "timeLimit": 40
+        },
+        {
+          "questionID": "117",
+          "timeLimit": 20
+        },
+        {
+          "questionID": "118",
+          "timeLimit": 30
+        },
+        {
+          "questionID": "119",
+          "timeLimit": 20
+        }
+      ]
+    },
+    {
+      "runID": "7002",
+      "operatorID": "SS",
+      "scenario": "c3",
+      "runTimeLimit": 300,
+      "questionSetups": [
+        {
+          "questionID": "120",
+          "timeLimit": 30
+        },
+        {
+          "questionID": "121",
+          "timeLimit": 20
+        },
+        {
+          "questionID": "122",
+          "timeLimit": 40
+        },
+        {
+          "questionID": "123",
+          "timeLimit": 30
+        },
+        {
+          "questionID": "124",
+          "timeLimit": 40
+        },
+        {
+          "questionID": "125",
+          "timeLimit": 30
+        },
+        {
+          "questionID": "126",
+          "timeLimit": 40
+        },
+        {
+          "questionID": "127",
+          "timeLimit": 20
+        },
+        {
+          "questionID": "128",
+          "timeLimit": 30
+        },
+        {
+          "questionID": "129",
+          "timeLimit": 20
+        }
+      ]
+    }
+  ]
+}

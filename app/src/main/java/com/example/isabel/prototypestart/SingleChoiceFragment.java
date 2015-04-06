@@ -65,6 +65,8 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
         // Experimental code ------------------------------------------------------------------------------------
         // Get information about the current Question(time limit, etc.)
         questionConfigurationData = ((MainActivity)getActivity()).getDBInteractor().getRunSetupQuestions();
+
+        // TODO: separate the Runs with the 'runFinished'-Fragments
         int runId = 7000; // this ID must come from the current run which the current Question belongs to
         HashMap<Integer, QuestionSetup> run1QuestionSetups = questionConfigurationData.get(runId);
         // argument to AnsweredQuestion constructor

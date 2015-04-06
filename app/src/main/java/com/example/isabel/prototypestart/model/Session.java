@@ -1,5 +1,7 @@
 package com.example.isabel.prototypestart.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.ArrayList;
 
 /**
@@ -10,11 +12,16 @@ import java.util.ArrayList;
  * It represents the Configuration file
  */
 public class Session {
+    @SerializedName("experimentName")
     private String mExperimentName;
+    @SerializedName("sessionID")
     private int mSessionID;
+    @SerializedName("crewID")
     private int mCrewID;
     private int mNumberOfRuns;
+    @SerializedName("runs")
     private RunSetup[] mRunsToSetup;
+
 
     public Session(String experimentName, int sessionID, int crewID, RunSetup[] runsToSetup) {
         this.mExperimentName = experimentName;

@@ -1,13 +1,20 @@
 package com.example.isabel.prototypestart.model;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by oyvind on 20.03.2015.
  */
 public class Run {
+    @SerializedName("runID")
     private int mRunID;
+    @SerializedName("operatorID")
     private String mOperatorID;
+    @SerializedName("scenario")
     private String mScenario;
+    @SerializedName("runTimeLimit")
     private long mRunTimeLimit;
+
 
     public Run(int runID, String operatorID, String scenario, long runTimeLimit) {
         this.mRunID = runID;

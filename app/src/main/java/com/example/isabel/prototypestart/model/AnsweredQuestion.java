@@ -1,17 +1,28 @@
 package com.example.isabel.prototypestart.model;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.util.Arrays;
+
 /**
  * Created by oyvind on 16.03.2015.
  *
  * Will represent a question in the Output file
  */
 public class AnsweredQuestion {
+    @SerializedName("questionID")
     private int mQuestionID;
+    @SerializedName("timeLimit")
     private long mTimeLimit;
+    @SerializedName("timeUsed")
     private long mTimeUsed;
+    @SerializedName("skippedQuestion")
     private boolean mSkippedQuestion;
+    @SerializedName("givenAnswer")
     private String[] mGivenAnswer;
+    @SerializedName("correctAnswer")
     private String[] mCorrectAnswer;
+    @SerializedName("answerWasCorrect")
     private boolean mAnswerWasCorrect;
 
 
@@ -20,6 +31,8 @@ public class AnsweredQuestion {
         this.mQuestionID = questionID;
         this.mTimeLimit = timeLimit;
         this.mCorrectAnswer = correctAnswer;
+        // mSkippedQuestion is set false when an answer is given
+        this.mSkippedQuestion = true;
     }
 
     /*public AnsweredQuestion(int questionID, long timeLimit, long timeUsed, boolean skipped,
@@ -75,15 +88,12 @@ public class AnsweredQuestion {
 
     public void setGivenAnswer(String[] givenAnswer) {
         this.mGivenAnswer = givenAnswer;
-        for (int i = 0; i < mCorrectAnswer.length; i++) {
-            for (int j = 0; j < givenAnswer.length; j++) {
-                if (mCorrectAnswer[i].equals(givenAnswer[j])) {
-                    this.mAnswerWasCorrect = true;
-                } else {
-                    this.mAnswerWasCorrect = false;
-                }
-            }
-        }
+
+        Arrays.sort(mCorrectAnswer);
+        Arrays.sort(mGivenAnswer);
+
+        this.mSkippedQuestion = false;
+        this.mAnswerWasCorrect = Arrays.equals(mCorrectAnswer, mGivenAnswer);
     }
 
     /*private void setAnswerWasCorrect(boolean answerWasCorrect) {
