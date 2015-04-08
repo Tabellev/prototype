@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -113,6 +114,7 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
         swipe = (TextView) view.findViewById(R.id.numericalContinue);
         questionText = (TextView) view.findViewById(R.id.numericalQuestion);
         questionText.setText(question.getQuestionText());
+        input.setInputType(InputType.TYPE_NULL);
 
         return view;
     }

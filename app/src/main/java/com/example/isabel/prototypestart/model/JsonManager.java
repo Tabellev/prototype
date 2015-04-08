@@ -236,11 +236,13 @@ public class JsonManager {
         // Take real questions with real alternatives from IFE material(20 x 3)
         // Create all the Questions --> add to this.questionMap
         HashMap<Integer, Question> returnedMockQuestions = new HashMap<>();
+
         // Reading from R.raw.questionsfile.json
         String jsonString = readJsonFile(QUESTIONS_FILE);
         //Gson
         /*Type type = new TypeToken<Question[]>(){}.getType();
         Question[] questions = gson.fromJson(jsonString, type);*/
+
 
         Type type = new TypeToken<ArrayList<Question>>(){}.getType();
         ArrayList<Question> questions = gson.fromJson(jsonString, type);
