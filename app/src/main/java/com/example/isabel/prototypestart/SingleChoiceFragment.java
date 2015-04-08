@@ -37,8 +37,10 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
     private HashMap<Integer, HashMap<Integer, QuestionSetup>> questionConfigurationData;
     private AnsweredQuestion answeredQuestion;
 
+    // Maybe add parameter RunID?
     public static SingleChoiceFragment newInstance(int questionID) {
         SingleChoiceFragment fragmentSingleChoice = new SingleChoiceFragment();
+        // Maybe add RUNID to the bundle?
         Bundle args = new Bundle();
         args.putInt(QUESTIONID, questionID);
 
@@ -67,6 +69,7 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
         questionConfigurationData = ((MainActivity)getActivity()).getDBInteractor().getRunSetupQuestions();
 
         // TODO: separate the Runs with the 'runFinished'-Fragments
+        //
         int runId = 7000; // this ID must come from the current run which the current Question belongs to
         HashMap<Integer, QuestionSetup> run1QuestionSetups = questionConfigurationData.get(runId);
         // argument to AnsweredQuestion constructor
