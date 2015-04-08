@@ -67,7 +67,11 @@ public class TestResult {
     /*private void setNumberOfRuns() {
         this.mNumberOfRuns = mRunResults.length;
     }*/
-
+// This method will not be used in the prototype
+    //TODO: remove this method!!!!!!
+    public void setTheRunResults(RunResult[] rr) {
+        this.mRunResults = rr;
+    }
     public String getExperimentName() {
         return mExperimentName;
     }

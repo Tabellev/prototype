@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 
 /**
  * Created by oyvind on 16.03.2015.
@@ -12,9 +13,9 @@ import java.util.Arrays;
  */
 public class RunResult extends Run {
     @SerializedName("startTime")
-    private long mStartTime; // Must be a Date, not long
+    private Date mStartTime; // Must be a Date, not long
     @SerializedName("stopTime")
-    private long mStopTime; // Must be a Date, not long
+    private Date mStopTime; // Must be a Date, not long
     @SerializedName("runTimeUsed")
     private long mRunTimeUsed;
     @SerializedName("numberOfQuestions")
@@ -31,16 +32,27 @@ public class RunResult extends Run {
         // Initialize mAnsweredQuestions here (3)
         this.mAnsweredQuestions = new AnsweredQuestion[numberOfQuestions];
         //this.mAnsweredQuestions = answeredQuestions;
+
+        // These must be called when a run starts and stops in the flow of fragments
+        setStartTime();
+        setStopTime();
     }
 
-    private void setStartTime() {
-        this.mStartTime = 0;
-        // Convert to Date with timezone!!!!!!!!!!
+    // This method will not be used in the prototype
+    // TODO: remove this method!!!
+    public void setTheAnsweredQuestions(AnsweredQuestion[] aq) {
+        this.mAnsweredQuestions = aq;
     }
+    public void setStartTime() {
+        Date now = new Date();
+        this.mStartTime = now;
+    }
+
     public void setStopTime() {
-        this.mStopTime = 0;
-        // Convert to Date with timezone!!!!!!!!!
+        Date now = new Date();
+        this.mStopTime = now;
     }
+
     public long getRunTimeUsed() {
         return mRunTimeUsed;
     }
