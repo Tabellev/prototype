@@ -63,6 +63,8 @@ public class MainActivity extends android.support.v4.app.FragmentActivity {
             questions = new ArrayList<Question>();
             this.mapOfQuestions = mapOfQuestions;
             // create an ArrayList<Question> with the question order from RunSetup in Session!!!!!!!!!!!!!!!!!!!!!!!!!!
+            // The below must be a method
+            // TODO: extract to method to eliminate using hard-coded getRunsToSetup()[*] - create a HashMap<runID, ArrayList<Question> for the Runs
             QuestionSetup[] temp = getDBInteractor().getMockSession().getRunsToSetup()[0].getQuestionSetup();
             for (int i = 0; i < temp.length; i++) {
                 questions.add(i, mapOfQuestions.get(temp[i].getQuestionID()));
@@ -72,18 +74,19 @@ public class MainActivity extends android.support.v4.app.FragmentActivity {
 
         @Override
         public Fragment getItem(int position) {
-
-            Question q = questions.get(position);
+            // Use numberOfRuns from Session
+            Question q = questions.get(position); //questions is only for the 1st run
             Fragment f;
-            switch ( q.getType()){
+
+            switch (q.getType()) {
                 case SingleChoice:
-                    f =  SingleChoiceFragment.newInstance(q.getID());// testing with q.getID() instead of position
+                    f = SingleChoiceFragment.newInstance(q.getID());// testing with q.getID() instead of position
                     break;
                 case MultipleChoice:
                     f = MultipleChoiceFragment.newInstance(q.getID());
                     break;
                 case Numerical:
-                    f =  NumericalFragment.newInstance(q.getID());
+                    f = NumericalFragment.newInstance(q.getID());
                     break;
                 default:
                     f = StartScreenFragment.newInstance(position);
