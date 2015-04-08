@@ -120,7 +120,7 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
         LinearLayout.LayoutParams tableParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         tableParams.topMargin = 550;
 
-       TableRow.LayoutParams buttonParams = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
+       TableRow.LayoutParams buttonParams = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT);
         int rightMargin = (int) (50 * scale + 0.5f);
         buttonParams.rightMargin = rightMargin;
 
