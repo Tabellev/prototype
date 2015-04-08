@@ -85,7 +85,7 @@ public class JsonManager {
         questionMap.put(100, new Question(100, "How many condensate pumps are running on turbine 31?",
                 QuestionType.Numerical, new String[]{}, new String[]{"3"}));
         questionMap.put(101, new Question(101, "On Turbine 31, what is the status of pump P204?",
-                QuestionType.SingleChoice, new String[]{"Running", "Stopped", "Promp", "TIss", "Mjau"}, new String[]{"Stopped"}));
+                QuestionType.SingleChoice, new String[]{ "Stopped", "Promp"}, new String[]{"Stopped"}));
         questionMap.put(102, new Question(102, "Which SG atmospheric valves are in manual control?",
                 QuestionType.MultipleChoice, new String[]{"SG-1", "SG-2", "SG-3", "SG-4", "SG-5"}, new String[]{"SG-2", "SG-3"}));
 

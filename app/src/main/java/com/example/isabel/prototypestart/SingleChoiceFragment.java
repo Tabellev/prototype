@@ -38,6 +38,7 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
     private static final String QUESTIONID = "questionID";
     private TableRow buttonsRow;
     private LinearLayout buttonLayout;
+    ContextThemeWrapper newContext;
 
     private HashMap<Integer, HashMap<Integer, QuestionSetup>> questionConfigurationData;
     private AnsweredQuestion answeredQuestion;
@@ -84,9 +85,9 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
         // The comments below is just examples of how to interact with the data structures
         //((MainActivity)getActivity()).getDBInteractor().getTestResult().getRunResults()[0].getRunID();
         //((MainActivity)getActivity()).getDBInteractor().getTestResult().getRunResults()[0].addAnsweredQuestion(questionToAdd);
-
+        newContext = new ContextThemeWrapper(getActivity(), R.style.ButtonAnswerStyle);
         View view = (RelativeLayout)inflater.inflate(R.layout.fragment_single_choice, container, false);
-        btnOption1 = new Button(new ContextThemeWrapper(getActivity().getApplicationContext(), R.style.buttonWidth));
+        btnOption1 = new Button(getActivity().getApplicationContext());
         //btnOption1 = new Button(getActivity().getApplicationContext());
         btnOption1.setOnClickListener(this);
         btnOption2 = new Button(getActivity().getApplicationContext());
@@ -114,54 +115,61 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
         LinearLayout.LayoutParams tableParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         tableParams.topMargin = 550;
 
-        //TableRow.LayoutParams buttonParams = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT);
+       TableRow.LayoutParams buttonParams = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
         int rightMargin = (int) (50 * scale + 0.5f);
-        //buttonParams.rightMargin = rightMargin;
+        buttonParams.rightMargin = rightMargin;
 
-        /*int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 200, getResources().getDisplayMetrics());
+       /* int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 200, getResources().getDisplayMetrics());
         int width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 220, getResources().getDisplayMetrics());*/
 
         // Convert the dps to pixels, based on density scale
         int height = (int) (200 * scale + 0.5f);
         int width = (int) (220 * scale + 0.5f);
+        int textSize = (int) (30 * scale + 0.5f);
+        int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 30, getResources().getDisplayMetrics());
 
-
-        //buttonParams.width = width;
-        //buttonParams.height = R.style.buttonHeight;
+        buttonParams.width = width;
+        buttonParams.height =  height;
 
 
 
         btnOption1.setBackgroundColor(Color.rgb(160, 200, 220));
-        btnOption1.setTextColor(Color.rgb(255,255,255));
-        //btnOption1.setLayoutParams(buttonParams);
+        //btnOption1.setTextColor(Color.rgb(255,255,255));
+        btnOption1.setLayoutParams(buttonParams);
         btnOption1.setId(R.id.btnSingleOption1Id);
         btnOption1.setTextAppearance(getActivity().getApplicationContext(), R.style.buttonTextSize);
+        //btnOption1.setTextSize(px);
+       // btnOption1.setMaxHeight(height);
+       // btnOption1.setMaxWidth(width);
 
         btnOption2.setBackgroundColor(Color.rgb(160, 200, 220));
-        btnOption2.setTextColor(Color.rgb(255,255,255));
-        //btnOption2.setLayoutParams(buttonParams);
+        //btnOption2.setTextColor(Color.rgb(255,255,255));
+        btnOption2.setLayoutParams(buttonParams);
         btnOption2.setId(R.id.btnSingleOption2Id);
         btnOption2.setTextAppearance(getActivity().getApplicationContext(), R.style.buttonTextSize);
 
         btnOption3.setBackgroundColor(Color.rgb(160, 200, 220));
-        btnOption3.setTextColor(Color.rgb(255,255,255));
-        //btnOption3.setLayoutParams(buttonParams);
+        //btnOption3.setTextColor(Color.rgb(255,255,255));
+        btnOption3.setLayoutParams(buttonParams);
         btnOption3.setId(R.id.btnSingleOption3Id);
+        btnOption3.setTextAppearance(getActivity().getApplicationContext(), R.style.buttonTextSize);
 
         btnOption4.setBackgroundColor(Color.rgb(160, 200, 220));
-        btnOption4.setTextColor(Color.rgb(255,255,255));
-        //btnOption4.setLayoutParams(buttonParams);
+        //btnOption4.setTextColor(Color.rgb(255,255,255));
+        btnOption4.setLayoutParams(buttonParams);
         btnOption4.setId(R.id.btnSingleOption4Id);
+        btnOption4.setTextAppearance(getActivity().getApplicationContext(), R.style.buttonTextSize);
 
         btnOption5.setBackgroundColor(Color.rgb(160, 200, 220));
-        btnOption5.setTextColor(Color.rgb(255,255,255));
-        //btnOption5.setLayoutParams(buttonParams);
+        //btnOption5.setTextColor(Color.rgb(255,255,255));
+        btnOption5.setLayoutParams(buttonParams);
         btnOption5.setId(R.id.btnSingleOption5Id);
+        btnOption5.setTextAppearance(getActivity().getApplicationContext(), R.style.buttonTextSize);
 
         switch (question.getResponseOptions().length) {
             case 2:
                 rightMargin = (int) (150 * scale + 0.5f);
-                //buttonParams.rightMargin = rightMargin;
+                buttonParams.rightMargin = rightMargin;
                 tableParams.leftMargin = 650;
                 buttonsRow.addView(btnOption1);
                 btnOption1.setText(question.getResponseOptions()[0]);
@@ -196,8 +204,8 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
                 btnOption4.setText(question.getResponseOptions()[3]);
                 break;
             case 5:
-                //rightMargin = (int) (30 * scale + 0.5f);
-                //buttonParams.rightMargin = rightMargin;
+                rightMargin = (int) (30 * scale + 0.5f);
+                buttonParams.rightMargin = rightMargin;
                 tableParams.leftMargin = 25;
                 buttonsRow.addView(btnOption1);
                 btnOption1.setText(question.getResponseOptions()[0]);
