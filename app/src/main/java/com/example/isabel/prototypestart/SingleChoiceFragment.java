@@ -1,24 +1,20 @@
 package com.example.isabel.prototypestart;
 
-import android.content.res.TypedArray;
+
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.TypedValue;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.example.isabel.prototypestart.model.*;
 
 import java.util.HashMap;
 
-import static android.support.v7.internal.widget.TintTypedArray.obtainStyledAttributes;
 
 public class SingleChoiceFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
 
@@ -30,15 +26,10 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
     private Button dontKnow;
     private TextView swipe;
     private TextView questionText;
-    private Boolean option1isClicked = false;
-    private Boolean option2isClicked = false;
-    private Boolean dontKnowIsClicked = false;
     private int questionID;
     private Question question;
     private static final String QUESTIONID = "questionID";
-    private TableRow buttonsRow;
     private LinearLayout buttonLayout;
-    ContextThemeWrapper newContext;
 
     private HashMap<Integer, HashMap<Integer, QuestionSetup>> questionConfigurationData;
     private AnsweredQuestion answeredQuestion;
@@ -90,10 +81,8 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
         // The comments below is just examples of how to interact with the data structures
         //((MainActivity)getActivity()).getDBInteractor().getTestResult().getRunResults()[0].getRunID();
         //((MainActivity)getActivity()).getDBInteractor().getTestResult().getRunResults()[0].addAnsweredQuestion(questionToAdd);
-        newContext = new ContextThemeWrapper(getActivity(), R.style.ButtonAnswerStyle);
-        View view = (RelativeLayout)inflater.inflate(R.layout.fragment_single_choice, container, false);
+        View view =  inflater.inflate(R.layout.fragment_single_choice, container, false);
         btnOption1 = new Button(getActivity().getApplicationContext());
-        //btnOption1 = new Button(getActivity().getApplicationContext());
         btnOption1.setOnClickListener(this);
         btnOption2 = new Button(getActivity().getApplicationContext());
         btnOption2.setOnClickListener(this);
@@ -106,7 +95,6 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
         dontKnow = (Button) view.findViewById(R.id.singleDontKnow);
         dontKnow.setOnClickListener(this);
         swipe = (TextView) view.findViewById(R.id.singleChoiceContinue);
-        buttonsRow = new TableRow(getActivity().getApplicationContext());
         buttonLayout = (LinearLayout)view.findViewById(R.id.buttonLayoutSingle);
         questionText = (TextView) view.findViewById(R.id.singleAnswerQuestion);
         questionText.setText(question.getQuestionText());
@@ -117,56 +105,46 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
 
     public void buttonSetup(){
         final float scale = getResources().getDisplayMetrics().density;
-        LinearLayout.LayoutParams tableParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        RelativeLayout.LayoutParams tableParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         tableParams.topMargin = 550;
 
-       TableRow.LayoutParams buttonParams = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.MATCH_PARENT);
+       LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 1.0f);
         int rightMargin = (int) (50 * scale + 0.5f);
         buttonParams.rightMargin = rightMargin;
-
-       /* int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 200, getResources().getDisplayMetrics());
-        int width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 220, getResources().getDisplayMetrics());*/
 
         // Convert the dps to pixels, based on density scale
         int height = (int) (200 * scale + 0.5f);
         int width = (int) (220 * scale + 0.5f);
-        int textSize = (int) (30 * scale + 0.5f);
-        int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 30, getResources().getDisplayMetrics());
 
         buttonParams.width = width;
         buttonParams.height =  height;
 
-
-
         btnOption1.setBackgroundColor(Color.rgb(160, 200, 220));
-        //btnOption1.setTextColor(Color.rgb(255,255,255));
+        btnOption1.setTextColor(Color.rgb(255,255,255));
         btnOption1.setLayoutParams(buttonParams);
         btnOption1.setId(R.id.btnSingleOption1Id);
         btnOption1.setTextAppearance(getActivity().getApplicationContext(), R.style.buttonTextSize);
-        //btnOption1.setTextSize(px);
-       // btnOption1.setMaxHeight(height);
-       // btnOption1.setMaxWidth(width);
 
         btnOption2.setBackgroundColor(Color.rgb(160, 200, 220));
-        //btnOption2.setTextColor(Color.rgb(255,255,255));
+        btnOption2.setTextColor(Color.rgb(255,255,255));
         btnOption2.setLayoutParams(buttonParams);
         btnOption2.setId(R.id.btnSingleOption2Id);
         btnOption2.setTextAppearance(getActivity().getApplicationContext(), R.style.buttonTextSize);
 
         btnOption3.setBackgroundColor(Color.rgb(160, 200, 220));
-        //btnOption3.setTextColor(Color.rgb(255,255,255));
+        btnOption3.setTextColor(Color.rgb(255,255,255));
         btnOption3.setLayoutParams(buttonParams);
         btnOption3.setId(R.id.btnSingleOption3Id);
         btnOption3.setTextAppearance(getActivity().getApplicationContext(), R.style.buttonTextSize);
 
         btnOption4.setBackgroundColor(Color.rgb(160, 200, 220));
-        //btnOption4.setTextColor(Color.rgb(255,255,255));
+        btnOption4.setTextColor(Color.rgb(255,255,255));
         btnOption4.setLayoutParams(buttonParams);
         btnOption4.setId(R.id.btnSingleOption4Id);
         btnOption4.setTextAppearance(getActivity().getApplicationContext(), R.style.buttonTextSize);
 
         btnOption5.setBackgroundColor(Color.rgb(160, 200, 220));
-        //btnOption5.setTextColor(Color.rgb(255,255,255));
+        btnOption5.setTextColor(Color.rgb(255,255,255));
         btnOption5.setLayoutParams(buttonParams);
         btnOption5.setId(R.id.btnSingleOption5Id);
         btnOption5.setTextAppearance(getActivity().getApplicationContext(), R.style.buttonTextSize);
@@ -176,62 +154,59 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
                 rightMargin = (int) (150 * scale + 0.5f);
                 buttonParams.rightMargin = rightMargin;
                 tableParams.leftMargin = 650;
-                buttonsRow.addView(btnOption1);
+                buttonLayout.addView(btnOption1);
                 btnOption1.setText(question.getResponseOptions()[0]);
 
-                buttonsRow.addView(btnOption2);
+                buttonLayout.addView(btnOption2);
                 btnOption2.setText(question.getResponseOptions()[1]);
 
                 break;
             case 3:
                 tableParams.leftMargin = 500;
-                buttonsRow.addView(btnOption1);
+                buttonLayout.addView(btnOption1);
                 btnOption1.setText(question.getResponseOptions()[0]);
 
-                buttonsRow.addView(btnOption2);
+                buttonLayout.addView(btnOption2);
                 btnOption2.setText(question.getResponseOptions()[1]);
 
-                buttonsRow.addView(btnOption3);
+                buttonLayout.addView(btnOption3);
                 btnOption3.setText(question.getResponseOptions()[2]);
                 break;
             case 4:
                 tableParams.leftMargin = 225;
-                buttonsRow.addView(btnOption1);
+                buttonLayout.addView(btnOption1);
                 btnOption1.setText(question.getResponseOptions()[0]);
 
-                buttonsRow.addView(btnOption2);
+                buttonLayout.addView(btnOption2);
                 btnOption2.setText(question.getResponseOptions()[1]);
 
-                buttonsRow.addView(btnOption3);
+                buttonLayout.addView(btnOption3);
                 btnOption3.setText(question.getResponseOptions()[2]);
 
-                buttonsRow.addView(btnOption4);
+                buttonLayout.addView(btnOption4);
                 btnOption4.setText(question.getResponseOptions()[3]);
                 break;
             case 5:
                 rightMargin = (int) (30 * scale + 0.5f);
                 buttonParams.rightMargin = rightMargin;
-                tableParams.leftMargin = 25;
-                buttonsRow.addView(btnOption1);
+                tableParams.leftMargin = 60;
+                buttonLayout.addView(btnOption1);
                 btnOption1.setText(question.getResponseOptions()[0]);
 
-                buttonsRow.addView(btnOption2);
+                buttonLayout.addView(btnOption2);
                 btnOption2.setText(question.getResponseOptions()[1]);
 
-                buttonsRow.addView(btnOption3);
+                buttonLayout.addView(btnOption3);
                 btnOption3.setText(question.getResponseOptions()[2]);
 
-                buttonsRow.addView(btnOption4);
+                buttonLayout.addView(btnOption4);
                 btnOption4.setText(question.getResponseOptions()[3]);
 
-                buttonsRow.addView(btnOption5);
+                buttonLayout.addView(btnOption5);
                 btnOption5.setText(question.getResponseOptions()[4]);
                 break;
         }
-
-        buttonsRow.setLayoutParams(tableParams);
-        buttonLayout.addView(buttonsRow);
-
+        buttonLayout.setLayoutParams(tableParams);
     }
 
     public SingleChoiceFragment(){}

@@ -116,6 +116,7 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
         questionText.setText(question.getQuestionText());
         input.setInputType(InputType.TYPE_NULL);
 
+
         return view;
     }
 
