@@ -20,7 +20,7 @@ public class RunSetup extends Run {
         setNumberOfQuestions();
     }
 
-    private void setNumberOfQuestions() {
+    public void setNumberOfQuestions() {
         this.mNumberOfQuestions = mQuestionSetup.length;
     }
 
