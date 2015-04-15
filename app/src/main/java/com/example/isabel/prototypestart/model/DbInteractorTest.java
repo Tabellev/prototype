@@ -29,6 +29,8 @@ public class DbInteractorTest implements IDbInteractor {
     // Key: runSetup ID , Values: HashMap(Key: questionSetup ID , Values: QuestionSetup objects from "Configuaration file")
     // Used in the Fragments to access a Question's time limit
     private HashMap<Integer, HashMap<Integer, QuestionSetup>> runSetupQuestions;
+
+    private int[] mRunIDs;
     // Deprecated!
     List<Question> questionList = new ArrayList<Question>();
 
@@ -40,6 +42,9 @@ public class DbInteractorTest implements IDbInteractor {
         runSetupQuestions = new HashMap<Integer, HashMap<Integer, QuestionSetup>>();
         this.mockQuestions = mockDataProvider.getQuestionMap();
         this.mockSession = mockDataProvider.getMockSession();
+
+        // populates mRunIDs
+        setRunIDs();
 
         // instantiate mTestResult so it is ready to receive input data during the test session
         // we will work directly with this when saving input and time used
@@ -60,6 +65,8 @@ public class DbInteractorTest implements IDbInteractor {
         questionList.add(new Question(3, "Hva er 5/2?", QuestionType.Numerical, new String[]{}, new String[]{"2.5"}));
         //-------------------------------------------------------------------------------------------------------------------
     }
+
+
 
     private void createAccessibleQuestionSetupList() {
         int lengthRuns = mockSession.getRunsToSetup().length;
@@ -113,5 +120,17 @@ public class DbInteractorTest implements IDbInteractor {
     @Override
     public HashMap<Integer, HashMap<Integer, QuestionSetup>> getRunSetupQuestions() {
         return runSetupQuestions;
+    }
+
+    private void setRunIDs() {
+        int length = this.mockSession.getRunsToSetup().length;
+        mRunIDs = new int[length];
+        for (int i = 0; i < mRunIDs.length; i++) {
+            mRunIDs[i] = this.mockSession.getRunsToSetup()[i].getRunID();
+        }
+    }
+
+    public int[] getRunIDs() {
+        return this.mRunIDs;
     }
 }

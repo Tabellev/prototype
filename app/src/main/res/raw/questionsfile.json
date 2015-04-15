@@ -362,5 +362,40 @@
       "correctAnswer": [
         "P201"
       ]
+    },
+    {
+      "questionID": "131",
+      "questionType": "SingleChoice",
+      "questionText": "On turbine 32, which MFW pump has tripped?",
+      "responseOptions": [
+        "P299",
+        "P298",
+        "P297"
+      ],
+      "correctAnswer": [
+        "P298"
+      ]
+    },
+    {
+      "questionID": "132",
+      "questionType": "MultipleChoice",
+      "questionText": "On turbine 32, which MFW pumps has tripped?",
+      "responseOptions": [
+        "P150",
+        "P155",
+        "P160"
+      ],
+      "correctAnswer": [
+        "P155",
+        "P160"
+      ]
+    },
+    {
+      "questionID": "133",
+      "questionType": "Numerical",
+      "questionText": "On which SG is a MFW bypass valve miss-positioned?",
+      "correctAnswer": [
+        "42"
+      ]
     }
 ]

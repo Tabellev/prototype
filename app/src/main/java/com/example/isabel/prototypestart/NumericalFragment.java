@@ -45,8 +45,10 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
     private TextView questionText;
     // New---------------------------------------------
     private int questionID;
+    private int runID;
     private Question question;
     private static final String QUESTIONID = "questionID";
+    private static final String RUN_ID = "runID";
 
     private HashMap<Integer, HashMap<Integer, QuestionSetup>> questionConfigurationData;
     private AnsweredQuestion answeredQuestion;
@@ -60,6 +62,7 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
 
         // New ---------------------------------------------------------------------------------------
         questionID = getArguments().getInt(QUESTIONID);
+        runID = getArguments().getInt(RUN_ID);
 
         question = ((MainActivity)getActivity()).getDBInteractor().getMockQuestions().get(questionID);
         // argument to AnsweredQuestion constructor
@@ -69,8 +72,8 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
         // Experimental code ------------------------------------------------------------------------------------
         // Get information about the current Question(time limit, etc.)
         questionConfigurationData = ((MainActivity)getActivity()).getDBInteractor().getRunSetupQuestions();
-        int runId = 7000; // this ID must come from the current run which the current Question belongs to
-        HashMap<Integer, QuestionSetup> run1QuestionSetups = questionConfigurationData.get(runId);
+        //int runId = 7000; // this ID must come from the current run which the current Question belongs to
+        HashMap<Integer, QuestionSetup> run1QuestionSetups = questionConfigurationData.get(runID);
         // argument to AnsweredQuestion constructor
         long timeLimit = run1QuestionSetups.get(questionID).getTimeLimit();
 
@@ -121,11 +124,12 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
 
     public NumericalFragment(){}
 
-    public static NumericalFragment newInstance(int questionID/*index*/) {
+    public static NumericalFragment newInstance(int runID, int questionID) {
         NumericalFragment f = new NumericalFragment();
         Bundle args = new Bundle();
         //args.putInt("index", index);
         args.putInt(QUESTIONID, questionID);
+        args.putInt(RUN_ID, runID);
         f.setArguments(args);
         return f;
     }
@@ -278,35 +282,31 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
 
         return false;
     }
-        /**
-         * Called when the Fragment is no longer resumed.  This is generally
-         * tied to {@link android.app.Activity#onPause() Activity.onPause} of the containing
-         * Activity's lifecycle.
-         */
-        @Override
-        public void onPause () {
-            Log.d("IN ON_PAUSE():", "Fragment got paused.");
-            super.onPause();
-        }
-
-        /**
-         * Called when the Fragment is no longer resumed.  This is generally
-         * tied to {@link android.app.Activity#onPause() Activity.onPause} of the containing
-         * Activity's lifecycle.
-         */
-        @Override
-        public void onStop () {
-            Log.d("IN ON_STOP():", "Fragment got stopped.");
-            String[] answerFromInput = new String[]{input.getText().toString()};
-            answeredQuestion.setGivenAnswer(answerFromInput);
-
-            super.onStop();
-        }
-
 
     @Override
     public boolean onLongClick(View v) {
         input.setText("");
         return true;
+    }
+
+    @Override
+    public void onPause () {
+        //Log.d("IN ON_PAUSE():", "Numerical Fragment got paused.");
+        super.onPause();
+    }
+
+    @Override
+    public void onStop () {
+        //Log.d("IN ON_STOP():", "Numerical Fragment got stopped.");
+        String[] answerFromInput = new String[]{input.getText().toString()};
+        answeredQuestion.setGivenAnswer(answerFromInput);
+
+        super.onStop();
+    }
+
+    @Override
+    public void onDestroy() {
+        //Log.d("IN ON_DESTROY():", "Numerical Fragment got destroyed.");
+        super.onDestroy();
     }
 }

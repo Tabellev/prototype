@@ -27,4 +27,6 @@ public interface IDbInteractor {
     TestResult getTestResult();
 
     HashMap<Integer, HashMap<Integer, QuestionSetup>> getRunSetupQuestions();
+
+    int[] getRunIDs();
 }

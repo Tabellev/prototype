@@ -146,6 +146,30 @@
           "timeLimit": 20
         }
       ]
+    },
+    {
+      "runID": "7003",
+      "operatorID": "SS",
+      "scenario": "c3",
+      "runTimeLimit": 300,
+      "questionSetups": [
+        {
+          "questionID": "130",
+          "timeLimit": 30
+        },
+        {
+          "questionID": "131",
+          "timeLimit": 20
+        },
+        {
+          "questionID": "132",
+          "timeLimit": 30
+        },
+        {
+          "questionID": "133",
+          "timeLimit": 20
+        }
+      ]
     }
   ]
 }
