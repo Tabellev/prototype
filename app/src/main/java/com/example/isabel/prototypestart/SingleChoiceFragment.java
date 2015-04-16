@@ -392,8 +392,6 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
         }
     }
 
-
-
     @Override
     public void onPause() {
         //Log.d("IN ON_PAUSE():", "SingelChoiceFragment got paused.");

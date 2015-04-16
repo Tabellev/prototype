@@ -23,9 +23,10 @@ public class MainActivity extends android.support.v4.app.FragmentActivity {
     private PagerAdapter mPagerAdapter;
     private IDbInteractor mDataManager;
     private ControlledViewPager pager;
-    private long startTime;
-    private long stopTime;
-    private long questionTime;
+    public long runStartTime;
+    public long runStopTime;
+    public long runTime;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,7 @@ public class MainActivity extends android.support.v4.app.FragmentActivity {
             public void onPageSelected(int position) {
                 //Log.d("onPageSelected():", String.valueOf(position));
                 //startTime = System.currentTimeMillis();
+
             }
 
             @Override
@@ -169,5 +171,29 @@ public class MainActivity extends android.support.v4.app.FragmentActivity {
 
     @Override
     public void onBackPressed(){}
+
+    public long getRunStartTime() {
+        return runStartTime;
+    }
+
+    public long getRunStopTime() {
+        return runStopTime;
+    }
+
+    public long getRunTime() {
+        return runTime;
+    }
+
+    public void setRunStartTime(long runStartTime) {
+        this.runStartTime = runStartTime;
+    }
+
+    public void setRunStopTime(long runStopTime) {
+        this.runStopTime = runStopTime;
+    }
+
+    public void setRunTime(long runTime) {
+        this.runTime = runTime;
+    }
 }
 
