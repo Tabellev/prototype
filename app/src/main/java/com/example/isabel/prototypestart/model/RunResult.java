@@ -25,17 +25,19 @@ public class RunResult extends Run {
 
     // Add parameter int numberOfQuestions (2)
     public RunResult(int runID, String operatorID, String scenario, long runTimeLimit,
-                     long runTimeUsed, int numberOfQuestions /*AnsweredQuestion[] answeredQuestions*/) {
+                     /*long runTimeUsed,*/ int numberOfQuestions /*AnsweredQuestion[] answeredQuestions*/) {
         super(runID, operatorID, scenario, runTimeLimit);
-        this.mRunTimeUsed = runTimeUsed;
+        //this.mRunTimeUsed = runTimeUsed;
         this.mNumberOfQuestions = numberOfQuestions;
         // Initialize mAnsweredQuestions here (3)
         this.mAnsweredQuestions = new AnsweredQuestion[numberOfQuestions];
         //this.mAnsweredQuestions = answeredQuestions;
 
         // These must be called when a run starts and stops in the flow of fragments
+
         //setStartTime();
         //setStopTime();
+
     }
 
     // This method will not be used in the prototype
@@ -43,6 +45,7 @@ public class RunResult extends Run {
     public void setTheAnsweredQuestions(AnsweredQuestion[] aq) {
         this.mAnsweredQuestions = aq;
     }
+
     public void setStartTime() {
         Date now = new Date();
         this.mStartTime = now;

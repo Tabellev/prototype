@@ -48,8 +48,8 @@ public class DbInteractorTest implements IDbInteractor {
 
         // instantiate mTestResult so it is ready to receive input data during the test session
         // we will work directly with this when saving input and time used
-        mTestResult = new TestResult(mockSession.getExperimentName(), mockSession.getSessionID(),
-                                    mockSession.getCrewID(), mockSession.getNumberOfRuns());
+
+        initializeTestResult();
 
         // The data used to access a Question's time limit when populating an AnsweredQuestion object in the Fragments
         createAccessibleQuestionSetupList();
@@ -66,6 +66,24 @@ public class DbInteractorTest implements IDbInteractor {
         //-------------------------------------------------------------------------------------------------------------------
     }
 
+    // Creates the initial TestResult object with information from Session
+    private void initializeTestResult() {
+        RunSetup[] runs = mockSession.getRunsToSetup();
+        int length = runs.length;
+
+        mTestResult = new TestResult(mockSession.getExperimentName(), mockSession.getSessionID(),
+                mockSession.getCrewID(), mockSession.getNumberOfRuns());
+
+        /*int runID, String operatorID, String scenario, long runTimeLimit, int numberOfQuestions */
+        for (int i = 0; i < length; i++) {
+            int id = mockSession.getRunsToSetup()[i].getRunID();
+            String operatorID = mockSession.getRunsToSetup()[i].getOperatorID();
+            String scenario = mockSession.getRunsToSetup()[i].getScenario();
+            long timeLimit = mockSession.getRunsToSetup()[i].getRunTimeLimit();
+            int numOfQuestions = mockSession.getRunsToSetup()[i].getNumberOfQuestions();
+            mTestResult.addRunResult(new RunResult(id, operatorID, scenario, timeLimit, numOfQuestions), i);
+        }
+    }
 
 
     private void createAccessibleQuestionSetupList() {
