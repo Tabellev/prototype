@@ -2,7 +2,9 @@ package com.example.isabel.prototypestart;
 
 
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +15,10 @@ import android.widget.TextView;
 
 import com.example.isabel.prototypestart.model.*;
 
+import org.apache.commons.logging.Log;
+
 import java.util.HashMap;
+import java.util.Locale;
 
 
 public class SingleChoiceFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
@@ -27,6 +32,7 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
     private TextView swipe;
     private TextView questionText;
     private int questionID;
+    View view;
     private Question question;
     private static final String QUESTIONID = "questionID";
     private LinearLayout buttonLayout;
@@ -81,7 +87,7 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
         // The comments below is just examples of how to interact with the data structures
         //((MainActivity)getActivity()).getDBInteractor().getTestResult().getRunResults()[0].getRunID();
         //((MainActivity)getActivity()).getDBInteractor().getTestResult().getRunResults()[0].addAnsweredQuestion(questionToAdd);
-        View view =  inflater.inflate(R.layout.fragment_single_choice, container, false);
+        view =  inflater.inflate(R.layout.fragment_single_choice, container, false);
         btnOption1 = new Button(getActivity().getApplicationContext());
         btnOption1.setOnClickListener(this);
         btnOption2 = new Button(getActivity().getApplicationContext());
@@ -97,7 +103,9 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
         swipe = (TextView) view.findViewById(R.id.singleChoiceContinue);
         buttonLayout = (LinearLayout)view.findViewById(R.id.buttonLayoutSingle);
         questionText = (TextView) view.findViewById(R.id.singleAnswerQuestion);
-        questionText.setText(question.getQuestionText());
+        String questionT = checkTextLength(question.getQuestionText());
+        questionText.setText(questionT);
+        //questionText.setText(question.getQuestionText() + question.getQuestionText().length());
 
         buttonSetup();
         return  view;
@@ -126,25 +134,25 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
         btnOption1.setTextAppearance(getActivity().getApplicationContext(), R.style.buttonTextSize);
 
         btnOption2.setBackgroundColor(Color.rgb(160, 200, 220));
-        btnOption2.setTextColor(Color.rgb(255,255,255));
+        btnOption2.setTextColor(Color.rgb(255, 255, 255));
         btnOption2.setLayoutParams(buttonParams);
         btnOption2.setId(R.id.btnSingleOption2Id);
         btnOption2.setTextAppearance(getActivity().getApplicationContext(), R.style.buttonTextSize);
 
         btnOption3.setBackgroundColor(Color.rgb(160, 200, 220));
-        btnOption3.setTextColor(Color.rgb(255,255,255));
+        btnOption3.setTextColor(Color.rgb(255, 255, 255));
         btnOption3.setLayoutParams(buttonParams);
         btnOption3.setId(R.id.btnSingleOption3Id);
         btnOption3.setTextAppearance(getActivity().getApplicationContext(), R.style.buttonTextSize);
 
         btnOption4.setBackgroundColor(Color.rgb(160, 200, 220));
-        btnOption4.setTextColor(Color.rgb(255,255,255));
+        btnOption4.setTextColor(Color.rgb(255, 255, 255));
         btnOption4.setLayoutParams(buttonParams);
         btnOption4.setId(R.id.btnSingleOption4Id);
         btnOption4.setTextAppearance(getActivity().getApplicationContext(), R.style.buttonTextSize);
 
         btnOption5.setBackgroundColor(Color.rgb(160, 200, 220));
-        btnOption5.setTextColor(Color.rgb(255,255,255));
+        btnOption5.setTextColor(Color.rgb(255, 255, 255));
         btnOption5.setLayoutParams(buttonParams);
         btnOption5.setId(R.id.btnSingleOption5Id);
         btnOption5.setTextAppearance(getActivity().getApplicationContext(), R.style.buttonTextSize);
@@ -207,6 +215,43 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
                 break;
         }
         buttonLayout.setLayoutParams(tableParams);
+    }
+
+    public String checkTextLength(String qText){
+            if(qText.length() > 54){
+       /* Paint p = questionText.getPaint();
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+
+        int width = displaymetrics.widthPixels;
+
+        android.util.Log.d("JADA",p.measureText(qText) + " " + width);
+
+        if( p.measureText(qText) > questionText.getWidth()){*/
+                String firstPart;
+                String lastPart;
+                if(qText.length() % 2 == 0){
+                    firstPart = qText.substring(0,(qText.length()/2)-1);
+                    lastPart = qText.substring((qText.length()/2));
+                }else{
+                    firstPart = qText.substring(0,(qText.length())/2);
+                    lastPart = qText.substring((qText.length()/2));
+                }
+
+                String[] removedSpace = firstPart.split("\\s");
+                String newString = "";
+                for(int i = 0; i<removedSpace.length; i++){
+                   if(i == removedSpace.length-1){
+                       newString += removedSpace[i];
+                   }else{
+                       newString += (removedSpace[i].concat(" "));
+                   }
+
+                }
+                lastPart = System.getProperty("line.separator").concat(lastPart);
+                qText = newString.concat(lastPart);
+            }
+        return qText;
     }
 
     public SingleChoiceFragment(){}

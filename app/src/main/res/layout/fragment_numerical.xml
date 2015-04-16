@@ -25,6 +25,7 @@
         android:layout_centerHorizontal="true"
         android:textAlignment="center"
         android:textSize="30sp"
+        android:maxLength="10"
         />
 
     <Button

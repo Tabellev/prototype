@@ -83,7 +83,8 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
         dontKnow.setOnClickListener(this);
         swipe = (TextView) view.findViewById(R.id.multipleChoiceContinue);
         questionText = (TextView) view.findViewById(R.id.multipleAnswerQuestion);
-        questionText.setText(question.getQuestionText());
+        String questionT = checkTextLength(question.getQuestionText());
+        questionText.setText(questionT);
         buttonLayout = (LinearLayout)view.findViewById(R.id.buttonLayoutMultiple);
 
         buttonSetup();
@@ -184,6 +185,43 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
                 break;
         }
         buttonLayout.setLayoutParams(tableParamsM);
+    }
+
+    public String checkTextLength(String qText){
+        if(qText.length() > 54){
+       /* Paint p = questionText.getPaint();
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+
+        int width = displaymetrics.widthPixels;
+
+        android.util.Log.d("JADA",p.measureText(qText) + " " + width);
+
+        if( p.measureText(qText) > questionText.getWidth()){*/
+            String firstPart;
+            String lastPart;
+            if(qText.length() % 2 == 0){
+                firstPart = qText.substring(0,(qText.length()/2)-1);
+                lastPart = qText.substring((qText.length()/2));
+            }else{
+                firstPart = qText.substring(0,(qText.length())/2);
+                lastPart = qText.substring((qText.length()/2));
+            }
+
+            String[] removedSpace = firstPart.split("\\s");
+            String newString = "";
+            for(int i = 0; i<removedSpace.length; i++){
+                if(i == removedSpace.length-1){
+                    newString += removedSpace[i];
+                }else{
+                    newString += (removedSpace[i].concat(" "));
+                }
+
+            }
+            lastPart = System.getProperty("line.separator").concat(lastPart);
+            qText = newString.concat(lastPart);
+        }
+        return qText;
     }
 
 
