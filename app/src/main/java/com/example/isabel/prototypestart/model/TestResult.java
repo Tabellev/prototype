@@ -92,14 +92,17 @@ public class TestResult {
         return mRunResults;
     }
 
-    public void addRunResult(RunResult newRunResult) {
-        this.mRunResults = appendRunResult(this.mRunResults, newRunResult);
+    public void addRunResult(RunResult newRunResult, int index) {
+        //this.mRunResults = appendRunResult(this.mRunResults, newRunResult);
+        int length = this.mRunResults.length;
+        this.mRunResults[index] = newRunResult;
+
     }
 
     // If this fails, build RunResult[] in DBInteractorTest
-    private RunResult[] appendRunResult(RunResult[] runResults, RunResult newRunResult) {
+    /*private RunResult[] appendRunResult(RunResult[] runResults, RunResult newRunResult) {
         ArrayList<RunResult> temp = new ArrayList<>(Arrays.asList(runResults));
         temp.add(newRunResult);
         return (RunResult[]) temp.toArray();
-    }
+    }*/
 }
