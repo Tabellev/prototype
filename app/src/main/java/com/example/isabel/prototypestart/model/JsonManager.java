@@ -209,6 +209,11 @@ public class JsonManager {
         // Read from R.raw.configurationfile
         String jsonString = readJsonFile(CONFIGURATION_FILE);
         Session session = gson.fromJson(jsonString, Session.class);
+       // Fix to set numberOfRuns and numberOfQuestions. Gson ignores the private setter methods
+        session.setNumberOfRuns();
+        for (int i = 0; i < session.getNumberOfRuns(); i++) {
+            session.getRunsToSetup()[i].setNumberOfQuestions();
+        }
 
         return session;
     }

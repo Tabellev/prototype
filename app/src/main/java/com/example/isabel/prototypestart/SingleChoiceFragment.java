@@ -5,6 +5,9 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
+import android.util.TypedValue;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +17,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.isabel.prototypestart.model.*;
-
-import org.apache.commons.logging.Log;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -32,21 +33,22 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
     private TextView swipe;
     private TextView questionText;
     private int questionID;
-    View view;
+    private int runID;
     private Question question;
     private static final String QUESTIONID = "questionID";
+    private static final String RUN_ID = "runID";
     private LinearLayout buttonLayout;
 
     private HashMap<Integer, HashMap<Integer, QuestionSetup>> questionConfigurationData;
     private AnsweredQuestion answeredQuestion;
 
     // Maybe add parameter RunID?
-    public static SingleChoiceFragment newInstance(int questionID) {
+    public static SingleChoiceFragment newInstance(int runID, int questionID) {
         SingleChoiceFragment fragmentSingleChoice = new SingleChoiceFragment();
         // Maybe add RUNID to the bundle?
         Bundle args = new Bundle();
         args.putInt(QUESTIONID, questionID);
-
+        args.putInt(RUN_ID, runID);
         fragmentSingleChoice.setArguments(args);
         return fragmentSingleChoice;
     }
@@ -57,6 +59,7 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
             return null;
         }
         questionID = getArguments().getInt(QUESTIONID);
+        runID = getArguments().getInt(RUN_ID);
         // This is where the Fragment gets hold of the question
         // Old before test with HashMap
         //question = ((MainActivity)getActivity()).getDBInteractor().getQuestionFromId(questionID);
@@ -72,9 +75,9 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
         questionConfigurationData = ((MainActivity)getActivity()).getDBInteractor().getRunSetupQuestions();
 
         // TODO: separate the Runs with the 'runFinished'-Fragments
-        //
-        int runId = 7000; // this ID must come from the current run which the current Question belongs to
-        HashMap<Integer, QuestionSetup> run1QuestionSetups = questionConfigurationData.get(runId);
+        // runId must be the actual runId to match the once used in PagerAdapter....!!!!!
+        //int runId = 7000; // this ID must come from the current run which the current Question belongs to
+        HashMap<Integer, QuestionSetup> run1QuestionSetups = questionConfigurationData.get(runID);
         // argument to AnsweredQuestion constructor
         long timeLimit = run1QuestionSetups.get(questionID).getTimeLimit();
 
@@ -87,7 +90,7 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
         // The comments below is just examples of how to interact with the data structures
         //((MainActivity)getActivity()).getDBInteractor().getTestResult().getRunResults()[0].getRunID();
         //((MainActivity)getActivity()).getDBInteractor().getTestResult().getRunResults()[0].addAnsweredQuestion(questionToAdd);
-        view =  inflater.inflate(R.layout.fragment_single_choice, container, false);
+        View view =  inflater.inflate(R.layout.fragment_single_choice, container, false);
         btnOption1 = new Button(getActivity().getApplicationContext());
         btnOption1.setOnClickListener(this);
         btnOption2 = new Button(getActivity().getApplicationContext());
@@ -314,5 +317,24 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
                 swipe.setVisibility(View.VISIBLE);
                 break;
         }
+    }
+
+
+    @Override
+    public void onPause() {
+        //Log.d("IN ON_PAUSE():", "SingelChoiceFragment got paused.");
+        super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        //Log.d("IN ON_STOP():", "SingelChoiceFragment got stopped.");
+        super.onStop();
+    }
+
+    @Override
+    public void onDestroy() {
+        //Log.d("IN ON_DESTROY():", "SingelChoiceFragment got destroyed.");
+        super.onDestroy();
     }
 }

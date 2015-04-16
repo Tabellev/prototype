@@ -4,11 +4,15 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
 
 import com.example.isabel.prototypestart.model.DbInteractorTest;
 import com.example.isabel.prototypestart.model.IDbInteractor;
 import com.example.isabel.prototypestart.model.Question;
 import com.example.isabel.prototypestart.model.QuestionSetup;
+import com.example.isabel.prototypestart.model.QuestionType;
+import com.example.isabel.prototypestart.model.Session;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,7 +22,7 @@ public class MainActivity extends android.support.v4.app.FragmentActivity {
 
     private PagerAdapter mPagerAdapter;
     private IDbInteractor mDataManager;
-
+    private ControlledViewPager pager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,82 +30,137 @@ public class MainActivity extends android.support.v4.app.FragmentActivity {
         mDataManager = new DbInteractorTest(getApplicationContext());
 
         super.setContentView(R.layout.activity_main);
+        pager = (ControlledViewPager)super.findViewById(R.id.viewpager);
+
+        // Don't need this, only used to understand what happens when swiping and loading fragments
+        pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                /*Log.d("onPageScrolled", String.valueOf(position) + ", " +
+                String.valueOf(positionOffset) + ", " +
+                String.valueOf(positionOffsetPixels));*/
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                //Log.d("onPageSelected():", String.valueOf(position));
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                //Log.d("..ScrollStateChanged()", String.valueOf(state));
+            }
+        });
 
         this.initialisePaging();
     }
 
     private void initialisePaging() {
-        // Old before testing with HashMap
-        //this.mPagerAdapter  = new PagerAdapter(super.getSupportFragmentManager(), getDBInteractor().getQuestions());
-
-        // Testing with HashMap for Questions--------------------------------------------------------------------------------
         this.mPagerAdapter = new PagerAdapter(super.getSupportFragmentManager(), getDBInteractor().getMockQuestions());
-        //-----------------------------------------------------------------------------------------------------------------
-
-        final ControlledViewPager pager = (ControlledViewPager)super.findViewById(R.id.viewpager);
         pager.setAdapter(this.mPagerAdapter);
-
     }
+
 
     // This is called from the fragments
     public IDbInteractor getDBInteractor() { return mDataManager; }
 
+    // called when new run should start
+    /*public void resetPager() {
+        pager.setCurrentItem(0);
+    }*/
+
     public class PagerAdapter extends FragmentStatePagerAdapter {
-
-        private List<Question> questions; // Needs to be HashMap<Integer, Question>, get from mDataManager
-        /*
-        public PagerAdapter(FragmentManager fm, List<Question> questions) {
-            super(fm);
-            this.questions = questions;
-        }*/
-
-        // Testing with HashMap and new constructor------------------------------------------------------------------------
+        private ArrayList<Fragment> mSessionFragments;
+        private HashMap<Integer, ArrayList<Question>> mRunsWithQuestions;
+        private Fragment[] mStaticFragments;
+        private int[] mRunIDs;
         private HashMap<Integer, Question> mapOfQuestions;
+
 
         public PagerAdapter(FragmentManager fm, HashMap<Integer, Question> mapOfQuestions) {
             super(fm);
-            questions = new ArrayList<Question>();
+
             this.mapOfQuestions = mapOfQuestions;
-            // create an ArrayList<Question> with the question order from RunSetup in Session!!!!!!!!!!!!!!!!!!!!!!!!!!
-            // The below must be a method
-            // TODO: extract to method to eliminate using hard-coded getRunsToSetup()[*] - create a HashMap<runID, ArrayList<Question> for the Runs
-            QuestionSetup[] temp = getDBInteractor().getMockSession().getRunsToSetup()[0].getQuestionSetup();
-            for (int i = 0; i < temp.length; i++) {
-                questions.add(i, mapOfQuestions.get(temp[i].getQuestionID()));
+            this.mRunsWithQuestions = buildRunsWithQuestions();
+            // Create the before and in-between-run Fragments
+            setStaticFragments();
+            // get runIDs from the Session object
+            this.mRunIDs = getDBInteractor().getRunIDs();
+            // Create a list of all fragments for one test session
+            populateSessionFragment();
+        }
+
+
+        private void setStaticFragments() {
+            mStaticFragments = new Fragment[3];
+            mStaticFragments[0] = new StartScreenFragment();
+            mStaticFragments[1] = new RunFinishedFragment();
+            mStaticFragments[2] = new SwipeToStartNewRunFragment();
+        }
+
+
+        // Testing to isolate runs with containing questions
+        private HashMap<Integer, ArrayList<Question>> buildRunsWithQuestions() {
+            HashMap<Integer, ArrayList<Question>> temp = new HashMap<>();
+            Session session = getDBInteractor().getMockSession();
+
+            for (int i = 0; i < session.getRunsToSetup().length; i++) {
+                ArrayList<Question> tmp = new ArrayList<>();
+                for (int j = 0; j < session.getRunsToSetup()[i].getQuestionSetup().length; j++) {
+                    tmp.add(mapOfQuestions.get(session.getRunsToSetup()[i].getQuestionSetup()[j].getQuestionID()));
+                }
+                temp.put(session.getRunsToSetup()[i].getRunID(), tmp);
+            }
+            return temp;
+        }
+
+
+        private void populateSessionFragment() {
+            mSessionFragments = new ArrayList<>();
+            int numberOfRuns = mRunsWithQuestions.size() - 1;
+            mSessionFragments.add(0, mStaticFragments[0]);
+            for (int i = 0; i < mRunsWithQuestions.size(); i++) {
+                ArrayList<Question> tempQuestions = mRunsWithQuestions.get(mRunIDs[i]);
+                for (int j = 0; j < tempQuestions.size(); j++) {
+                    int questionID = tempQuestions.get(j).getID();
+                    switch (tempQuestions.get(j).getType()) {
+                        case SingleChoice:
+                            mSessionFragments.add(SingleChoiceFragment.newInstance(mRunIDs[i], questionID));
+                            break;
+                        case MultipleChoice:
+                            mSessionFragments.add(MultipleChoiceFragment.newInstance(mRunIDs[i], questionID));
+                            break;
+                        case Numerical:
+                            mSessionFragments.add(NumericalFragment.newInstance(mRunIDs[i], questionID));
+                            break;
+                    }
+                }
+                int size = mSessionFragments.size();
+                if (i == 3/*numberOfRuns*/) {
+                    // TODO: maybe have an endFragment here without a <<Swipe to...<<
+                    mSessionFragments.add(size, mStaticFragments[1]);
+                } else {
+                    mSessionFragments.add(size, mStaticFragments[1]);
+                    mSessionFragments.add(++size, mStaticFragments[2]);
+                }
             }
         }
-        //--------------------------------------------------------------------------------------------------------------
 
         @Override
         public Fragment getItem(int position) {
-            // Use numberOfRuns from Session
-            Question q = questions.get(position); //questions is only for the 1st run
-            Fragment f;
-
-            switch (q.getType()) {
-                case SingleChoice:
-                    f = SingleChoiceFragment.newInstance(q.getID());// testing with q.getID() instead of position
-                    break;
-                case MultipleChoice:
-                    f = MultipleChoiceFragment.newInstance(q.getID());
-                    break;
-                case Numerical:
-                    f = NumericalFragment.newInstance(q.getID());
-                    break;
-                default:
-                    f = StartScreenFragment.newInstance(position);
-            }
-
-            return f;
+            //Log.d("position:", String.valueOf(position));
+            return mSessionFragments.get(position);
         }
 
-
+        @Override
+        public int getItemPosition(Object object) {
+            return super.getItemPosition(object);
+        }
 
         @Override
         public int getCount() {
-            return this.questions.size();
+            return mSessionFragments.size();
         }
-
     }
 
     @Override

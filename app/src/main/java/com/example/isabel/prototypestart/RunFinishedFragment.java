@@ -25,4 +25,7 @@ public class RunFinishedFragment extends android.support.v4.app.Fragment {
         f.setArguments(args);
         return f;
     }
+
+    // add button that resets pageradapters counter
+
 }

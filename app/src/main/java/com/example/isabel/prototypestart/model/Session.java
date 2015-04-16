@@ -31,7 +31,7 @@ public class Session {
         setNumberOfRuns();
     }
 
-    private void setNumberOfRuns() {
+    public void setNumberOfRuns() {
         this.mNumberOfRuns = mRunsToSetup.length;
     }
 

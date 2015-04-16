@@ -3,6 +3,9 @@ package com.example.isabel.prototypestart;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.app.Fragment;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,8 +38,10 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
     private TextView questionText;
     // New---------------------------------------------
     private int questionID;
+    private int runID;
     private Question question;
     private static final String QUESTIONID = "questionID";
+    private static final String RUN_ID = "runID";
 
     private HashMap<Integer, HashMap<Integer, QuestionSetup>> questionConfigurationData;
     private AnsweredQuestion answeredQuestion;
@@ -49,6 +54,7 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
         }
         // New ---------------------------------------------------------------------------------------
         questionID = getArguments().getInt(QUESTIONID);
+        runID = getArguments().getInt(RUN_ID);
 
         question = ((MainActivity)getActivity()).getDBInteractor().getMockQuestions().get(questionID);
         // argument to AnsweredQuestion constructor
@@ -58,8 +64,8 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
         // Experimental code ------------------------------------------------------------------------------------
         // Get information about the current Question(time limit, etc.)
         questionConfigurationData = ((MainActivity)getActivity()).getDBInteractor().getRunSetupQuestions();
-        int runId = 7000; // this ID must come from the current run which the current Question belongs to
-        HashMap<Integer, QuestionSetup> run1QuestionSetups = questionConfigurationData.get(runId);
+        //int runId = 7000; // this ID must come from the current run which the current Question belongs to
+        HashMap<Integer, QuestionSetup> run1QuestionSetups = questionConfigurationData.get(runID);
         // argument to AnsweredQuestion constructor
         long timeLimit = run1QuestionSetups.get(questionID).getTimeLimit();
 
@@ -227,11 +233,12 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
 
     public MultipleChoiceFragment(){}
 
-    public static MultipleChoiceFragment newInstance(int questionID/*index*/) {
+    public static MultipleChoiceFragment newInstance(int runID, int questionID) {
         MultipleChoiceFragment f = new MultipleChoiceFragment();
         Bundle args = new Bundle();
         //args.putInt("index", index);
         args.putInt(QUESTIONID, questionID);
+        args.putInt(RUN_ID, runID);
         f.setArguments(args);
         return f;
     }
@@ -314,5 +321,23 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
                 option4isClicked = false;
                 break;
         }
+    }
+
+    @Override
+    public void onPause() {
+        //Log.d("IN ON_PAUSE():", "MultipleChoiceFragment got paused.");
+        super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        //Log.d("IN ON_STOP():", "MultipleChoiceFragment got stopped.");
+        super.onStop();
+    }
+
+    @Override
+    public void onDestroy() {
+        //Log.d("IN ON_DESTROY():", "MultipleChoiceFragment got destroyed.");
+        super.onDestroy();
     }
 }
