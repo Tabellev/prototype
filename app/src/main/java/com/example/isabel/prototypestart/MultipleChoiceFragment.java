@@ -34,8 +34,10 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
     private Button dontKnow;
     private TextView swipe;
     private LinearLayout buttonLayout;
-
     private TextView questionText;
+    private long startTime;
+    private long stopTime;
+    private long questionTime;
     // New---------------------------------------------
     private int questionID;
     private int runID;
@@ -323,6 +325,29 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
         }
     }
 
+    public long getQuestionTime(long startTime, long stopTime){
+        questionTime = stopTime - startTime;
+        questionTime = questionTime/1000;
+        return questionTime;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            startTime = System.currentTimeMillis();
+        }else{
+            stopTime = System.currentTimeMillis();
+            questionTime = getQuestionTime(startTime,stopTime);
+            if(answeredQuestion != null){
+                answeredQuestion.setTimeUsed(getQuestionTime(startTime, stopTime));
+                Log.d("AnsweredQuestionTime", answeredQuestion.getTimeUsed() + " answered");
+            }
+            Log.d("Time", questionTime + " Multiple");
+        }
+    }
+
+
     @Override
     public void onPause() {
         //Log.d("IN ON_PAUSE():", "MultipleChoiceFragment got paused.");
@@ -333,6 +358,12 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
     public void onStop() {
         //Log.d("IN ON_STOP():", "MultipleChoiceFragment got stopped.");
         super.onStop();
+    }
+
+    @Override
+    public void onResume() {
+        //Log.d("IN ON_Resume():", "MultipleChoiceFragment got resumed.");
+        super.onResume();
     }
 
     @Override

@@ -34,8 +34,8 @@ public class RunResult extends Run {
         //this.mAnsweredQuestions = answeredQuestions;
 
         // These must be called when a run starts and stops in the flow of fragments
-        setStartTime();
-        setStopTime();
+        //setStartTime();
+        //setStopTime();
     }
 
     // This method will not be used in the prototype

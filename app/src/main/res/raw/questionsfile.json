@@ -2,7 +2,7 @@
     {
       "questionID": "100",
       "questionType": "SingleChoice",
-      "questionText": "On turbine 31, what is the status of P108 On turbine 3?",
+      "questionText": "On turbine 31, what is the status of P108?",
       "responseOptions": [
         "Running",
         "Not Running"

@@ -38,6 +38,10 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
     private static final String QUESTIONID = "questionID";
     private static final String RUN_ID = "runID";
     private LinearLayout buttonLayout;
+    private long startTime;
+    private long stopTime;
+    private long questionTime;
+    private long runTime;
 
     private HashMap<Integer, HashMap<Integer, QuestionSetup>> questionConfigurationData;
     private AnsweredQuestion answeredQuestion;
@@ -58,6 +62,7 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
         if (container == null) {
             return null;
         }
+
         questionID = getArguments().getInt(QUESTIONID);
         runID = getArguments().getInt(RUN_ID);
         // This is where the Fragment gets hold of the question
@@ -319,11 +324,42 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
         }
     }
 
+    public long getQuestionTime(long startTime, long stopTime){
+        questionTime = stopTime - startTime;
+
+        questionTime = questionTime/1000;
+        return questionTime;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            startTime = System.currentTimeMillis();
+        }else{
+            stopTime = System.currentTimeMillis();
+            questionTime = getQuestionTime(startTime,stopTime);
+            if(answeredQuestion != null){
+                answeredQuestion.setTimeUsed(getQuestionTime(startTime, stopTime));
+                Log.d("AnsweredQuestionTime", answeredQuestion.getTimeUsed() + " answered");
+            }
+            Log.d("Time", questionTime + " Single");
+        }
+    }
+
+
 
     @Override
     public void onPause() {
         //Log.d("IN ON_PAUSE():", "SingelChoiceFragment got paused.");
         super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        //Log.d("IN ON_Resume():", "SingelChoiceFragment got resumed.");
+
+        super.onResume();
     }
 
     @Override
@@ -334,7 +370,8 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
 
     @Override
     public void onDestroy() {
-        //Log.d("IN ON_DESTROY():", "SingelChoiceFragment got destroyed.");
+       //Log.d("IN ON_DESTROY():", "SingelChoiceFragment got destroyed.");
+
         super.onDestroy();
     }
 }

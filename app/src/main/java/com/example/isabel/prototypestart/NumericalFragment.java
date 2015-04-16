@@ -43,6 +43,9 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
     private Button dontKnow;
     private ImageButton btnBackspace;
     private TextView questionText;
+    private long startTime;
+    private long stopTime;
+    private long questionTime;
     // New---------------------------------------------
     private int questionID;
     private int runID;
@@ -327,6 +330,30 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
         input.setText("");
         return true;
     }
+
+    public long getQuestionTime(long startTime, long stopTime){
+        questionTime = stopTime - startTime;
+
+        questionTime = questionTime/1000;
+        return questionTime;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            startTime = System.currentTimeMillis();
+        }else{
+            stopTime = System.currentTimeMillis();
+            questionTime = getQuestionTime(startTime,stopTime);
+            if(answeredQuestion != null){
+                answeredQuestion.setTimeUsed(getQuestionTime(startTime, stopTime));
+                Log.d("AnsweredQuestionTime", answeredQuestion.getTimeUsed() + " answered");
+            }
+            Log.d("Time", questionTime + " Single");
+        }
+    }
+
 
     @Override
     public void onPause () {
