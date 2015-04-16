@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.example.isabel.prototypestart.model.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 
@@ -42,6 +43,7 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
     private long stopTime;
     private long questionTime;
     private long runTime;
+    private ArrayList<String> mGivenAnswer = new ArrayList<>();
 
     private HashMap<Integer, HashMap<Integer, QuestionSetup>> questionConfigurationData;
     private AnsweredQuestion answeredQuestion;
@@ -275,6 +277,13 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
                 btnOption5.setBackgroundColor(Color.rgb(160,200,220));
                 dontKnow.setBackgroundColor(Color.rgb(160,200,220));
                 swipe.setVisibility(View.VISIBLE);
+                // add this answer to ArrayList if clicked
+                if (0 != mGivenAnswer.size()) {
+                    mGivenAnswer.clear();
+                    mGivenAnswer.add(btnOption1.getText().toString());
+                } else {
+                    mGivenAnswer.add(btnOption1.getText().toString());
+                }
                 break;
             case R.id.btnSingleOption2Id:
                 btnOption2.setBackgroundColor(Color.rgb(7, 147, 194));
@@ -284,6 +293,13 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
                 btnOption5.setBackgroundColor(Color.rgb(160,200,220));
                 dontKnow.setBackgroundColor(Color.rgb(160,200,220));
                 swipe.setVisibility(View.VISIBLE);
+                // add this answer to ArrayList if clicked
+                if (0 != mGivenAnswer.size()) {
+                    mGivenAnswer.clear();
+                    mGivenAnswer.add(btnOption2.getText().toString());
+                } else {
+                    mGivenAnswer.add(btnOption2.getText().toString());
+                }
                 break;
             case R.id.btnSingleOption3Id:
                 btnOption3.setBackgroundColor(Color.rgb(7, 147, 194));
@@ -293,6 +309,13 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
                 btnOption5.setBackgroundColor(Color.rgb(160,200,220));
                 dontKnow.setBackgroundColor(Color.rgb(160,200,220));
                 swipe.setVisibility(View.VISIBLE);
+                // add this answer to ArrayList if clicked
+                if (0 != mGivenAnswer.size()) {
+                    mGivenAnswer.clear();
+                    mGivenAnswer.add(btnOption3.getText().toString());
+                } else {
+                    mGivenAnswer.add(btnOption3.getText().toString());
+                }
                 break;
             case R.id.btnSingleOption4Id:
                 btnOption4.setBackgroundColor(Color.rgb(7, 147, 194));
@@ -302,6 +325,13 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
                 btnOption5.setBackgroundColor(Color.rgb(160,200,220));
                 dontKnow.setBackgroundColor(Color.rgb(160,200,220));
                 swipe.setVisibility(View.VISIBLE);
+                // add this answer to ArrayList if clicked
+                if (0 != mGivenAnswer.size()) {
+                    mGivenAnswer.clear();
+                    mGivenAnswer.add(btnOption4.getText().toString());
+                } else {
+                    mGivenAnswer.add(btnOption4.getText().toString());
+                }
                 break;
             case R.id.btnSingleOption5Id:
                 btnOption5.setBackgroundColor(Color.rgb(7, 147, 194));
@@ -311,6 +341,13 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
                 btnOption2.setBackgroundColor(Color.rgb(160,200,220));
                 dontKnow.setBackgroundColor(Color.rgb(160,200,220));
                 swipe.setVisibility(View.VISIBLE);
+                // add this answer to ArrayList if clicked
+                if (0 != mGivenAnswer.size()) {
+                    mGivenAnswer.clear();
+                    mGivenAnswer.add(btnOption5.getText().toString());
+                } else {
+                    mGivenAnswer.add(btnOption5.getText().toString());
+                }
                 break;
             case R.id.singleDontKnow:
                 dontKnow.setBackgroundColor(Color.rgb(7, 147, 194));
@@ -320,6 +357,10 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
                 btnOption4.setBackgroundColor(Color.rgb(160,200,220));
                 btnOption5.setBackgroundColor(Color.rgb(160,200,220));
                 swipe.setVisibility(View.VISIBLE);
+                // remove previously given answer
+                mGivenAnswer.clear();
+                answeredQuestion.setSkippedQuestion(true);
+
                 break;
         }
     }
@@ -342,6 +383,10 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
             if(answeredQuestion != null){
                 answeredQuestion.setTimeUsed(getQuestionTime(startTime, stopTime));
                 Log.d("AnsweredQuestionTime", answeredQuestion.getTimeUsed() + " answered");
+                answeredQuestion.setGivenAnswer(mGivenAnswer.toArray(new String[mGivenAnswer.size()]));
+                //Log.d("answeredQuestion : answ", String.valueOf(answeredQuestion.getGivenAnswer()[0]));
+                // TODO: Teste og se om answerWasCorrect og skippedQuestion blir satt riktig i AnsweredQuestion
+                // TODO: adde answeredQuestion til riktig RunResult. (Må muligens sende med index for plassering i mAnsweredQuestions
             }
             Log.d("Time", questionTime + " Single");
         }
