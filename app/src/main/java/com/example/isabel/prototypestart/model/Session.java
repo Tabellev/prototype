@@ -52,4 +52,16 @@ public class Session {
     public RunSetup[] getRunsToSetup() {
         return mRunsToSetup;
     }
+
+    // return one specific RunSetup. Used when retrieving QuestionSetup ID's to create indexArray in Fragments
+    public RunSetup getRunSetup(int runID) {
+        for (int i = 0; i < mRunsToSetup.length; i++) {
+            if (runID == mRunsToSetup[i].getRunID()) {
+                return mRunsToSetup[i];
+            } else {
+                return null;
+            }
+        }
+        return null;
+    }
 }

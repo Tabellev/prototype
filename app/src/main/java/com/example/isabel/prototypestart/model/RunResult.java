@@ -1,5 +1,7 @@
 package com.example.isabel.prototypestart.model;
 
+import android.util.Log;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
@@ -67,14 +69,27 @@ public class RunResult extends Run {
         return mAnsweredQuestions;
     }
 
-    public void addAnsweredQuestion(AnsweredQuestion question) {
-        this.mAnsweredQuestions = appendQuestion(this.mAnsweredQuestions, question);
+    //TODO: modify as described in SingleChoiceFragment
+    public void addAnsweredQuestion(AnsweredQuestion question, int index) {
+        this.mAnsweredQuestions[index] = question;
+
+        Log.d("Question added:", String.valueOf(question.getQuestionID()));
+        for (int i = 0; i < mAnsweredQuestions.length; i++) {
+            if (mAnsweredQuestions[i] != null) {
+                //Log.d("Array Length:", String.valueOf(mAnsweredQuestions[i].getQuestionID()));
+                //TODO: find a way to print the contents of mAnsweredQuestions for debugging
+                Log.d("Array Length:", String.valueOf(mAnsweredQuestions.length));
+            }
+        }
+
+        //Log.d("Array Length:", String.valueOf(mAnsweredQuestions[1].getQuestionID()));
+        //this.mAnsweredQuestions = appendQuestion(this.mAnsweredQuestions, question);
     }
 
     // If this fails, build AnsweredQuestion[] in DBInteractorTest
-    private AnsweredQuestion[] appendQuestion(AnsweredQuestion[] answeredQuestions, AnsweredQuestion newQuestion) {
+    /*private AnsweredQuestion[] appendQuestion(AnsweredQuestion[] answeredQuestions, AnsweredQuestion newQuestion) {
         ArrayList<AnsweredQuestion> temp = new ArrayList<>(Arrays.asList(answeredQuestions));
         temp.add(newQuestion);
         return (AnsweredQuestion[]) temp.toArray();
-    }
+    }*/
 }

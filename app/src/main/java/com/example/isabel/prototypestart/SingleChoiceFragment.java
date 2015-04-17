@@ -47,6 +47,7 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
 
     private HashMap<Integer, HashMap<Integer, QuestionSetup>> questionConfigurationData;
     private AnsweredQuestion answeredQuestion;
+    private int[] indexOfAnsweredQuestions;
 
     // Maybe add parameter RunID?
     public static SingleChoiceFragment newInstance(int runID, int questionID) {
@@ -90,6 +91,13 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
 
         // instantiate answeredQuestion
         answeredQuestion = new AnsweredQuestion(questionID, timeLimit, correctAnswer);
+
+        // Testing------------------------------------------------------------------------------------------
+        RunSetup temp = ((MainActivity)getActivity()).getDBInteractor().getMockSession().getRunSetup(runID);
+        indexOfAnsweredQuestions = new int[temp.getNumberOfQuestions()];
+        for (int i = 0; i < indexOfAnsweredQuestions.length; i++) {
+            indexOfAnsweredQuestions[i] = temp.getQuestionSetup()[i].getQuestionID();
+        }
 
         //-------------------------------------------------------------------------------------------------------
 
@@ -384,9 +392,18 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
                 answeredQuestion.setTimeUsed(getQuestionTime(startTime, stopTime));
                 Log.d("AnsweredQuestionTime", answeredQuestion.getTimeUsed() + " answered");
                 answeredQuestion.setGivenAnswer(mGivenAnswer.toArray(new String[mGivenAnswer.size()]));
-                //Log.d("answeredQuestion : answ", String.valueOf(answeredQuestion.getGivenAnswer()[0]));
-                // TODO: Teste og se om answerWasCorrect og skippedQuestion blir satt riktig i AnsweredQuestion
-                // TODO: adde answeredQuestion til riktig RunResult. (Må muligens sende med index for plassering i mAnsweredQuestions
+                Log.d("answeredQuestion : answ", String.valueOf(answeredQuestion.getGivenAnswer()[0]));
+                Log.d("CorrectAnswer:", answeredQuestion.getCorrectAnswer()[0]);
+                Log.d("AnswerWasCorrect:", String.valueOf(answeredQuestion.answerWasCorrect()));
+                Log.d("SkippedQuestion:", String.valueOf(answeredQuestion.skippedQuestion()));
+                // TODO: modify getRunResults() to return correct array from runID, and modify addAnsweredQuestion()
+                int index = 0;
+                for (int i = 0; i < indexOfAnsweredQuestions.length; i++) {
+                    if (indexOfAnsweredQuestions[i] == runID) {
+                        index = i;
+                    }
+                }
+                ((MainActivity)getActivity()).getDBInteractor().getTestResult().getRunResult(runID).addAnsweredQuestion(answeredQuestion, index);
             }
             Log.d("Time", questionTime + " Single");
         }

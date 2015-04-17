@@ -58,7 +58,7 @@ public class AnsweredQuestion {
         return mTimeUsed;
     }
 
-    public boolean isSkippedQuestion() {
+    public boolean skippedQuestion() {
         return mSkippedQuestion;
     }
 
@@ -70,7 +70,7 @@ public class AnsweredQuestion {
         return mCorrectAnswer;
     }
 
-    public boolean isAnswerWasCorrect() {
+    public boolean answerWasCorrect() {
         return mAnswerWasCorrect;
     }
 
@@ -87,13 +87,17 @@ public class AnsweredQuestion {
     }
 
     public void setGivenAnswer(String[] givenAnswer) {
-        this.mGivenAnswer = givenAnswer;
+        if (givenAnswer.length != 0) {
+            this.mGivenAnswer = givenAnswer;
 
-        Arrays.sort(mCorrectAnswer);
-        Arrays.sort(mGivenAnswer);
+            Arrays.sort(mCorrectAnswer);
+            Arrays.sort(mGivenAnswer);
 
-        this.mSkippedQuestion = false;
-        this.mAnswerWasCorrect = Arrays.equals(mCorrectAnswer, mGivenAnswer);
+            this.mSkippedQuestion = false;
+            this.mAnswerWasCorrect = Arrays.equals(mCorrectAnswer, mGivenAnswer);
+        } else {
+            this.mAnswerWasCorrect = false;
+        }
     }
 
     /*private void setAnswerWasCorrect(boolean answerWasCorrect) {

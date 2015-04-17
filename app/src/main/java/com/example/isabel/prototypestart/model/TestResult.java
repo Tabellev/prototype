@@ -92,6 +92,18 @@ public class TestResult {
         return mRunResults;
     }
 
+    // Testing to reach the right RunResult when adding an AnsweredQuestion
+    public RunResult getRunResult(int runID) {
+        for(int i = 0; i < mRunResults.length; i++) {
+            if (runID == mRunResults[i].getRunID()) {
+                return mRunResults[i];
+            } else {
+                return null;
+            }
+        }
+        return null;
+    }
+
     public void addRunResult(RunResult newRunResult, int index) {
         //this.mRunResults = appendRunResult(this.mRunResults, newRunResult);
         int length = this.mRunResults.length;
