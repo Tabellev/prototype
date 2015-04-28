@@ -77,10 +77,16 @@ public class DbInteractorTest implements IDbInteractor {
         /*int runID, String operatorID, String scenario, long runTimeLimit, int numberOfQuestions */
         for (int i = 0; i < length; i++) {
             int id = mockSession.getRunsToSetup()[i].getRunID();
+
+            //Log.d("InitializeTestResult():", "runID: " + String.valueOf(id));
+
             String operatorID = mockSession.getRunsToSetup()[i].getOperatorID();
             String scenario = mockSession.getRunsToSetup()[i].getScenario();
             long timeLimit = mockSession.getRunsToSetup()[i].getRunTimeLimit();
             int numOfQuestions = mockSession.getRunsToSetup()[i].getNumberOfQuestions();
+
+            // kan det være trøbbel i addRunResult()????????
+            //Log.d("new RunResult:", "id: " + id + " numOfQuestions: " + numOfQuestions + " i: " + i);
             mTestResult.addRunResult(new RunResult(id, operatorID, scenario, timeLimit, numOfQuestions), i);
         }
     }
@@ -145,10 +151,15 @@ public class DbInteractorTest implements IDbInteractor {
         mRunIDs = new int[length];
         for (int i = 0; i < mRunIDs.length; i++) {
             mRunIDs[i] = this.mockSession.getRunsToSetup()[i].getRunID();
+            //Log.d("mRunIDs:", "" + i + ": " + mRunIDs[i]);
         }
     }
 
     public int[] getRunIDs() {
         return this.mRunIDs;
+    }
+
+    public void createOutputJsonFile() {
+        this.mockDataProvider.exportTestResultsToJson(mTestResult);
     }
 }

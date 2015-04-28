@@ -50,6 +50,12 @@ public class MainActivity extends android.support.v4.app.FragmentActivity {
                 //Log.d("onPageSelected():", String.valueOf(position));
                 //startTime = System.currentTimeMillis();
 
+                // FUNKER IKKE! får ikke tak i setHasBeenVisible() i RunFinishedFragment...
+               /* if (mPagerAdapter.getItem(pager.getCurrentItem()) instanceof RunFinishedFragment) {
+                    mPagerAdapter.mSessionFragments.get(position).setHasBeenVisible(false);
+
+                }*/
+
             }
 
             @Override
@@ -142,7 +148,8 @@ public class MainActivity extends android.support.v4.app.FragmentActivity {
                     }
                 }
                 int size = mSessionFragments.size();
-                if (i == 3/*numberOfRuns*/) {
+                // TODO: don't use int constant below!!!
+                if (i == /*3*/numberOfRuns) {
                     // TODO: maybe have an endFragment here without a <<Swipe to...<<
                     mSessionFragments.add(size, mStaticFragments[1]);
                 } else {
@@ -155,13 +162,16 @@ public class MainActivity extends android.support.v4.app.FragmentActivity {
         @Override
         public Fragment getItem(int position) {
             //Log.d("position:", String.valueOf(position));
+            if (position == mSessionFragments.size() - 1) {
+                getDBInteractor().createOutputJsonFile();
+            }
             return mSessionFragments.get(position);
         }
 
-        @Override
+        /*@Override
         public int getItemPosition(Object object) {
             return super.getItemPosition(object);
-        }
+        }*/
 
         @Override
         public int getCount() {

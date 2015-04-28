@@ -26,10 +26,14 @@ public class SwipeToStartNewRunFragment extends android.support.v4.app.Fragment 
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
             hasBeenVisible = true;
+            //-------------------------------------------------
+            ((MainActivity)getActivity()).setRunStartTime(System.currentTimeMillis());
+            Log.d("startScreene", ((MainActivity) getActivity()).getRunStartTime() + "");
+            //------------------------------------------------------
         }else{
             if(hasBeenVisible){
-                ((MainActivity)getActivity()).setRunStartTime(System.currentTimeMillis());
-                Log.d("startScreene", ((MainActivity) getActivity()).getRunStartTime() + "");
+                /*((MainActivity)getActivity()).setRunStartTime(System.currentTimeMillis());
+                Log.d("startScreene", ((MainActivity) getActivity()).getRunStartTime() + "");*/
             }
         }
     }

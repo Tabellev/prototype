@@ -70,19 +70,24 @@ public class RunResult extends Run {
     }
 
     //TODO: modify as described in SingleChoiceFragment
-    public void addAnsweredQuestion(AnsweredQuestion question, int index) {
-        this.mAnsweredQuestions[index] = question;
+    public void addAnsweredQuestion(AnsweredQuestion question/*, int index*/) {
 
-        Log.d("Question added:", String.valueOf(question.getQuestionID()));
-        for (int i = 0; i < mAnsweredQuestions.length; i++) {
-            if (mAnsweredQuestions[i] != null) {
-                //Log.d("Array Length:", String.valueOf(mAnsweredQuestions[i].getQuestionID()));
-                //TODO: find a way to print the contents of mAnsweredQuestions for debugging
-                Log.d("Array Length:", String.valueOf(mAnsweredQuestions.length));
+        for(int i = 0; i < mAnsweredQuestions.length; i++) {
+            if (mAnsweredQuestions[i] == null) {
+                mAnsweredQuestions[i] = question;
+                break;
             }
         }
 
-        //Log.d("Array Length:", String.valueOf(mAnsweredQuestions[1].getQuestionID()));
+        //Log.d("AnsweredQuestions!:", Arrays.deepToString(mAnsweredQuestions));
+        /*for(int i = 0; i < mAnsweredQuestions.length; i++) {
+            if (mAnsweredQuestions[i] != null) {
+                Log.d("AnsweredQuestion:", "AQ(" + i + ")" + mAnsweredQuestions[i].getQuestionID() +
+                        "GivAnsw: " + mAnsweredQuestions[i].getGivenAnswer()[0]);
+            } else {
+                Log.d("AnsweredQuestion:", "AQ(" + i + ") is null");
+            }
+        }*/
         //this.mAnsweredQuestions = appendQuestion(this.mAnsweredQuestions, question);
     }
 

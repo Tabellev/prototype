@@ -29,4 +29,6 @@ public interface IDbInteractor {
     HashMap<Integer, HashMap<Integer, QuestionSetup>> getRunSetupQuestions();
 
     int[] getRunIDs();
+
+    public void createOutputJsonFile();
 }

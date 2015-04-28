@@ -10,7 +10,7 @@ import android.widget.RelativeLayout;
 
 public class RunFinishedFragment extends android.support.v4.app.Fragment {
 
-   private  boolean hasBeenVisible = false;
+   private boolean hasBeenVisible = false;
     private long runTime;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -25,13 +25,20 @@ public class RunFinishedFragment extends android.support.v4.app.Fragment {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
             hasBeenVisible = true;
+            //----------------------------------------------
+            ((MainActivity)getActivity()).setRunStopTime(System.currentTimeMillis());
+            Log.d("startTime",((MainActivity)getActivity()).getRunStartTime() + "");
+            Log.d("stopTime",((MainActivity)getActivity()).getRunStopTime() + "");
+            ((MainActivity)getActivity()).setRunTime((((MainActivity)getActivity()).getRunStopTime() - ((MainActivity)getActivity()).getRunStartTime())/1000);
+            Log.d("Run finished", ((MainActivity)getActivity()).getRunTime() + "");
+            //--------------------------------------------------
         }else{
             if(hasBeenVisible){
-                ((MainActivity)getActivity()).setRunStopTime(System.currentTimeMillis());
+                /*((MainActivity)getActivity()).setRunStopTime(System.currentTimeMillis());
                 Log.d("startTime",((MainActivity)getActivity()).getRunStartTime() + "");
                 Log.d("stopTime",((MainActivity)getActivity()).getRunStopTime() + "");
                 ((MainActivity)getActivity()).setRunTime((((MainActivity)getActivity()).getRunStopTime() - ((MainActivity)getActivity()).getRunStartTime())/1000);
-                Log.d("Run finished", ((MainActivity)getActivity()).getRunTime() + "");
+                Log.d("Run finished", ((MainActivity)getActivity()).getRunTime() + "");*/
             }
         }
     }
@@ -46,6 +53,9 @@ public class RunFinishedFragment extends android.support.v4.app.Fragment {
         return f;
     }
 
+    public void setHasBeenVisible(boolean value) {
+        this.hasBeenVisible = value;
+    }
     // add button that resets pageradapters counter
 
 }

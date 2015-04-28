@@ -3,21 +3,19 @@ package com.example.isabel.prototypestart;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 import com.example.isabel.prototypestart.model.AnsweredQuestion;
 import com.example.isabel.prototypestart.model.Question;
 import com.example.isabel.prototypestart.model.QuestionSetup;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MultipleChoiceFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
@@ -26,6 +24,10 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
     private Boolean option3isClicked = false;
     private Boolean option4isClicked = false;
     private Boolean option5isClicked = false;
+
+    private Boolean[] optionStatus = new Boolean[] {false, false, false, false, false};
+    private Button[] optionButtons = new Button[5];
+
     private Button btnOption1;
     private Button btnOption2;
     private Button btnOption3;
@@ -47,6 +49,7 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
 
     private HashMap<Integer, HashMap<Integer, QuestionSetup>> questionConfigurationData;
     private AnsweredQuestion answeredQuestion;
+    private ArrayList<String> mGivenAnswer = new ArrayList<>();
     // --------------------------------------------------------
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,25 +71,32 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
         questionConfigurationData = ((MainActivity)getActivity()).getDBInteractor().getRunSetupQuestions();
         //int runId = 7000; // this ID must come from the current run which the current Question belongs to
         HashMap<Integer, QuestionSetup> run1QuestionSetups = questionConfigurationData.get(runID);
+        Log.d("!Mult-RunID:", String.valueOf(runID));
         // argument to AnsweredQuestion constructor
         long timeLimit = run1QuestionSetups.get(questionID).getTimeLimit();
 
         // instantiate answeredQuestion
         answeredQuestion = new AnsweredQuestion(questionID, timeLimit, correctAnswer);
+        Log.d("!AQ-CorAnsw:", answeredQuestion.getCorrectAnswer()[0]);
 
         //-------------------------------------------------------------------------------------------------------
 
         View view = inflater.inflate(R.layout.fragment_multiple_choice, container, false);
         btnOption1 = new Button(getActivity().getApplicationContext());
         btnOption1.setOnClickListener(this);
+        optionButtons[0] = btnOption1;
         btnOption2 = new Button(getActivity().getApplicationContext());
         btnOption2.setOnClickListener(this);
+        optionButtons[1] = btnOption2;
         btnOption3 = new Button(getActivity().getApplicationContext());
         btnOption3.setOnClickListener(this);
+        optionButtons[2] = btnOption3;
         btnOption4 = new Button(getActivity().getApplicationContext());
         btnOption4.setOnClickListener(this);
+        optionButtons[3] = btnOption4;
         btnOption5 = new Button(getActivity().getApplicationContext());
         btnOption5.setOnClickListener(this);
+        optionButtons[4] = btnOption5;
         dontKnow = (Button) view.findViewById(R.id.multipleDontKnow);
         dontKnow.setOnClickListener(this);
         swipe = (TextView) view.findViewById(R.id.multipleChoiceContinue);
@@ -260,6 +270,12 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
                     option1isClicked = false;
                     dontKnow.setBackgroundColor(Color.rgb(160,200,220));
                 }
+                // set chosen flag based on if the option is clicked
+                if (option1isClicked) {
+                    optionStatus[0] = true;
+                } else {
+                    optionStatus[0] = false;
+                }
                 break;
             case R.id.btnOption2Id:
                 if(!option2isClicked){
@@ -271,6 +287,12 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
                     btnOption2.setBackgroundColor(Color.rgb(160,200,220));
                     option2isClicked = false;
                     dontKnow.setBackgroundColor(Color.rgb(160,200,220));
+                }
+                // set chosen flag based on if the option is clicked
+                if (option2isClicked) {
+                    optionStatus[1] = true;
+                } else {
+                    optionStatus[1] = false;
                 }
                 break;
             case R.id.btnOption3Id:
@@ -284,6 +306,12 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
                     option3isClicked = false;
                     dontKnow.setBackgroundColor(Color.rgb(160,200,220));
                 }
+                // set chosen flag based on if the option is clicked
+                if (option3isClicked) {
+                    optionStatus[2] = true;
+                } else {
+                    optionStatus[2] = false;
+                }
                 break;
             case R.id.btnOption4Id:
                 if(!option4isClicked){
@@ -296,6 +324,12 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
                     option4isClicked = false;
                     dontKnow.setBackgroundColor(Color.rgb(160,200,220));
                 }
+                // set chosen flag based on if the option is clicked
+                if (option4isClicked) {
+                    optionStatus[3] = true;
+                } else {
+                    optionStatus[3] = false;
+                }
                 break;
             case R.id.btnOption5Id:
                 if(!option5isClicked){
@@ -307,6 +341,12 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
                     btnOption5.setBackgroundColor(Color.rgb(160,200,220));
                     option5isClicked = false;
                     dontKnow.setBackgroundColor(Color.rgb(160,200,220));
+                }
+                // set chosen flag based on if the option is clicked
+                if (option5isClicked) {
+                    optionStatus[4] = true;
+                } else {
+                    optionStatus[4] = false;
                 }
                 break;
             case R.id.multipleDontKnow:
@@ -321,7 +361,28 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
                 option2isClicked = false;
                 option3isClicked = false;
                 option4isClicked = false;
+                // remove answer
+                mGivenAnswer.clear();
+                // remove chosen flags
+                for (int i = 0; i < optionStatus.length; i++) {
+                    optionStatus[i] = false;
+                }
+
+                answeredQuestion.setSkippedQuestion(true);
                 break;
+        }
+    }
+
+    private void setGivenAnswer() {
+        // add answers to mGivenAnswer if matching flag is true
+        // TODO: maybe move this to ...visibleToUser() before adding answeredQuestion to TestResult?
+        for (int i = 0; i < optionStatus.length; i++) {
+            if (optionStatus[i]) {
+                //Log.d("Status:", "optionStatus[" + i + "]" + optionStatus[i].toString());
+                mGivenAnswer.add(optionButtons[i].getText().toString());
+            } else {
+                //Log.d("Status:", "optionStatus[" + i + "]" + optionStatus[i].toString());
+            }
         }
     }
 
@@ -342,6 +403,13 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
             if(answeredQuestion != null){
                 answeredQuestion.setTimeUsed(getQuestionTime(startTime, stopTime));
                 Log.d("AnsweredQuestionTime", answeredQuestion.getTimeUsed() + " answered");
+
+                setGivenAnswer(); // populate mGivenAnswer
+
+                answeredQuestion.setGivenAnswer(mGivenAnswer.toArray(new String[mGivenAnswer.size()]));
+                //Log.d("MultGivenAnswer:", String.valueOf(mGivenAnswer.size()));
+                Log.d("RUN_ID:", String.valueOf(runID));
+                ((MainActivity)getActivity()).getDBInteractor().getTestResult().getRunResult(runID).addAnsweredQuestion(answeredQuestion/*, index*/);
             }
             Log.d("Time", questionTime + " Multiple");
         }

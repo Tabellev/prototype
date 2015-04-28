@@ -46,6 +46,8 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
     private long startTime;
     private long stopTime;
     private long questionTime;
+
+    private boolean answerIsGiven = false;
     // New---------------------------------------------
     private int questionID;
     private int runID;
@@ -199,42 +201,55 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
             switch (v.getId()) {
                 case R.id.btnZero:
                     v.setBackgroundColor(Color.rgb(7, 147, 194));
+                    answerIsGiven = true;
                     break;
                 case R.id.btnOne:
                     v.setBackgroundColor(Color.rgb(7, 147, 194));
+                    answerIsGiven = true;
                     break;
                 case R.id.btnTwo:
                     v.setBackgroundColor(Color.rgb(7, 147, 194));
+                    answerIsGiven = true;
                     break;
                 case R.id.btnThree:
                     v.setBackgroundColor(Color.rgb(7, 147, 194));
+                    answerIsGiven = true;
                     break;
                 case R.id.btnFour:
                     v.setBackgroundColor(Color.rgb(7, 147, 194));
+                    answerIsGiven = true;
                     break;
                 case R.id.btnFive:
                     v.setBackgroundColor(Color.rgb(7, 147, 194));
+                    answerIsGiven = true;
                     break;
                 case R.id.btnSix:
                     v.setBackgroundColor(Color.rgb(7, 147, 194));
+                    answerIsGiven = true;
                     break;
                 case R.id.btnSeven:
                     v.setBackgroundColor(Color.rgb(7, 147, 194));
+                    answerIsGiven = true;
                     break;
                 case R.id.btnEight:
                     v.setBackgroundColor(Color.rgb(7, 147, 194));
+                    answerIsGiven = true;
                     break;
                 case R.id.btnNine:
                     v.setBackgroundColor(Color.rgb(7, 147, 194));
+                    answerIsGiven = true;
                     break;
                 case R.id.btnPoint:
                     v.setBackgroundColor(Color.rgb(7, 147, 194));
+                    answerIsGiven = true;
                     break;
                 case R.id.backspace:
                     v.setBackgroundColor(Color.rgb(7, 147, 194));
                     break;
                 case R.id.btnNumericalDontKnow:
                     v.setBackgroundColor(Color.rgb(7, 147, 194));
+                    answerIsGiven = false;
+                    answeredQuestion.setSkippedQuestion(true);
                     break;
             }
         } else if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -327,7 +342,9 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
 
     @Override
     public boolean onLongClick(View v) {
+        // may need to remove the string instead of setting an empty one
         input.setText("");
+        answerIsGiven = false;
         return true;
     }
 
@@ -349,9 +366,28 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
             if(answeredQuestion != null){
                 answeredQuestion.setTimeUsed(getQuestionTime(startTime, stopTime));
                 Log.d("AnsweredQuestionTime", answeredQuestion.getTimeUsed() + " answered");
+
+                // set givenAnswer
+                /*setGivenAnswer();*/
+                answeredQuestion.setGivenAnswer(setGivenAnswer());
+
+                //Log.d("NumericalAQ:", answeredQuestion.getGivenAnswer()[0]);
+                Log.d("RUN_ID:", String.valueOf(runID));
+                // add answeredQuestion to TestResult
+                ((MainActivity)getActivity()).getDBInteractor().getTestResult().getRunResult(runID).addAnsweredQuestion(answeredQuestion/*, index*/);
             }
             Log.d("Time", questionTime + " Single");
         }
+    }
+
+    private String[] setGivenAnswer() {
+        String[] fromInput = new String[1];
+        if (answerIsGiven) {
+            fromInput[0] = input.getText().toString();
+        } else {
+            fromInput[0] = null;
+        }
+        return fromInput;
     }
 
 

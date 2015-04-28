@@ -93,11 +93,11 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
         answeredQuestion = new AnsweredQuestion(questionID, timeLimit, correctAnswer);
 
         // Testing------------------------------------------------------------------------------------------
-        RunSetup temp = ((MainActivity)getActivity()).getDBInteractor().getMockSession().getRunSetup(runID);
+        /*RunSetup temp = ((MainActivity)getActivity()).getDBInteractor().getMockSession().getRunSetup(runID);
         indexOfAnsweredQuestions = new int[temp.getNumberOfQuestions()];
         for (int i = 0; i < indexOfAnsweredQuestions.length; i++) {
             indexOfAnsweredQuestions[i] = temp.getQuestionSetup()[i].getQuestionID();
-        }
+        }*/
 
         //-------------------------------------------------------------------------------------------------------
 
@@ -391,19 +391,22 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
             if(answeredQuestion != null){
                 answeredQuestion.setTimeUsed(getQuestionTime(startTime, stopTime));
                 Log.d("AnsweredQuestionTime", answeredQuestion.getTimeUsed() + " answered");
+
                 answeredQuestion.setGivenAnswer(mGivenAnswer.toArray(new String[mGivenAnswer.size()]));
-                Log.d("answeredQuestion : answ", String.valueOf(answeredQuestion.getGivenAnswer()[0]));
+                //Log.d("answeredQuestion : answ", String.valueOf(answeredQuestion.getGivenAnswer()[0]));
                 Log.d("CorrectAnswer:", answeredQuestion.getCorrectAnswer()[0]);
                 Log.d("AnswerWasCorrect:", String.valueOf(answeredQuestion.answerWasCorrect()));
                 Log.d("SkippedQuestion:", String.valueOf(answeredQuestion.skippedQuestion()));
                 // TODO: modify getRunResults() to return correct array from runID, and modify addAnsweredQuestion()
-                int index = 0;
-                for (int i = 0; i < indexOfAnsweredQuestions.length; i++) {
+
+                //int index = 0;
+                /*for (int i = 0; i < indexOfAnsweredQuestions.length; i++) {
                     if (indexOfAnsweredQuestions[i] == runID) {
                         index = i;
                     }
-                }
-                ((MainActivity)getActivity()).getDBInteractor().getTestResult().getRunResult(runID).addAnsweredQuestion(answeredQuestion, index);
+                }*/
+                Log.d("RUN_ID:", String.valueOf(runID));
+                ((MainActivity)getActivity()).getDBInteractor().getTestResult().getRunResult(runID).addAnsweredQuestion(answeredQuestion/*, index*/);
             }
             Log.d("Time", questionTime + " Single");
         }

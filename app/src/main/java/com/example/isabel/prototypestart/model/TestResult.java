@@ -1,5 +1,7 @@
 package com.example.isabel.prototypestart.model;
 
+import android.util.Log;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
@@ -72,6 +74,7 @@ public class TestResult {
     public void setTheRunResults(RunResult[] rr) {
         this.mRunResults = rr;
     }
+
     public String getExperimentName() {
         return mExperimentName;
     }
@@ -94,13 +97,24 @@ public class TestResult {
 
     // Testing to reach the right RunResult when adding an AnsweredQuestion
     public RunResult getRunResult(int runID) {
+        Log.d("Input-runID:", String.valueOf(runID));
         for(int i = 0; i < mRunResults.length; i++) {
+            Log.d("ID:", String.valueOf(mRunResults[i].getRunID()));
+            // Må gjøres annerledes!!! går i else fordi første element i mRunResults[] er 7000 og neste Run har 7001
+            // lage switch på runID hvis vi ikke får til en bedre løsning...
             if (runID == mRunResults[i].getRunID()) {
+
+                //Log.d("In getRunResult():", String.valueOf(mRunResults[i].getRunID()));
+
                 return mRunResults[i];
             } else {
-                return null;
+
+                //Log.d("In getRunResult():", "Returned NULL!!!");
+                continue;
+                //return null;
             }
         }
+        //Log.d("In getRunResult():", "Returned NULL After Loop!!!");
         return null;
     }
 
