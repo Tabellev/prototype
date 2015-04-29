@@ -25,7 +25,7 @@
             android:layout_marginBottom="20dp"
             android:text="Test name:"
             android:textSize="40sp"
-            android:layout_marginRight="150dp"/>
+            android:layout_marginRight="240dp"/>
         <TextView
             android:id="@+id/txtOutputTestResultName"
             android:layout_toRightOf="@+id/txtLabelTestResultTestName"
@@ -42,7 +42,7 @@
             android:layout_marginBottom="20dp"
             android:text="Session ID:"
             android:textSize="40sp"
-            android:layout_marginRight="150dp"/>
+            android:layout_marginRight="240dp"/>
         <TextView
             android:id="@+id/txtOutputTestResultSessionId"
             android:layout_toRightOf="@+id/txtLabelTestResultSession"
@@ -59,7 +59,7 @@
             android:layout_marginBottom="20dp"
             android:text="Crew ID:"
             android:textSize="40sp"
-            android:layout_marginRight="150dp"/>
+            android:layout_marginRight="290dp"/>
         <TextView
             android:id="@+id/txtOutputTestResultCrewId"
             android:layout_toRightOf="@+id/txtLabelTestResultCrew"
@@ -76,7 +76,7 @@
             android:layout_marginBottom="20dp"
             android:text="Runs:"
             android:textSize="40sp"
-            android:layout_marginRight="150dp"/>
+            android:layout_marginRight="340dp"/>
         <TextView
             android:id="@+id/txtOutputTestResultNumberOfRuns"
             android:layout_toRightOf="@+id/txtLabelTestResultNumberOfRuns"
@@ -93,7 +93,7 @@
             android:layout_marginBottom="20dp"
             android:text="Overall Time Used:"
             android:textSize="40sp"
-            android:layout_marginRight="150dp"/>
+            android:layout_marginRight="106dp"/>
         <TextView
             android:id="@+id/txtOutputTestResultOverallTimeUsed"
             android:layout_toRightOf="@+id/txtLabelTestResultTimeUsed"
@@ -110,7 +110,7 @@
             android:layout_marginBottom="20dp"
             android:text="Correct Answers:"
             android:textSize="40sp"
-            android:layout_marginRight="150dp"/>
+            android:layout_marginRight="135dp"/>
         <TextView
             android:id="@+id/txtOutputTestResultCorrectAnswers"
             android:layout_toRightOf="@+id/txtLabelTestResultCorrectAnswers"
@@ -127,7 +127,7 @@
             android:layout_marginBottom="20dp"
             android:text="Wrong Answers:"
             android:textSize="40sp"
-            android:layout_marginRight="150dp"/>
+            android:layout_marginRight="151dp"/>
         <TextView
             android:id="@+id/txtOutputTestResultWrongAnswers"
             android:layout_toRightOf="@+id/txtLabelTestResultWrongAnswers"
@@ -144,7 +144,7 @@
             android:layout_marginBottom="20dp"
             android:text="Skipped Answers:"
             android:textSize="40sp"
-            android:layout_marginRight="150dp"/>
+            android:layout_marginRight="130dp"/>
         <TextView
             android:id="@+id/txtOutputTestResultSkippedAnswers"
             android:layout_toRightOf="@+id/txtLabelTestResultSkippedAnswers"

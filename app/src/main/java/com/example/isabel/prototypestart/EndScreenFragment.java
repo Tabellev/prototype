@@ -57,7 +57,7 @@ public class EndScreenFragment extends Fragment {
         txtTestCrewId.setText(String.valueOf(mTestResult.getCrewID()));
         txtTestNumberOfRuns.setText(String.valueOf(mTestResult.getNumberOfRuns()));
 
-        txtTestTimeUsed.setText(String.valueOf(mTestStatistics.getSessionTimeUsed()));
+        txtTestTimeUsed.setText(String.valueOf(mTestStatistics.getSessionTimeUsed()) + " Seconds");
         txtTestCorrectAnswers.setText(String.valueOf(mTestStatistics.getNumberOfCorrectAnswers()));
         txtTestWrongAnswers.setText(String.valueOf(mTestStatistics.getNumberOfWrongAnswers()));
         txtTestSkippedAnswers.setText(String.valueOf(mTestStatistics.getNumberOfSkippedAnswers()));
