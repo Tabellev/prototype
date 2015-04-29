@@ -236,7 +236,7 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
     }
 
     public String checkTextLength(String qText){
-            if(qText.length() > 54){
+            if(qText.length() > 47){
        /* Paint p = questionText.getPaint();
         DisplayMetrics displaymetrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
@@ -249,7 +249,7 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
                 String firstPart;
                 String lastPart;
                 if(qText.length() % 2 == 0){
-                    firstPart = qText.substring(0,(qText.length()/2)-1);
+                    firstPart = qText.substring(0,(qText.length()/2)/*-1*/);
                     lastPart = qText.substring((qText.length()/2));
                 }else{
                     firstPart = qText.substring(0,(qText.length())/2);

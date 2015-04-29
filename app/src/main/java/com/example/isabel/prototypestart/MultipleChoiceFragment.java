@@ -206,7 +206,7 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
     }
 
     public String checkTextLength(String qText){
-        if(qText.length() > 54){
+        if(qText.length() > 47){
        /* Paint p = questionText.getPaint();
         DisplayMetrics displaymetrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
