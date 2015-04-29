@@ -85,5 +85,73 @@
             android:layout_height="wrap_content"
             android:text="output from TestResult"
             android:textSize="40sp"/>
+        <TextView
+            android:id="@+id/txtLabelTestResultTimeUsed"
+            android:layout_below="@+id/txtLabelTestResultNumberOfRuns"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="Overall Time Used:"
+            android:textSize="40sp"
+            android:layout_marginRight="150dp"/>
+        <TextView
+            android:id="@+id/txtOutputTestResultOverallTimeUsed"
+            android:layout_toRightOf="@+id/txtLabelTestResultTimeUsed"
+            android:layout_alignBaseline="@+id/txtLabelTestResultTimeUsed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="output from TestResult"
+            android:textSize="40sp"/>
+        <TextView
+            android:id="@+id/txtLabelTestResultCorrectAnswers"
+            android:layout_below="@+id/txtLabelTestResultTimeUsed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="Correct Answers:"
+            android:textSize="40sp"
+            android:layout_marginRight="150dp"/>
+        <TextView
+            android:id="@+id/txtOutputTestResultCorrectAnswers"
+            android:layout_toRightOf="@+id/txtLabelTestResultCorrectAnswers"
+            android:layout_alignBaseline="@+id/txtLabelTestResultCorrectAnswers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="output from TestResult"
+            android:textSize="40sp"/>
+        <TextView
+            android:id="@+id/txtLabelTestResultWrongAnswers"
+            android:layout_below="@+id/txtLabelTestResultCorrectAnswers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="Wrong Answers:"
+            android:textSize="40sp"
+            android:layout_marginRight="150dp"/>
+        <TextView
+            android:id="@+id/txtOutputTestResultWrongAnswers"
+            android:layout_toRightOf="@+id/txtLabelTestResultWrongAnswers"
+            android:layout_alignBaseline="@+id/txtLabelTestResultWrongAnswers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="output from TestResult"
+            android:textSize="40sp"/>
+        <TextView
+            android:id="@+id/txtLabelTestResultSkippedAnswers"
+            android:layout_below="@+id/txtLabelTestResultWrongAnswers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="Skipped Answers:"
+            android:textSize="40sp"
+            android:layout_marginRight="150dp"/>
+        <TextView
+            android:id="@+id/txtOutputTestResultSkippedAnswers"
+            android:layout_toRightOf="@+id/txtLabelTestResultSkippedAnswers"
+            android:layout_alignBaseline="@+id/txtLabelTestResultSkippedAnswers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="output from TestResult"
+            android:textSize="40sp"/>
     </RelativeLayout>
 </ScrollView>

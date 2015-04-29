@@ -71,13 +71,13 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
         questionConfigurationData = ((MainActivity)getActivity()).getDBInteractor().getRunSetupQuestions();
         //int runId = 7000; // this ID must come from the current run which the current Question belongs to
         HashMap<Integer, QuestionSetup> run1QuestionSetups = questionConfigurationData.get(runID);
-        Log.d("!Mult-RunID:", String.valueOf(runID));
+        //Log.d("!Mult-RunID:", String.valueOf(runID));
         // argument to AnsweredQuestion constructor
         long timeLimit = run1QuestionSetups.get(questionID).getTimeLimit();
 
         // instantiate answeredQuestion
         answeredQuestion = new AnsweredQuestion(questionID, timeLimit, correctAnswer);
-        Log.d("!AQ-CorAnsw:", answeredQuestion.getCorrectAnswer()[0]);
+        //Log.d("!AQ-CorAnsw:", answeredQuestion.getCorrectAnswer()[0]);
 
         //-------------------------------------------------------------------------------------------------------
 
@@ -402,16 +402,21 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
             questionTime = getQuestionTime(startTime,stopTime);
             if(answeredQuestion != null){
                 answeredQuestion.setTimeUsed(getQuestionTime(startTime, stopTime));
-                Log.d("AnsweredQuestionTime", answeredQuestion.getTimeUsed() + " answered");
+                //Log.d("AnsweredQuestionTime", answeredQuestion.getTimeUsed() + " answered");
 
                 setGivenAnswer(); // populate mGivenAnswer
 
                 answeredQuestion.setGivenAnswer(mGivenAnswer.toArray(new String[mGivenAnswer.size()]));
                 //Log.d("MultGivenAnswer:", String.valueOf(mGivenAnswer.size()));
-                Log.d("RUN_ID:", String.valueOf(runID));
+                //Log.d("RUN_ID:", String.valueOf(runID));
+                ((MainActivity)getActivity()).getDBInteractor().getTestStatistics().setSessionTimeUsed((int) answeredQuestion.getTimeUsed());
+                ((MainActivity)getActivity()).getDBInteractor().getTestStatistics().setNumberOfCorrectAnswers(answeredQuestion.answerWasCorrect() ? 1 : 0);
+                ((MainActivity)getActivity()).getDBInteractor().getTestStatistics().setNumberOfWrongAnswers(answeredQuestion.answerWasCorrect() ? 0 : 1);
+                ((MainActivity)getActivity()).getDBInteractor().getTestStatistics().setNumberOfSkippedAnswers(answeredQuestion.skippedQuestion() ? 1 : 0);
+
                 ((MainActivity)getActivity()).getDBInteractor().getTestResult().getRunResult(runID).addAnsweredQuestion(answeredQuestion/*, index*/);
             }
-            Log.d("Time", questionTime + " Multiple");
+            //Log.d("Time", questionTime + " Multiple");
         }
     }
 

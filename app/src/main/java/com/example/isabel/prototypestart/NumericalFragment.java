@@ -317,6 +317,8 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
                 case R.id.btnNumericalDontKnow:
                     v.setBackgroundColor(Color.rgb(7, 147, 194));
                     input.setText("");
+                    answerIsGiven = false;
+                    answeredQuestion.setSkippedQuestion(true);
                     break;
                 case R.id.btnPoint:
                     if (!isPoint(input.getText().toString())) {
@@ -365,18 +367,25 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
             questionTime = getQuestionTime(startTime,stopTime);
             if(answeredQuestion != null){
                 answeredQuestion.setTimeUsed(getQuestionTime(startTime, stopTime));
-                Log.d("AnsweredQuestionTime", answeredQuestion.getTimeUsed() + " answered");
+                //Log.d("AnsweredQuestionTime", answeredQuestion.getTimeUsed() + " answered");
 
                 // set givenAnswer
                 /*setGivenAnswer();*/
                 answeredQuestion.setGivenAnswer(setGivenAnswer());
 
                 //Log.d("NumericalAQ:", answeredQuestion.getGivenAnswer()[0]);
-                Log.d("RUN_ID:", String.valueOf(runID));
+                //Log.d("RUN_ID:", String.valueOf(runID));
                 // add answeredQuestion to TestResult
+                Log.d("skippedQuestion:", String.valueOf(answeredQuestion.skippedQuestion()));
+
+                ((MainActivity)getActivity()).getDBInteractor().getTestStatistics().setSessionTimeUsed((int) answeredQuestion.getTimeUsed());
+                ((MainActivity)getActivity()).getDBInteractor().getTestStatistics().setNumberOfCorrectAnswers(answeredQuestion.answerWasCorrect() ? 1 : 0);
+                ((MainActivity)getActivity()).getDBInteractor().getTestStatistics().setNumberOfWrongAnswers(answeredQuestion.answerWasCorrect() ? 0 : 1);
+                ((MainActivity)getActivity()).getDBInteractor().getTestStatistics().setNumberOfSkippedAnswers(answeredQuestion.skippedQuestion() ? 1 : 0);
+
                 ((MainActivity)getActivity()).getDBInteractor().getTestResult().getRunResult(runID).addAnsweredQuestion(answeredQuestion/*, index*/);
             }
-            Log.d("Time", questionTime + " Single");
+            //Log.d("Time", questionTime + " Single");
         }
     }
 
@@ -384,8 +393,10 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
         String[] fromInput = new String[1];
         if (answerIsGiven) {
             fromInput[0] = input.getText().toString();
+            answeredQuestion.setSkippedQuestion(false);
         } else {
             fromInput[0] = null;
+            answeredQuestion.setSkippedQuestion(true);
         }
         return fromInput;
     }

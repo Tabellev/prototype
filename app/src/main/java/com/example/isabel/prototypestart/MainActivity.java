@@ -55,6 +55,10 @@ public class MainActivity extends android.support.v4.app.FragmentActivity {
                     mPagerAdapter.mSessionFragments.get(position).setHasBeenVisible(false);
 
                 }*/
+                if (position == mPagerAdapter.mSessionFragments.size()) {
+                    Log.d("onPageSelected()", String.valueOf(position));
+                    getDBInteractor().createOutputJsonFile();
+                }
 
             }
 
@@ -161,11 +165,12 @@ public class MainActivity extends android.support.v4.app.FragmentActivity {
         @Override
         public Fragment getItem(int position) {
 
-            if (position == mSessionFragments.size() - 1) {
+            /*if (position == mSessionFragments.size() - 1) {
                 // Generate output file
                 getDBInteractor().createOutputJsonFile();
-            }
+            }*/
             if (position == mSessionFragments.size()) {
+                //getDBInteractor().createOutputJsonFile();//her lages output før siste spm er satt!!!
                 return new EndScreenFragment();
             } else {
                 return mSessionFragments.get(position);

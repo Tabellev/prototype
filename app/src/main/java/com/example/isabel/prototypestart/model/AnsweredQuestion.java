@@ -87,16 +87,22 @@ public class AnsweredQuestion {
     }
 
     public void setGivenAnswer(String[] givenAnswer) {
-        if (givenAnswer.length != 0) {
-            this.mGivenAnswer = givenAnswer;
 
-            Arrays.sort(mCorrectAnswer);
-            Arrays.sort(mGivenAnswer);
+        for (int i = 0; i < givenAnswer.length; i++) {
+            if (givenAnswer[i] == null) {
+                this.mSkippedQuestion = true;
+            }
+            else if (givenAnswer.length != 0) {
+                this.mGivenAnswer = givenAnswer;
 
-            this.mSkippedQuestion = false;
-            this.mAnswerWasCorrect = Arrays.equals(mCorrectAnswer, mGivenAnswer);
-        } else {
-            this.mAnswerWasCorrect = false;
+                Arrays.sort(mCorrectAnswer);
+                Arrays.sort(mGivenAnswer);
+
+                this.mSkippedQuestion = false;
+                this.mAnswerWasCorrect = Arrays.equals(mCorrectAnswer, mGivenAnswer);
+            } else {
+                this.mAnswerWasCorrect = false;
+            }
         }
     }
 

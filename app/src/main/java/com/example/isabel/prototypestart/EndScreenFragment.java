@@ -9,6 +9,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.isabel.prototypestart.model.TestResult;
+import com.example.isabel.prototypestart.model.TestStatistics;
 
 import org.w3c.dom.Text;
 
@@ -17,7 +18,9 @@ import org.w3c.dom.Text;
  */
 public class EndScreenFragment extends Fragment {
     private TestResult mTestResult;
-    private TextView txtTestName, txtTestSessionId, txtTestCrewId, txtTestNumberOfRuns;
+    private TextView txtTestName, txtTestSessionId, txtTestCrewId, txtTestNumberOfRuns, txtTestTimeUsed,
+                     txtTestCorrectAnswers, txtTestWrongAnswers, txtTestSkippedAnswers;
+    private TestStatistics mTestStatistics;
 
     public EndScreenFragment() {}
 
@@ -33,6 +36,10 @@ public class EndScreenFragment extends Fragment {
         txtTestSessionId = (TextView)view.findViewById(R.id.txtOutputTestResultSessionId);
         txtTestCrewId = (TextView)view.findViewById(R.id.txtOutputTestResultCrewId);
         txtTestNumberOfRuns = (TextView)view.findViewById(R.id.txtOutputTestResultNumberOfRuns);
+        txtTestTimeUsed = (TextView)view.findViewById(R.id.txtOutputTestResultOverallTimeUsed);
+        txtTestCorrectAnswers = (TextView)view.findViewById(R.id.txtOutputTestResultCorrectAnswers);
+        txtTestWrongAnswers = (TextView)view.findViewById(R.id.txtOutputTestResultWrongAnswers);
+        txtTestSkippedAnswers = (TextView)view.findViewById(R.id.txtOutputTestResultSkippedAnswers);
 
         populateWithTestResults();
 
@@ -43,9 +50,16 @@ public class EndScreenFragment extends Fragment {
         //TODO: get TestResult from DbInteractorTest
         mTestResult = ((MainActivity)getActivity()).getDBInteractor().getTestResult();
 
+        mTestStatistics = ((MainActivity)getActivity()).getDBInteractor().getTestStatistics();
+
         txtTestName.setText(mTestResult.getExperimentName());
         txtTestSessionId.setText(String.valueOf(mTestResult.getSessionID()));
         txtTestCrewId.setText(String.valueOf(mTestResult.getCrewID()));
         txtTestNumberOfRuns.setText(String.valueOf(mTestResult.getNumberOfRuns()));
+
+        txtTestTimeUsed.setText(String.valueOf(mTestStatistics.getSessionTimeUsed()));
+        txtTestCorrectAnswers.setText(String.valueOf(mTestStatistics.getNumberOfCorrectAnswers()));
+        txtTestWrongAnswers.setText(String.valueOf(mTestStatistics.getNumberOfWrongAnswers()));
+        txtTestSkippedAnswers.setText(String.valueOf(mTestStatistics.getNumberOfSkippedAnswers()));
     }
 }

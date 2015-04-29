@@ -31,6 +31,8 @@ public class DbInteractorTest implements IDbInteractor {
     private HashMap<Integer, HashMap<Integer, QuestionSetup>> runSetupQuestions;
 
     private int[] mRunIDs;
+
+    private TestStatistics testStatistics;
     // Deprecated!
     List<Question> questionList = new ArrayList<Question>();
 
@@ -42,6 +44,8 @@ public class DbInteractorTest implements IDbInteractor {
         runSetupQuestions = new HashMap<Integer, HashMap<Integer, QuestionSetup>>();
         this.mockQuestions = mockDataProvider.getQuestionMap();
         this.mockSession = mockDataProvider.getMockSession();
+
+        this.testStatistics = new TestStatistics();
 
         // populates mRunIDs
         setRunIDs();
@@ -160,6 +164,41 @@ public class DbInteractorTest implements IDbInteractor {
     }
 
     public void createOutputJsonFile() {
+        //this.mockDataProvider.exportTestResultsToJson(mTestResult); // The last AnsweredQuestion is not added??
+
+        //TODO: put TestStatistics stuff in it's own method...
+        //populate TestStatistics
+        /*int numOfCorrectAnswers = 0;
+        int numOfWrongAnswers = 0;
+        int numOfSkippedAnswers = 0;
+        int overallTimeUsed = 0;
+
+        int numberOfRuns = mTestResult.getNumberOfRuns();
+        for (int i = 0; i < numberOfRuns; i++) {
+            int numberOfQuestions = mTestResult.getRunResults()[i].getAnsweredQuestions().length;
+            overallTimeUsed += mTestResult.getRunResults()[i].getRunTimeUsed();
+            for (int j = 0; j < numberOfQuestions; j++) {
+                if (mTestResult.getRunResults()[i].getAnsweredQuestions()[j].answerWasCorrect()) {
+                    numOfCorrectAnswers++;
+                } else {
+                    numOfWrongAnswers++;
+                }
+                if (mTestResult.getRunResults()[i].getAnsweredQuestions()[j].skippedQuestion()) {
+                    numOfSkippedAnswers++;
+                }
+            }
+        }
+        this.testStatistics.setSessionTimeUsed(overallTimeUsed);
+        this.testStatistics.setNumberOfCorrectAnswers(numOfCorrectAnswers);
+        this.testStatistics.setNumberOfWrongAnswers(numOfWrongAnswers);
+        this.testStatistics.setNumberOfSkippedAnswers(numOfSkippedAnswers);*/
+
         this.mockDataProvider.exportTestResultsToJson(mTestResult);
     }
+
+    @Override
+    public TestStatistics getTestStatistics() {
+        return testStatistics;
+    }
+
 }

@@ -390,13 +390,13 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
             questionTime = getQuestionTime(startTime,stopTime);
             if(answeredQuestion != null){
                 answeredQuestion.setTimeUsed(getQuestionTime(startTime, stopTime));
-                Log.d("AnsweredQuestionTime", answeredQuestion.getTimeUsed() + " answered");
+                //Log.d("AnsweredQuestionTime", answeredQuestion.getTimeUsed() + " answered");
 
                 answeredQuestion.setGivenAnswer(mGivenAnswer.toArray(new String[mGivenAnswer.size()]));
                 //Log.d("answeredQuestion : answ", String.valueOf(answeredQuestion.getGivenAnswer()[0]));
-                Log.d("CorrectAnswer:", answeredQuestion.getCorrectAnswer()[0]);
-                Log.d("AnswerWasCorrect:", String.valueOf(answeredQuestion.answerWasCorrect()));
-                Log.d("SkippedQuestion:", String.valueOf(answeredQuestion.skippedQuestion()));
+                //Log.d("CorrectAnswer:", answeredQuestion.getCorrectAnswer()[0]);
+                //Log.d("AnswerWasCorrect:", String.valueOf(answeredQuestion.answerWasCorrect()));
+                //Log.d("SkippedQuestion:", String.valueOf(answeredQuestion.skippedQuestion()));
                 // TODO: modify getRunResults() to return correct array from runID, and modify addAnsweredQuestion()
 
                 //int index = 0;
@@ -405,10 +405,15 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
                         index = i;
                     }
                 }*/
-                Log.d("RUN_ID:", String.valueOf(runID));
+                //Log.d("RUN_ID:", String.valueOf(runID));
+                ((MainActivity)getActivity()).getDBInteractor().getTestStatistics().setSessionTimeUsed((int) answeredQuestion.getTimeUsed());
+                ((MainActivity)getActivity()).getDBInteractor().getTestStatistics().setNumberOfCorrectAnswers(answeredQuestion.answerWasCorrect() ? 1 : 0);
+                ((MainActivity)getActivity()).getDBInteractor().getTestStatistics().setNumberOfWrongAnswers(answeredQuestion.answerWasCorrect() ? 0 : 1);
+                ((MainActivity)getActivity()).getDBInteractor().getTestStatistics().setNumberOfSkippedAnswers(answeredQuestion.skippedQuestion() ? 1 : 0);
+
                 ((MainActivity)getActivity()).getDBInteractor().getTestResult().getRunResult(runID).addAnsweredQuestion(answeredQuestion/*, index*/);
             }
-            Log.d("Time", questionTime + " Single");
+            //Log.d("Time", questionTime + " Single");
         }
     }
 

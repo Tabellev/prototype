@@ -1,401 +1,625 @@
 [
     {
       "questionID": "100",
-      "questionType": "SingleChoice",
-      "questionText": "On turbine 31, what is the status of P108?",
-      "responseOptions": [
-        "Running",
-        "Not Running"
-      ],
+      "questionType": "Numerical",
+      "questionText": "How many condensate pumps are running on turbine 31?",
       "correctAnswer": [
-        "Running"
+        "3"
       ]
     },
     {
       "questionID": "101",
       "questionType": "SingleChoice",
-      "questionText": "On turbine 32, which MFW pump has tripped?",
+      "questionText": "On turbine 31, what is the status of pump P204",
       "responseOptions": [
-        "P200",
-        "P201",
-        "P202"
+        "Running",
+        "Stopped"
       ],
       "correctAnswer": [
-        "P201"
+        "Stopped"
       ]
     },
     {
       "questionID": "102",
-      "questionType": "MultipleChoice",
-      "questionText": "Which of the following pumps are running?",
-      "responseOptions": [
-        "P201",
-        "P203",
-        "P205"
-      ],
+      "questionType": "Numerical",
+      "questionText": "Which pump is in manual on turbine 32?",
       "correctAnswer": [
-        "P203",
-        "P205"
+        "2"
       ]
     },
     {
       "questionID": "103",
-      "questionType": "Numerical",
-      "questionText": "On which SG is a MFW bypass valve miss-positioned?",
+      "questionType": "SingleChoice",
+      "questionText": "On turbine 32, what is the status of the MFW pump 2?",
+      "responseOptions": [
+          "Running",
+          "Tripped"
+        ],
       "correctAnswer": [
-        "3"
+        "Tripped"
       ]
     },
     {
       "questionID": "104",
       "questionType": "SingleChoice",
-      "questionText": "On turbine 31, what is the status of P108?",
+      "questionText": "On turbine 31, which high temperature drain pump has the lowest current?",
       "responseOptions": [
-        "Running",
-        "Not Running"
+        "P104",
+        "P105"
       ],
       "correctAnswer": [
-        "Running"
+        "P104"
       ]
     },
     {
       "questionID": "105",
-      "questionType": "SingleChoice",
+      "questionType": "Numerical",
       "questionText": "On turbine 32, which MFW pump has tripped?",
-      "responseOptions": [
-        "P200",
-        "P201",
-        "P202"
-      ],
       "correctAnswer": [
-        "P201"
+        "2"
       ]
     },
     {
       "questionID": "106",
-      "questionType": "MultipleChoice",
-      "questionText": "Which of the following pumps are running?",
+      "questionType": "SingleChoice",
+      "questionText": "On turbine 31, what is the status of P108?",
       "responseOptions": [
-        "P201",
-        "P203",
-        "P205"
+        "Running",
+        "Stopped"
       ],
       "correctAnswer": [
-        "P203",
-        "P205"
+        "Running"
       ]
     },
     {
       "questionID": "107",
       "questionType": "Numerical",
-      "questionText": "On which SG is a MFW bypass valve miss-positioned?",
+      "questionText": "What is the pressure from the MFW pumps on turbine 31?",
       "correctAnswer": [
-        "3"
+        "1139"
       ]
     },
     {
       "questionID": "108",
-      "questionType": "SingleChoice",
-      "questionText": "On turbine 31, what is the status of P108?",
-      "responseOptions": [
-        "Running",
-        "Not Running"
-      ],
+      "questionType": "Numerical",
+      "questionText": "Which MFW pump on turbine 32 has the highest current?",
       "correctAnswer": [
-        "Running"
+        "1"
       ]
     },
     {
       "questionID": "109",
-      "questionType": "SingleChoice",
-      "questionText": "On turbine 32, which MFW pump has tripped?",
-      "responseOptions": [
-        "P200",
-        "P201",
-        "P202"
-      ],
+      "questionType": "Numerical",
+      "questionText": "Which turbine has a switchgear error or fault indication?",
       "correctAnswer": [
-        "P201"
+        "32"
       ]
     },
     {
       "questionID": "110",
-      "questionType": "MultipleChoice",
-      "questionText": "Which of the following pumps are running?",
+      "questionType": "SingleChoice",
+      "questionText": "Are the high temperature preheaters by-passed?",
       "responseOptions": [
-        "P201",
-        "P203",
-        "P205"
+        "YES",
+        "NO"
       ],
       "correctAnswer": [
-        "P203",
-        "P205"
+        "NO"
       ]
     },
     {
       "questionID": "111",
-      "questionType": "Numerical",
-      "questionText": "On which SG is a MFW bypass valve miss-positioned?",
+      "questionType": "SingleChoice",
+      "questionText": "Are any of the turbine regulating valves throttled?",
+      "responseOptions": [
+          "YES",
+          "NO"
+        ],
       "correctAnswer": [
-        "3"
+        "NO"
       ]
     },
     {
       "questionID": "112",
       "questionType": "SingleChoice",
-      "questionText": "On turbine 31, what is the status of P108?",
+      "questionText": "Are all turbine 32 stop valves open?",
       "responseOptions": [
-        "Running",
-        "Not Running"
+        "YES",
+        "NO"
       ],
       "correctAnswer": [
-        "Running"
+        "YES"
       ]
     },
     {
       "questionID": "113",
-      "questionType": "SingleChoice",
-      "questionText": "On turbine 32, which MFW pump has tripped?",
-      "responseOptions": [
-        "P200",
-        "P201",
-        "P202"
-      ],
+      "questionType": "Numerical",
+      "questionText": "What is the condenser pressure on turbine 31?",
       "correctAnswer": [
-        "P201"
+        "0.70"
       ]
     },
     {
       "questionID": "114",
-      "questionType": "MultipleChoice",
-      "questionText": "Which of the following pumps are running?",
+      "questionType": "SingleChoice",
+      "questionText": "Are operating MFW pumps on turbine 31 operating properly?",
       "responseOptions": [
-        "P201",
-        "P203",
-        "P205"
+        "YES",
+        "NO"
       ],
       "correctAnswer": [
-        "P203",
-        "P205"
+        "YES"
       ]
     },
     {
       "questionID": "115",
-      "questionType": "Numerical",
-      "questionText": "On which SG is a MFW bypass valve miss-positioned?",
+      "questionType": "SingleChoice",
+      "questionText": "Are any AFW cross over valves miss-positioned?",
+      "responseOptions": [
+        "YES",
+        "NO"
+      ],
       "correctAnswer": [
-        "3"
+        "YES"
       ]
     },
     {
       "questionID": "116",
-      "questionType": "SingleChoice",
-      "questionText": "On turbine 31, what is the status of P108?",
-      "responseOptions": [
-        "Running",
-        "Not Running"
-      ],
+      "questionType": "Numerical",
+      "questionText": "On which SG is a MFW bypass valve miss-positioned?",
       "correctAnswer": [
-        "Running"
+        "3"
       ]
     },
     {
       "questionID": "117",
       "questionType": "SingleChoice",
-      "questionText": "On turbine 32, which MFW pump has tripped?",
+      "questionText": "Which SG atmospheric control valve is in manual control?",
       "responseOptions": [
-        "P200",
-        "P201",
-        "P202"
+        "SG-1",
+        "SG-2",
+        "SG-3"
       ],
       "correctAnswer": [
-        "P201"
+        "SG-2"
       ]
     },
     {
       "questionID": "118",
-      "questionType": "MultipleChoice",
-      "questionText": "Which of the following pumps are running?",
+      "questionType": "SingleChoice",
+      "questionText": "Are all MSIVs closed?",
       "responseOptions": [
-        "P201",
-        "P203",
-        "P205"
+        "YES",
+        "NO"
       ],
       "correctAnswer": [
-        "P203",
-        "P205"
+        "YES"
       ]
     },
     {
       "questionID": "119",
-      "questionType": "Numerical",
-      "questionText": "On which SG is a MFW bypass valve miss-positioned?",
+      "questionType": "SingleChoice",
+      "questionText": "Is the stop valve to the turbine-driven AFW pump closed?",
+      "responseOptions": [
+        "YES",
+        "NO"
+       ],
       "correctAnswer": [
-        "3"
+        "NO"
       ]
     },
     {
       "questionID": "120",
       "questionType": "SingleChoice",
-      "questionText": "On turbine 31, what is the status of P108?",
+      "questionText": "Is MFW regulating valve to SG-3 in manual control?",
       "responseOptions": [
-        "Running",
-        "Not Running"
+        "YES",
+        "NO"
       ],
       "correctAnswer": [
-        "Running"
+        "NO"
       ]
     },
     {
       "questionID": "121",
-      "questionType": "SingleChoice",
-      "questionText": "On turbine 32, which MFW pump has tripped?",
-      "responseOptions": [
-        "P200",
-        "P201",
-        "P202"
-      ],
+      "questionType": "Numerical",
+      "questionText": "Which motor-driven AFW pump has low current?",
       "correctAnswer": [
-        "P201"
+        "1"
       ]
     },
     {
       "questionID": "122",
-      "questionType": "MultipleChoice",
-      "questionText": "Which of the following pumps are running?",
+      "questionType": "SingleChoice",
+      "questionText": "Which of the RCPs are not working properly?",
       "responseOptions": [
-        "P201",
-        "P203",
-        "P205"
+        "RCP-1",
+        "RCP-2",
+        "RCP-3"
       ],
       "correctAnswer": [
-        "P203",
-        "P205"
+        "RCP-1"
       ]
     },
     {
       "questionID": "123",
       "questionType": "Numerical",
-      "questionText": "On which SG is a MFW bypass valve miss-positioned?",
+      "questionText": "Which AFW pump is supplying flow to SG-1?",
       "correctAnswer": [
-        "3"
+        "2"
       ]
     },
     {
       "questionID": "124",
-      "questionType": "MultipleChoice",
-      "questionText": "Which of the following pumps are running?",
-      "responseOptions": [
-        "P201",
-        "P203",
-        "P205"
-      ],
+      "questionType": "Numerical",
+      "questionText": "What is the AFW flow to SG-1?",
       "correctAnswer": [
-        "P203",
-        "P205"
+        "320"
       ]
     },
     {
       "questionID": "125",
-      "questionType": "Numerical",
-      "questionText": "On which SG is a MFW bypass valve miss-positioned?",
+      "questionType": "SingleChoice",
+      "questionText": "Which SG has the highest steam flow?",
+      "responseOptions": [
+        "SG-1",
+        "SG-2",
+        "SG-3"
+      ],
       "correctAnswer": [
-        "3"
+        "SG-2"
       ]
     },
     {
       "questionID": "126",
       "questionType": "SingleChoice",
-      "questionText": "On turbine 31, what is the status of P108?",
+      "questionText": "Which SG has the highest pressure?",
       "responseOptions": [
-        "Running",
-        "Not Running"
+        "SG-1",
+        "SG-2",
+        "SG-3"
       ],
       "correctAnswer": [
-        "Running"
+        "SG-3"
       ]
     },
     {
       "questionID": "127",
       "questionType": "SingleChoice",
-      "questionText": "On turbine 32, which MFW pump has tripped?",
+      "questionText": "Is the SG-3 pressure normal?",
       "responseOptions": [
-        "P200",
-        "P201",
-        "P202"
+        "YES",
+        "NO"
       ],
       "correctAnswer": [
-        "P201"
+        "YES"
       ]
     },
     {
       "questionID": "128",
-      "questionType": "MultipleChoice",
-      "questionText": "Which of the following pumps are running?",
+      "questionType": "SingleChoice",
+      "questionText": "Which SG has an increasing level?",
       "responseOptions": [
-        "P201",
-        "P203",
-        "P205"
+        "SG-1",
+        "SG-2",
+        "SG-3"
       ],
       "correctAnswer": [
-        "P203",
-        "P205"
+        "SG-1"
       ]
     },
     {
       "questionID": "129",
       "questionType": "Numerical",
-      "questionText": "On which SG is a MFW bypass valve miss-positioned?",
+      "questionText": "What is the level of the condensate storage tank?",
       "correctAnswer": [
-        "3"
+        "82"
       ]
     },
     {
       "questionID": "130",
-      "questionType": "SingleChoice",
-      "questionText": "On turbine 32, which MFW pump has tripped?",
-      "responseOptions": [
-        "P200",
-        "P201",
-        "P202"
-      ],
+      "questionType": "Numerical",
+      "questionText": "What are the NR levels for SG 1?",
       "correctAnswer": [
-        "P201"
+        "54"
       ]
     },
     {
       "questionID": "131",
-      "questionType": "SingleChoice",
-      "questionText": "On turbine 32, which MFW pump has tripped?",
-      "responseOptions": [
-        "P299",
-        "P298",
-        "P297"
-      ],
+      "questionType": "Numerical",
+      "questionText": "What are the NR levels for SG 2?",
       "correctAnswer": [
-        "P298"
+        "25"
       ]
     },
     {
       "questionID": "132",
-      "questionType": "MultipleChoice",
-      "questionText": "On turbine 32, which MFW pumps has tripped?",
-      "responseOptions": [
-        "P150",
-        "P155",
-        "P160"
-      ],
+      "questionType": "Numerical",
+      "questionText": "What are the NR levels for SG 3?",
       "correctAnswer": [
-        "P155",
-        "P160"
+        "26"
       ]
     },
     {
       "questionID": "133",
-      "questionType": "Numerical",
-      "questionText": "On which SG is a MFW bypass valve miss-positioned?",
+      "questionType": "SingleChoice",
+      "questionText": "Do you have a FW isolation signal?",
+      "responseOptions": [
+        "YES",
+        "NO"
+      ],
       "correctAnswer": [
-        "42"
+        "YES"
+      ]
+    },
+    {
+      "questionID": "134",
+      "questionType": "SingleChoice",
+      "questionText": "Do you have a steam line isolation signal?",
+      "responseOptions": [
+        "YES",
+        "NO"
+      ],
+      "correctAnswer": [
+        "YES"
+      ]
+    },
+    {
+      "questionID": "135",
+      "questionType": "SingleChoice",
+      "questionText": "Is SG-2 releasing steam to the atmosphere?",
+      "responseOptions": [
+        "YES",
+        "NO"
+      ],
+      "correctAnswer": [
+        "YES"
+      ]
+    },
+    {
+      "questionID": "136",
+      "questionType": "SingleChoice",
+      "questionText": "Which SG has the most negative feed water balance?",
+      "responseOptions": [
+        "SG-1",
+        "SG-2",
+        "SG-3"
+      ],
+      "correctAnswer": [
+        "SG-2"
+      ]
+    },
+    {
+      "questionID": "137",
+      "questionType": "SingleChoice",
+      "questionText": "Are all charging pumps running?",
+      "responseOptions": [
+        "YES",
+        "NO"
+      ],
+      "correctAnswer": [
+        "NO"
+      ]
+    },
+    {
+      "questionID": "138",
+      "questionType": "SingleChoice",
+      "questionText": "Is the pressurizer variable heater on?",
+      "responseOptions": [
+        "YES",
+        "NO"
+      ],
+      "correctAnswer": [
+        "NO"
+      ]
+    },
+    {
+      "questionID": "139",
+      "questionType": "SingleChoice",
+      "questionText": "Are the reactor trip breakers",
+      "responseOptions": [
+        "OPEN",
+        "CLOSED"
+      ],
+      "correctAnswer": [
+        "OPEN"
+      ]
+    },
+    {
+      "questionID": "140",
+      "questionType": "SingleChoice",
+      "questionText": "Are the PRT rupture disks intact?",
+      "responseOptions": [
+        "YES",
+        "NO"
+      ],
+      "correctAnswer": [
+        "NO"
+      ]
+    },
+    {
+      "questionID": "141",
+      "questionType": "SingleChoice",
+      "questionText": "Are the pressurizer back-up heaters energized?",
+      "responseOptions": [
+        "YES",
+        "NO"
+      ],
+      "correctAnswer": [
+        "YES"
+      ]
+    },
+    {
+      "questionID": "142",
+      "questionType": "SingleChoice",
+      "questionText": "Are the pressurizer spray valves open?",
+      "responseOptions": [
+        "YES",
+        "NO"
+      ],
+      "correctAnswer": [
+        "NO"
+      ]
+    },
+    {
+      "questionID": "143",
+      "questionType": "SingleChoice",
+      "questionText": "Is valve 8912",
+      "responseOptions": [
+        "OPEN",
+        "CLOSED"
+      ],
+      "correctAnswer": [
+        "CLOSED"
+      ]
+    },
+    {
+      "questionID": "144",
+      "questionType": "SingleChoice",
+      "questionText": "Do you have sufficient SI flow?",
+      "responseOptions": [
+        "YES",
+        "NO"
+      ],
+      "correctAnswer": [
+        "YES"
+      ]
+    },
+    {
+      "questionID": "145",
+      "questionType": "SingleChoice",
+      "questionText": "Is the pressure from the charging pumps normal?",
+      "responseOptions": [
+        "YES",
+        "NO"
+      ],
+      "correctAnswer": [
+        "YES"
+      ]
+    },
+    {
+      "questionID": "146",
+      "questionType": "SingleChoice",
+      "questionText": "Is the sub cooling margin sufficient?",
+      "responseOptions": [
+        "YES",
+        "NO"
+      ],
+      "correctAnswer": [
+        "NO"
+      ]
+    },
+    {
+      "questionID": "147",
+      "questionType": "SingleChoice",
+      "questionText": "Are all PORV isolation valves in correct position?",
+      "responseOptions": [
+        "YES",
+        "NO"
+      ],
+      "correctAnswer": [
+        "NO"
+      ]
+    },
+    {
+      "questionID": "148",
+      "questionType": "SingleChoice",
+      "questionText": "Do you have a normal BIT line-up?",
+      "responseOptions": [
+        "YES",
+        "NO"
+      ],
+      "correctAnswer": [
+        "NO"
+      ]
+    },
+    {
+      "questionID": "149",
+      "questionType": "SingleChoice",
+      "questionText": "Are all PORVs in the correct position?",
+      "responseOptions": [
+        "YES",
+        "NO"
+      ],
+      "correctAnswer": [
+        "NO"
+      ]
+    },
+    {
+      "questionID": "150",
+      "questionType": "Numerical",
+      "questionText": "What is the pressurizer level?",
+      "correctAnswer": [
+        "100"
+      ]
+    },
+    {
+      "questionID": "151",
+      "questionType": "Numerical",
+      "questionText": "What is the RCS cold leg temperature?",
+      "correctAnswer": [
+        "525"
+      ]
+    },
+    {
+      "questionID": "152",
+      "questionType": "SingleChoice",
+      "questionText": "What is the trend of the RCS temperature?",
+      "responseOptions": [
+        "increasing",
+        "decreasing",
+        "stable"
+      ],
+      "correctAnswer": [
+        "decreasing"
+      ]
+    },
+    {
+      "questionID": "153",
+      "questionType": "SingleChoice",
+      "questionText": "Do you have an SI?",
+      "responseOptions": [
+        "YES",
+        "NO"
+      ],
+      "correctAnswer": [
+        "YES"
+      ]
+    },
+    {
+      "questionID": "154",
+      "questionType": "SingleChoice",
+      "questionText": "Should you have low-head SI flow?",
+      "responseOptions": [
+        "YES",
+        "NO"
+      ],
+      "correctAnswer": [
+        "NO"
+      ]
+    },
+    {
+      "questionID": "155",
+      "questionType": "SingleChoice",
+      "questionText": "Is there a risk of over-pressurization of the RCS?",
+      "responseOptions": [
+        "YES",
+        "NO"
+      ],
+      "correctAnswer": [
+        "NO"
+      ]
+    },
+    {
+      "questionID": "156",
+      "questionType": "SingleChoice",
+      "questionText": "Should RCPs be stopped?",
+      "responseOptions": [
+        "YES",
+        "NO"
+      ],
+      "correctAnswer": [
+        "YES"
       ]
     }
 ]

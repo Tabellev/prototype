@@ -31,4 +31,6 @@ public interface IDbInteractor {
     int[] getRunIDs();
 
     public void createOutputJsonFile();
+
+    TestStatistics getTestStatistics();
 }

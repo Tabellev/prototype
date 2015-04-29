@@ -75,9 +75,13 @@ public class RunResult extends Run {
         for(int i = 0; i < mAnsweredQuestions.length; i++) {
             if (mAnsweredQuestions[i] == null) {
                 mAnsweredQuestions[i] = question;
+                //Log.d("AQ ADDED_TO_AQ", String.valueOf(question.getQuestionID()));
                 break;
             }
         }
+
+        // Add time used for added question to mRunTimeUsed
+        this.mRunTimeUsed += question.getTimeUsed();
 
         //Log.d("AnsweredQuestions!:", Arrays.deepToString(mAnsweredQuestions));
         /*for(int i = 0; i < mAnsweredQuestions.length; i++) {
