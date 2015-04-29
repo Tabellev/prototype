@@ -148,9 +148,8 @@ public class MainActivity extends android.support.v4.app.FragmentActivity {
                     }
                 }
                 int size = mSessionFragments.size();
-                // TODO: don't use int constant below!!!
-                if (i == /*3*/numberOfRuns) {
-                    // TODO: maybe have an endFragment here without a <<Swipe to...<<
+
+                if (i == numberOfRuns) {
                     mSessionFragments.add(size, mStaticFragments[1]);
                 } else {
                     mSessionFragments.add(size, mStaticFragments[1]);
@@ -161,11 +160,17 @@ public class MainActivity extends android.support.v4.app.FragmentActivity {
 
         @Override
         public Fragment getItem(int position) {
-            //Log.d("position:", String.valueOf(position));
+
             if (position == mSessionFragments.size() - 1) {
+                // Generate output file
                 getDBInteractor().createOutputJsonFile();
             }
-            return mSessionFragments.get(position);
+            if (position == mSessionFragments.size()) {
+                return new EndScreenFragment();
+            } else {
+                return mSessionFragments.get(position);
+            }
+
         }
 
         /*@Override
@@ -175,7 +180,7 @@ public class MainActivity extends android.support.v4.app.FragmentActivity {
 
         @Override
         public int getCount() {
-            return mSessionFragments.size();
+            return mSessionFragments.size() + 1;
         }
     }
 
