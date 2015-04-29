@@ -1,0 +1,64 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/FragmentStyle">
+
+    <TextView
+        android:id="@+id/txtTestResultHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Test results Micro-Tasks"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="40dp"
+        android:textSize="50sp"/>
+
+    <TextView
+        android:id="@+id/txtLabelTestResultTestName"
+        android:layout_below="@+id/txtTestResultHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="Test name:"
+        android:textSize="40sp"
+        android:layout_marginRight="150dp"/>
+    <TextView
+        android:layout_toRightOf="@+id/txtLabelTestResultTestName"
+        android:layout_alignBaseline="@+id/txtLabelTestResultTestName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="output from TestResult"
+        android:textSize="40sp"/>
+    <TextView
+        android:id="@+id/txtLabelTestResultSession"
+        android:layout_below="@+id/txtLabelTestResultTestName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="Session ID:"
+        android:textSize="40sp"
+        android:layout_marginRight="150dp"/>
+    <TextView
+        android:layout_toRightOf="@+id/txtLabelTestResultSession"
+        android:layout_alignBaseline="@+id/txtLabelTestResultSession"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="output from TestResult"
+        android:textSize="40sp"/>
+    <TextView
+        android:id="@+id/txtLabelTestResultCrew"
+        android:layout_below="@+id/txtLabelTestResultSession"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="Crew ID:"
+        android:textSize="40sp"
+        android:layout_marginRight="150dp"/>
+    <TextView
+        android:layout_toRightOf="@+id/txtLabelTestResultCrew"
+        android:layout_alignBaseline="@+id/txtLabelTestResultCrew"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="output from TestResult"
+        android:textSize="40sp"/>
+</RelativeLayout>
