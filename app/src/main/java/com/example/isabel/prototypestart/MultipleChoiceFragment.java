@@ -101,8 +101,8 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
         dontKnow.setOnClickListener(this);
         swipe = (TextView) view.findViewById(R.id.multipleChoiceContinue);
         questionText = (TextView) view.findViewById(R.id.multipleAnswerQuestion);
-        //String questionT = checkTextLength(question.getQuestionText());
-        questionText.setText(question.getQuestionText());
+        String questionT = checkTextLength(question.getQuestionText());
+        questionText.setText(questionT);
         buttonLayout = (LinearLayout)view.findViewById(R.id.buttonLayoutMultiple);
 
         buttonSetup();
@@ -205,53 +205,31 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
         buttonLayout.setLayoutParams(tableParamsM);
     }
 
-    /*public String checkTextLength(String qText){
+    public String checkTextLength(String qText){
         if(qText.length() > 47) {
 
             String firstPart = "";
             String lastPart = "";
 
-            String[] removedSpace = qText.split("\\s");
+            String[] removedSpace = qText.split(" ");
 
-            if (qText.length() % 2 == 0) {
-                for (int i = 0; i < removedSpace.length / 2; i++) {
-                    if (i == removedSpace.length - 1) {
-                        firstPart = removedSpace[i];
-                    } else {
-                        firstPart += (removedSpace[i].concat(" "));
-                    }
 
-                }
-            } else {
-                for (int i = 0; i < removedSpace.length / 2; i++) {
-                    if (i == 0) {
-                        firstPart = removedSpace[i];
-                    } else {
-                        firstPart += (removedSpace[i].concat(" "));
-                    }
-
-                }
+            for (int i = 0; i < removedSpace.length/2; i++) {
+                firstPart += (removedSpace[i].concat(" "));
             }
 
-            if (qText.length() % 2 == 0) {
-                for (int i = removedSpace.length/2; i < removedSpace.length; i++) {
-                    lastPart += (removedSpace[i].concat(" "));
-
-
-                }
-            } else {
-                for (int i = (removedSpace.length / 2 ); i < removedSpace.length; i++) {
-                    lastPart += (removedSpace[i].concat(" "));
-
-                }
+            for (int i = removedSpace.length/2; i < removedSpace.length; i++) {
+                lastPart += (removedSpace[i].concat(" "));
             }
+            Log.d("Tekst",lastPart.toString());
+            Log.d("Tekst",firstPart.toString());
 
             lastPart = System.getProperty("line.separator").concat(lastPart);
             qText = firstPart.concat(lastPart);
         }
 
         return qText;
-    }*/
+    }
 
 
     public MultipleChoiceFragment(){}

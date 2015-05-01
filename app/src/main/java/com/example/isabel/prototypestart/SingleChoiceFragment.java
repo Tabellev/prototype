@@ -121,8 +121,8 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
         swipe = (TextView) view.findViewById(R.id.singleChoiceContinue);
         buttonLayout = (LinearLayout)view.findViewById(R.id.buttonLayoutSingle);
         questionText = (TextView) view.findViewById(R.id.singleAnswerQuestion);
-       // String questionT = checkTextLength(question.getQuestionText());
-        questionText.setText(question.getQuestionText());
+        String questionT = checkTextLength(question.getQuestionText());
+        questionText.setText(questionT);
         //questionText.setText(question.getQuestionText() + question.getQuestionText().length());
 
         buttonSetup();
@@ -235,7 +235,7 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
         buttonLayout.setLayoutParams(tableParams);
     }
 
-  /* public String checkTextLength(String qText){
+   public String checkTextLength(String qText){
             if(qText.length() > 47) {
 
                 String firstPart = "";
@@ -243,36 +243,23 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
 
                 String[] removedSpace = qText.split(" ");
 
-                if (qText.length() % 2 == 0) {
-                    for (int i = 0; i < removedSpace.length / 2; i++) {
-                        firstPart += (removedSpace[i].concat(" "));
-                    }
-                } else {
-                    for (int i = 0; i < removedSpace.length / 2; i++) {
-                        firstPart += (removedSpace[i].concat(" "));
 
-                    }
+                for (int i = 0; i < removedSpace.length/2; i++) {
+                    firstPart += (removedSpace[i].concat(" "));
                 }
 
-                if (qText.length() % 2 == 0) {
-                    for (int i = removedSpace.length/2; i < removedSpace.length; i++) {
-                        lastPart += (removedSpace[i].concat(" "));
-
-
-                    }
-                } else {
-                    for (int i = (removedSpace.length / 2 ); i < removedSpace.length; i++) {
-                        lastPart += (removedSpace[i].concat(" "));
-
-                    }
+                for (int i = removedSpace.length/2; i < removedSpace.length; i++) {
+                    lastPart += (removedSpace[i].concat(" "));
                 }
+                Log.d("Tekst",lastPart.toString());
+                Log.d("Tekst",firstPart.toString());
 
                 lastPart = System.getProperty("line.separator").concat(lastPart);
                 qText = firstPart.concat(lastPart);
             }
 
         return qText;
-    }*/
+    }
 
     public SingleChoiceFragment(){}
 
