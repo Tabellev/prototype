@@ -1,5 +1,20 @@
 [
     {
+      "questionID": "99",
+      "questionType": "MultipleChoice",
+      "questionText": "How many condensate pumps are running on turbine 31?",
+       "responseOptions": [
+              "Running",
+              "Stopped",
+              "LOL",
+              "Tiss"
+            ],
+      "correctAnswer": [
+        "Running",
+        "LOL"
+      ]
+    },
+    {
       "questionID": "100",
       "questionType": "Numerical",
       "questionText": "How many condensate pumps are running on turbine 31?",
@@ -12,9 +27,9 @@
       "questionType": "SingleChoice",
       "questionText": "On turbine 31, what is the status of pump P204?",
       "responseOptions": [
-        "Running",
-        "Stopped"
-      ],
+                "Running",
+                "Stopped"
+              ],
       "correctAnswer": [
         "Stopped"
       ]

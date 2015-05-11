@@ -26,7 +26,6 @@ import java.util.HashMap;
 
 public class NumericalFragment extends android.support.v4.app.Fragment implements View.OnTouchListener, View.OnLongClickListener{
 
-    private Boolean dontKnowIsClicked = false;
     private EditText input;
     private TextView swipe;
     private  Button btn0;
@@ -46,6 +45,8 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
     private long startTime;
     private long stopTime;
     private long questionTime;
+    private ControlledViewPager pager;
+    private boolean dontKnowIsClicked = false;
 
     private boolean answerIsGiven = false;
     // New---------------------------------------------
@@ -121,9 +122,10 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
         input = (EditText) view.findViewById(R.id.input);
         swipe = (TextView) view.findViewById(R.id.numericalContinue);
         questionText = (TextView) view.findViewById(R.id.numericalQuestion);
-       String questionT = checkTextLength(question.getQuestionText());
+        String questionT = checkTextLength(question.getQuestionText());
         questionText.setText(questionT);
         input.setInputType(InputType.TYPE_NULL);
+        pager = ((MainActivity) getActivity()).getPager();
 
 
         return view;
@@ -151,7 +153,6 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
             lastPart = System.getProperty("line.separator").concat(lastPart);
             qText = firstPart.concat(lastPart);
         }
-
         return qText;
     }
 
@@ -191,46 +192,57 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
                 case R.id.btnZero:
                     v.setBackgroundColor(Color.rgb(7, 147, 194));
                     answerIsGiven = true;
+                    pager.setPagingEnabled(true);
                     break;
                 case R.id.btnOne:
                     v.setBackgroundColor(Color.rgb(7, 147, 194));
                     answerIsGiven = true;
+                    pager.setPagingEnabled(true);
                     break;
                 case R.id.btnTwo:
                     v.setBackgroundColor(Color.rgb(7, 147, 194));
                     answerIsGiven = true;
+                    pager.setPagingEnabled(true);
                     break;
                 case R.id.btnThree:
                     v.setBackgroundColor(Color.rgb(7, 147, 194));
                     answerIsGiven = true;
+                    pager.setPagingEnabled(true);
                     break;
                 case R.id.btnFour:
                     v.setBackgroundColor(Color.rgb(7, 147, 194));
                     answerIsGiven = true;
+                    pager.setPagingEnabled(true);
                     break;
                 case R.id.btnFive:
                     v.setBackgroundColor(Color.rgb(7, 147, 194));
                     answerIsGiven = true;
+                    pager.setPagingEnabled(true);
                     break;
                 case R.id.btnSix:
                     v.setBackgroundColor(Color.rgb(7, 147, 194));
                     answerIsGiven = true;
+                    pager.setPagingEnabled(true);
                     break;
                 case R.id.btnSeven:
                     v.setBackgroundColor(Color.rgb(7, 147, 194));
                     answerIsGiven = true;
+                    pager.setPagingEnabled(true);
                     break;
                 case R.id.btnEight:
                     v.setBackgroundColor(Color.rgb(7, 147, 194));
                     answerIsGiven = true;
+                    pager.setPagingEnabled(true);
                     break;
                 case R.id.btnNine:
                     v.setBackgroundColor(Color.rgb(7, 147, 194));
                     answerIsGiven = true;
+                    pager.setPagingEnabled(true);
                     break;
                 case R.id.btnPoint:
                     v.setBackgroundColor(Color.rgb(7, 147, 194));
                     answerIsGiven = true;
+                    pager.setPagingEnabled(false);
                     break;
                 case R.id.backspace:
                     v.setBackgroundColor(Color.rgb(7, 147, 194));
@@ -239,6 +251,8 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
                     v.setBackgroundColor(Color.rgb(7, 147, 194));
                     answerIsGiven = false;
                     answeredQuestion.setSkippedQuestion(true);
+                    pager.setPagingEnabled(true);
+                    dontKnowIsClicked = true;
                     break;
             }
         } else if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -248,60 +262,70 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
                     swipe.setVisibility(View.VISIBLE);
                     v.setBackgroundColor(Color.rgb(160, 200, 220));
                     dontKnow.setBackgroundColor(Color.rgb(160, 200, 220));
+                    dontKnowIsClicked = false;
                     break;
                 case R.id.btnOne:
                     input.setText(input.getText() + "1");
                     swipe.setVisibility(View.VISIBLE);
                     v.setBackgroundColor(Color.rgb(160, 200, 220));
                     dontKnow.setBackgroundColor(Color.rgb(160, 200, 220));
+                    dontKnowIsClicked = false;
                     break;
                 case R.id.btnTwo:
                     input.setText(input.getText() + "2");
                     swipe.setVisibility(View.VISIBLE);
                     v.setBackgroundColor(Color.rgb(160, 200, 220));
                     dontKnow.setBackgroundColor(Color.rgb(160, 200, 220));
+                    dontKnowIsClicked = false;
                     break;
                 case R.id.btnThree:
                     input.setText(input.getText() + "3");
                     swipe.setVisibility(View.VISIBLE);
                     v.setBackgroundColor(Color.rgb(160, 200, 220));
                     dontKnow.setBackgroundColor(Color.rgb(160, 200, 220));
+                    dontKnowIsClicked = false;
                     break;
                 case R.id.btnFour:
                     input.setText(input.getText() + "4");
                     swipe.setVisibility(View.VISIBLE);
                     v.setBackgroundColor(Color.rgb(160, 200, 220));
                     dontKnow.setBackgroundColor(Color.rgb(160, 200, 220));
+                    dontKnowIsClicked = false;
                     break;
                 case R.id.btnFive:
                     input.setText(input.getText() + "5");
                     swipe.setVisibility(View.VISIBLE);
                     v.setBackgroundColor(Color.rgb(160, 200, 220));
                     dontKnow.setBackgroundColor(Color.rgb(160, 200, 220));
+                    dontKnowIsClicked = false;
                     break;
                 case R.id.btnSix:
                     input.setText(input.getText() + "6");
                     swipe.setVisibility(View.VISIBLE);
                     v.setBackgroundColor(Color.rgb(160, 200, 220));
                     dontKnow.setBackgroundColor(Color.rgb(160, 200, 220));
+                    dontKnowIsClicked = false;
                     break;
                 case R.id.btnSeven:
                     input.setText(input.getText() + "7");
                     swipe.setVisibility(View.VISIBLE);
                     v.setBackgroundColor(Color.rgb(160, 200, 220));
                     dontKnow.setBackgroundColor(Color.rgb(160, 200, 220));
+                    dontKnowIsClicked = false;
                     break;
                 case R.id.btnEight:
                     input.setText(input.getText() + "8");
                     swipe.setVisibility(View.VISIBLE);
                     v.setBackgroundColor(Color.rgb(160, 200, 220));
                     dontKnow.setBackgroundColor(Color.rgb(160, 200, 220));
+                    dontKnowIsClicked = false;
                     break;
                 case R.id.btnNine:
                     input.setText(input.getText() + "9");
                     swipe.setVisibility(View.VISIBLE);
                     v.setBackgroundColor(Color.rgb(160, 200, 220));
                     dontKnow.setBackgroundColor(Color.rgb(160, 200, 220));
+                    dontKnowIsClicked = false;
                     break;
                 case R.id.btnNumericalDontKnow:
                     v.setBackgroundColor(Color.rgb(7, 147, 194));
@@ -315,15 +339,22 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
                         swipe.setVisibility(View.VISIBLE);
                         v.setBackgroundColor(Color.rgb(160, 200, 220));
                         dontKnow.setBackgroundColor(Color.rgb(160, 200, 220));
+                        dontKnowIsClicked = false;
                     } else {
                         v.setBackgroundColor(Color.rgb(160, 200, 220));
                         dontKnow.setBackgroundColor(Color.rgb(160, 200, 220));
+                        dontKnowIsClicked = false;
                     }
                     break;
                 case R.id.backspace:
                     input.setText(eraseCharacter(input.getText().toString()));
                     v.setBackgroundColor(Color.rgb(160, 200, 220));
                     dontKnow.setBackgroundColor(Color.rgb(160, 200, 220));
+                    if(input.getText().length() == 0){
+                        pager.setPagingEnabled(false);
+                    }else{
+                        pager.setPagingEnabled(true);
+                    }
                     break;
             }
         }
@@ -336,6 +367,7 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
         // may need to remove the string instead of setting an empty one
         input.setText("");
         answerIsGiven = false;
+        pager.setPagingEnabled(false);
         return true;
     }
 
@@ -351,6 +383,7 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
             startTime = System.currentTimeMillis();
+            pager.setPagingEnabled(false);
         }else{
             stopTime = System.currentTimeMillis();
             questionTime = getQuestionTime(startTime,stopTime);

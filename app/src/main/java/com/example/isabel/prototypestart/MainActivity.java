@@ -189,6 +189,10 @@ public class MainActivity extends android.support.v4.app.FragmentActivity {
         }
     }
 
+    public ControlledViewPager getPager() {
+        return pager;
+    }
+
     @Override
     public void onBackPressed(){}
 

@@ -44,6 +44,8 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
     private long questionTime;
     private long runTime;
     private ArrayList<String> mGivenAnswer = new ArrayList<>();
+    ControlledViewPager pager;
+    private boolean answerGiven = false;
 
     private HashMap<Integer, HashMap<Integer, QuestionSetup>> questionConfigurationData;
     private AnsweredQuestion answeredQuestion;
@@ -123,6 +125,8 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
         questionText = (TextView) view.findViewById(R.id.singleAnswerQuestion);
         String questionT = checkTextLength(question.getQuestionText());
         questionText.setText(questionT);
+        pager = ((MainActivity) getActivity()).getPager();
+
         //questionText.setText(question.getQuestionText() + question.getQuestionText().length());
 
         buttonSetup();
@@ -274,6 +278,7 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
                 btnOption5.setBackgroundColor(Color.rgb(160,200,220));
                 dontKnow.setBackgroundColor(Color.rgb(160,200,220));
                 swipe.setVisibility(View.VISIBLE);
+                pager.setPagingEnabled(true);
                 // add this answer to ArrayList if clicked
                 if (0 != mGivenAnswer.size()) {
                     mGivenAnswer.clear();
@@ -290,6 +295,7 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
                 btnOption5.setBackgroundColor(Color.rgb(160,200,220));
                 dontKnow.setBackgroundColor(Color.rgb(160,200,220));
                 swipe.setVisibility(View.VISIBLE);
+                pager.setPagingEnabled(true);
                 // add this answer to ArrayList if clicked
                 if (0 != mGivenAnswer.size()) {
                     mGivenAnswer.clear();
@@ -306,6 +312,7 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
                 btnOption5.setBackgroundColor(Color.rgb(160,200,220));
                 dontKnow.setBackgroundColor(Color.rgb(160,200,220));
                 swipe.setVisibility(View.VISIBLE);
+                pager.setPagingEnabled(true);
                 // add this answer to ArrayList if clicked
                 if (0 != mGivenAnswer.size()) {
                     mGivenAnswer.clear();
@@ -322,6 +329,7 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
                 btnOption5.setBackgroundColor(Color.rgb(160,200,220));
                 dontKnow.setBackgroundColor(Color.rgb(160,200,220));
                 swipe.setVisibility(View.VISIBLE);
+                pager.setPagingEnabled(true);
                 // add this answer to ArrayList if clicked
                 if (0 != mGivenAnswer.size()) {
                     mGivenAnswer.clear();
@@ -354,6 +362,7 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
                 btnOption4.setBackgroundColor(Color.rgb(160,200,220));
                 btnOption5.setBackgroundColor(Color.rgb(160,200,220));
                 swipe.setVisibility(View.VISIBLE);
+                pager.setPagingEnabled(true);
                 // remove previously given answer
                 mGivenAnswer.clear();
                 answeredQuestion.setSkippedQuestion(true);
@@ -374,6 +383,7 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
             startTime = System.currentTimeMillis();
+            pager.setPagingEnabled(false);
         }else{
             stopTime = System.currentTimeMillis();
             questionTime = getQuestionTime(startTime,stopTime);
