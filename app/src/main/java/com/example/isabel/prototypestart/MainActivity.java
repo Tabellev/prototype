@@ -1,5 +1,7 @@
 package com.example.isabel.prototypestart;
 
+import android.content.Context;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -35,6 +37,8 @@ public class MainActivity extends android.support.v4.app.FragmentActivity {
 
         super.setContentView(R.layout.activity_main);
         pager = (ControlledViewPager)super.findViewById(R.id.viewpager);
+        WifiManager wifiManager = (WifiManager) this.getSystemService(Context.WIFI_SERVICE);
+        wifiManager.setWifiEnabled(false);
 
         // Don't need this, only used to understand what happens when swiping and loading fragments
         pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
