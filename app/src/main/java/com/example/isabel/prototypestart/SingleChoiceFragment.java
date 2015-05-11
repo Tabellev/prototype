@@ -93,7 +93,7 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
         answeredQuestion = new AnsweredQuestion(questionID, timeLimit, correctAnswer);
 
         // Testing------------------------------------------------------------------------------------------
-        /*RunSetup temp = ((MainActivity)getActivity()).getDBInteractor().getMockSession().getRunSetup(runID);
+        /*RunSetup temp = ((MainActivity)getActivity()).getDBInteractor().getSession().getRunSetup(runID);
         indexOfAnsweredQuestions = new int[temp.getNumberOfQuestions()];
         for (int i = 0; i < indexOfAnsweredQuestions.length; i++) {
             indexOfAnsweredQuestions[i] = temp.getQuestionSetup()[i].getQuestionID();

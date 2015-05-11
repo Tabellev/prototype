@@ -47,7 +47,7 @@ public class EndScreenFragment extends Fragment {
     }
 
     private void populateWithTestResults() {
-        //TODO: get TestResult from DbInteractorTest
+        //TODO: get TestResult from DbInteractor
         mTestResult = ((MainActivity)getActivity()).getDBInteractor().getTestResult();
 
         mTestStatistics = ((MainActivity)getActivity()).getDBInteractor().getTestStatistics();
