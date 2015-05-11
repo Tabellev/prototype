@@ -1,20 +1,5 @@
 [
     {
-      "questionID": "99",
-      "questionType": "MultipleChoice",
-      "questionText": "How many condensate pumps are running on turbine 31?",
-       "responseOptions": [
-              "Running",
-              "Stopped",
-              "LOL",
-              "Tiss"
-            ],
-      "correctAnswer": [
-        "Running",
-        "LOL"
-      ]
-    },
-    {
       "questionID": "100",
       "questionType": "Numerical",
       "questionText": "How many condensate pumps are running on turbine 31?",

@@ -10,10 +10,6 @@
       "runTimeLimit": 300000,
       "questionSetups": [
         {
-          "questionID": "99",
-          "timeLimit": 30
-        },
-        {
           "questionID": "100",
           "timeLimit": 30
         },
