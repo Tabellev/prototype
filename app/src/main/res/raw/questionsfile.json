@@ -12,9 +12,9 @@
       "questionType": "SingleChoice",
       "questionText": "On turbine 31, what is the status of pump P204?",
       "responseOptions": [
-        "Running",
-        "Stopped"
-      ],
+                "Running",
+                "Stopped"
+              ],
       "correctAnswer": [
         "Stopped"
       ]

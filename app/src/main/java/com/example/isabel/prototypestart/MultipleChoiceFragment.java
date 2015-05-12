@@ -16,6 +16,7 @@ import com.example.isabel.prototypestart.model.Question;
 import com.example.isabel.prototypestart.model.QuestionSetup;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class MultipleChoiceFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
@@ -24,6 +25,7 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
     private Boolean option3isClicked = false;
     private Boolean option4isClicked = false;
     private Boolean option5isClicked = false;
+    private Boolean dontKnowIsClicked = false;
 
     private Boolean[] optionStatus = new Boolean[] {false, false, false, false, false};
     private Button[] optionButtons = new Button[5];
@@ -46,6 +48,7 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
     private Question question;
     private static final String QUESTIONID = "questionID";
     private static final String RUN_ID = "runID";
+    ControlledViewPager pager;
 
     private HashMap<Integer, HashMap<Integer, QuestionSetup>> questionConfigurationData;
     private AnsweredQuestion answeredQuestion;
@@ -104,6 +107,7 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
         String questionT = checkTextLength(question.getQuestionText());
         questionText.setText(questionT);
         buttonLayout = (LinearLayout)view.findViewById(R.id.buttonLayoutMultiple);
+        pager = ((MainActivity) getActivity()).getPager();
 
         buttonSetup();
 
@@ -252,12 +256,17 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
                 if(!option1isClicked){
                     btnOption1.setBackgroundColor(Color.rgb(7, 147, 194));
                     dontKnow.setBackgroundColor(Color.rgb(160,200,220));
+                    dontKnowIsClicked = false;
                     swipe.setVisibility(View.VISIBLE);
+                    pager.setPagingEnabled(true);
                     option1isClicked = true;
                 }else{
                     btnOption1.setBackgroundColor(Color.rgb(160,200,220));
                     option1isClicked = false;
                     dontKnow.setBackgroundColor(Color.rgb(160,200,220));
+                    if(!option2isClicked && !option3isClicked && !option4isClicked && !option5isClicked && !dontKnowIsClicked){
+                        pager.setPagingEnabled(false);
+                    }
                 }
                 // set chosen flag based on if the option is clicked
                 if (option1isClicked) {
@@ -270,12 +279,17 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
                 if(!option2isClicked){
                     btnOption2.setBackgroundColor(Color.rgb(7, 147, 194));
                     dontKnow.setBackgroundColor(Color.rgb(160,200,220));
+                    dontKnowIsClicked = false;
                     swipe.setVisibility(View.VISIBLE);
+                    pager.setPagingEnabled(true);
                     option2isClicked = true;
                 }else{
                     btnOption2.setBackgroundColor(Color.rgb(160,200,220));
                     option2isClicked = false;
                     dontKnow.setBackgroundColor(Color.rgb(160,200,220));
+                    if(!option1isClicked && !option3isClicked && !option4isClicked && !option5isClicked && !dontKnowIsClicked){
+                        pager.setPagingEnabled(false);
+                    }
                 }
                 // set chosen flag based on if the option is clicked
                 if (option2isClicked) {
@@ -288,12 +302,17 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
                 if(!option3isClicked){
                     btnOption3.setBackgroundColor(Color.rgb(7, 147, 194));
                     dontKnow.setBackgroundColor(Color.rgb(160,200,220));
+                    dontKnowIsClicked = false;
                     swipe.setVisibility(View.VISIBLE);
+                    pager.setPagingEnabled(true);
                     option3isClicked = true;
                 }else{
                     btnOption3.setBackgroundColor(Color.rgb(160,200,220));
                     option3isClicked = false;
                     dontKnow.setBackgroundColor(Color.rgb(160,200,220));
+                    if(!option1isClicked && !option2isClicked && !option4isClicked && !option5isClicked && !dontKnowIsClicked){
+                        pager.setPagingEnabled(false);
+                    }
                 }
                 // set chosen flag based on if the option is clicked
                 if (option3isClicked) {
@@ -306,12 +325,17 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
                 if(!option4isClicked){
                     btnOption4.setBackgroundColor(Color.rgb(7, 147, 194));
                     dontKnow.setBackgroundColor(Color.rgb(160,200,220));
+                    dontKnowIsClicked = false;
                     swipe.setVisibility(View.VISIBLE);
+                    pager.setPagingEnabled(true);
                     option4isClicked = true;
                 }else{
                     btnOption4.setBackgroundColor(Color.rgb(160,200,220));
                     option4isClicked = false;
                     dontKnow.setBackgroundColor(Color.rgb(160,200,220));
+                    if(!option1isClicked && !option2isClicked && !option3isClicked && !option5isClicked && !dontKnowIsClicked){
+                        pager.setPagingEnabled(false);
+                    }
                 }
                 // set chosen flag based on if the option is clicked
                 if (option4isClicked) {
@@ -324,12 +348,17 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
                 if(!option5isClicked){
                     btnOption5.setBackgroundColor(Color.rgb(7, 147, 194));
                     dontKnow.setBackgroundColor(Color.rgb(160,200,220));
+                    dontKnowIsClicked = false;
                     swipe.setVisibility(View.VISIBLE);
+                    pager.setPagingEnabled(true);
                     option5isClicked = true;
                 }else{
                     btnOption5.setBackgroundColor(Color.rgb(160,200,220));
                     option5isClicked = false;
                     dontKnow.setBackgroundColor(Color.rgb(160,200,220));
+                    if(!option1isClicked && !option2isClicked && !option3isClicked && !option4isClicked && !dontKnowIsClicked){
+                        pager.setPagingEnabled(false);
+                    }
                 }
                 // set chosen flag based on if the option is clicked
                 if (option5isClicked) {
@@ -341,7 +370,7 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
             case R.id.multipleDontKnow:
                 dontKnow.setBackgroundColor(Color.rgb(7, 147, 194));
                 swipe.setVisibility(View.VISIBLE);
-                btnOption1.setBackgroundColor(Color.rgb(160,200,220));
+                btnOption1.setBackgroundColor(Color.rgb(160, 200, 220));
                 btnOption2.setBackgroundColor(Color.rgb(160,200,220));
                 btnOption3.setBackgroundColor(Color.rgb(160,200,220));
                 btnOption4.setBackgroundColor(Color.rgb(160,200,220));
@@ -350,6 +379,8 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
                 option2isClicked = false;
                 option3isClicked = false;
                 option4isClicked = false;
+                dontKnowIsClicked = true;
+                pager.setPagingEnabled(true);
                 // remove answer
                 mGivenAnswer.clear();
                 // remove chosen flags
@@ -386,12 +417,13 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
             startTime = System.currentTimeMillis();
+            pager.setPagingEnabled(false);
         }else{
             stopTime = System.currentTimeMillis();
             questionTime = getQuestionTime(startTime,stopTime);
             if(answeredQuestion != null){
                 answeredQuestion.setTimeUsed(getQuestionTime(startTime, stopTime));
-                //Log.d("AnsweredQuestionTime", answeredQuestion.getTimeUsed() + " answered");
+
 
                 setGivenAnswer(); // populate mGivenAnswer
 
@@ -404,6 +436,7 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
                 ((MainActivity)getActivity()).getDBInteractor().getTestStatistics().setNumberOfSkippedAnswers(answeredQuestion.skippedQuestion() ? 1 : 0);
 
                 ((MainActivity)getActivity()).getDBInteractor().getTestResult().getRunResult(runID).addAnsweredQuestion(answeredQuestion/*, index*/);
+                Log.d("AnsweredQuestion", answeredQuestion.answerWasCorrect() + " answered");
             }
             //Log.d("Time", questionTime + " Multiple");
         }
