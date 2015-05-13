@@ -1,6 +1,5 @@
 package com.example.isabel.prototypestart.model;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
@@ -18,15 +17,11 @@ import com.google.gson.JsonSerializer;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
@@ -47,8 +42,8 @@ public class JsonManager {
 
     private Context context;
     // Placeholders for actual data from JSON Configuration file
-    // TODO: rename mMockSession to mSession
-    private Session mMockSession;
+    // TODO: rename mSession to mSession
+    private Session mSession;
     private HashMap<Integer, Question> questionMap;
     private final int QUESTIONS_FILE = 1;
     private final int CONFIGURATION_FILE = 2;
@@ -65,7 +60,7 @@ public class JsonManager {
 
         questionMap = new HashMap<>();
 
-        this.mMockSession = createSession();
+        this.mSession = createSession();
         createQuestions();
 
         //exportTestResultsToJson(); // called for testing export of testresults to JSON
@@ -84,43 +79,10 @@ public class JsonManager {
 
 
     public void exportTestResultsToJson(TestResult testResult) {
-        // Create Output file in tablet's local file system
-        // TODO: remove the dummy code. It is only for testing file writing functionality
-        /*AnsweredQuestion[] answeredQuestions = new AnsweredQuestion[] {
-                new AnsweredQuestion(100, 20000, new String[] {"A", "B"}),
-                new AnsweredQuestion(101, 25000, new String[] {"C"}),
-                new AnsweredQuestion(102, 30000, new String[] {"42"})
-        };
-        answeredQuestions[0].setGivenAnswer(new String[] {"C", "B"});
-        answeredQuestions[1].setGivenAnswer(new String[] {"C"});
-        answeredQuestions[2].setGivenAnswer(new String[] {"42"});
-
-        AnsweredQuestion[] answeredQuestions2 = new AnsweredQuestion[] {
-                new AnsweredQuestion(103, 20000, new String[] {"C", "D"}),
-                new AnsweredQuestion(104, 25000, new String[] {"A"}),
-                new AnsweredQuestion(105, 30000, new String[] {"42"})
-        };
-        answeredQuestions2[0].setGivenAnswer(new String[] {"D", "C"});
-        answeredQuestions2[1].setGivenAnswer(new String[] {"A"});
-        answeredQuestions2[2].setGivenAnswer(new String[] {"43"});
-
-        RunResult[] runResults = new RunResult[] {
-                new RunResult(1000, "SS", "c1", 75000, 0, 3),
-                new RunResult(1001, "SB", "c2", 75000, 0, 3)
-        };
-
-        // setTheAnsweredQuestions() is not to be used in prototype
-        runResults[0].setTheAnsweredQuestions(answeredQuestions);
-        runResults[1].setTheAnsweredQuestions(answeredQuestions2);
-
-        TestResult testResult = new TestResult("MicroTasks", 800, 5000, 2);
-        // setTheRunResults() is not to be used in prototype
-        testResult.setTheRunResults(runResults);*/
-
+        Log.d("ExportToJSON()", "Testresults exported.");
         String json = gson.toJson(testResult);
 
         // Write output file to device's external storage
-        //Log.e("SD-card", String.valueOf(isExternalStorageWritable()));
         if (isExternalStorageWritable()) {
             File dir = getOutputStorageDir(context, OUTPUT_DIRECOTRY_NAME);
             File file = new File(dir, OUTPUT_FILE_NAME);
@@ -160,7 +122,7 @@ public class JsonManager {
 
     // TODO: modify to read from external storage
     private String readJsonFile(int rawResource) {
-        // Convert this to read from local storage on tablet
+        // Reads JSON files from res/raw/
         InputStream inStream;
         switch (rawResource) {
             case CONFIGURATION_FILE:
@@ -197,11 +159,8 @@ public class JsonManager {
     }
 
 
-
-
-
-    public Session getMockSession() {
-        return mMockSession;
+    public Session getSession() {
+        return mSession;
     }
 
     // Placeholder method for providing mock-data while implementing the View(UI)

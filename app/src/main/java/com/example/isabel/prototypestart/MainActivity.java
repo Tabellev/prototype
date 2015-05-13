@@ -9,16 +9,13 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 
-import com.example.isabel.prototypestart.model.DbInteractorTest;
+import com.example.isabel.prototypestart.model.DbInteractor;
 import com.example.isabel.prototypestart.model.IDbInteractor;
 import com.example.isabel.prototypestart.model.Question;
-import com.example.isabel.prototypestart.model.QuestionSetup;
-import com.example.isabel.prototypestart.model.QuestionType;
 import com.example.isabel.prototypestart.model.Session;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class MainActivity extends android.support.v4.app.FragmentActivity {
 
@@ -33,32 +30,20 @@ public class MainActivity extends android.support.v4.app.FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mDataManager = new DbInteractorTest(getApplicationContext());
+        mDataManager = new DbInteractor(getApplicationContext());
 
         super.setContentView(R.layout.activity_main);
         pager = (ControlledViewPager)super.findViewById(R.id.viewpager);
         WifiManager wifiManager = (WifiManager) this.getSystemService(Context.WIFI_SERVICE);
         wifiManager.setWifiEnabled(false);
 
-        // Don't need this, only used to understand what happens when swiping and loading fragments
         pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                /*Log.d("onPageScrolled", String.valueOf(position) + ", " +
-                String.valueOf(positionOffset) + ", " +
-                String.valueOf(positionOffsetPixels));*/
-            }
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
 
             @Override
             public void onPageSelected(int position) {
-                //Log.d("onPageSelected():", String.valueOf(position));
-                //startTime = System.currentTimeMillis();
 
-                // FUNKER IKKE! får ikke tak i setHasBeenVisible() i RunFinishedFragment...
-               /* if (mPagerAdapter.getItem(pager.getCurrentItem()) instanceof RunFinishedFragment) {
-                    mPagerAdapter.mSessionFragments.get(position).setHasBeenVisible(false);
-
-                }*/
                 if (position == mPagerAdapter.mSessionFragments.size()) {
                     Log.d("onPageSelected()", String.valueOf(position));
                     getDBInteractor().createOutputJsonFile();
@@ -67,9 +52,7 @@ public class MainActivity extends android.support.v4.app.FragmentActivity {
             }
 
             @Override
-            public void onPageScrollStateChanged(int state) {
-                //Log.d("..ScrollStateChanged()", String.valueOf(state));
-            }
+            public void onPageScrollStateChanged(int state) {}
         });
 
         this.initialisePaging();
@@ -84,10 +67,6 @@ public class MainActivity extends android.support.v4.app.FragmentActivity {
     // This is called from the fragments
     public IDbInteractor getDBInteractor() { return mDataManager; }
 
-    // called when new run should start
-    /*public void resetPager() {
-        pager.setCurrentItem(0);
-    }*/
 
     public class PagerAdapter extends FragmentStatePagerAdapter {
         private ArrayList<Fragment> mSessionFragments;
@@ -119,7 +98,6 @@ public class MainActivity extends android.support.v4.app.FragmentActivity {
         }
 
 
-        // Testing to isolate runs with containing questions
         private HashMap<Integer, ArrayList<Question>> buildRunsWithQuestions() {
             HashMap<Integer, ArrayList<Question>> temp = new HashMap<>();
             Session session = getDBInteractor().getMockSession();
@@ -169,12 +147,7 @@ public class MainActivity extends android.support.v4.app.FragmentActivity {
         @Override
         public Fragment getItem(int position) {
 
-            /*if (position == mSessionFragments.size() - 1) {
-                // Generate output file
-                getDBInteractor().createOutputJsonFile();
-            }*/
             if (position == mSessionFragments.size()) {
-                //getDBInteractor().createOutputJsonFile();//her lages output før siste spm er satt!!!
                 return new EndScreenFragment();
             } else {
                 return mSessionFragments.get(position);
@@ -182,10 +155,6 @@ public class MainActivity extends android.support.v4.app.FragmentActivity {
 
         }
 
-        /*@Override
-        public int getItemPosition(Object object) {
-            return super.getItemPosition(object);
-        }*/
 
         @Override
         public int getCount() {

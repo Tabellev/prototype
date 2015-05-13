@@ -1,7 +1,6 @@
 package com.example.isabel.prototypestart.model;
 
 import android.content.Context;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,7 +14,7 @@ import java.util.List;
  *
  * TODO: Rename everything containing mock[....] when things are working as expected
  */
-public class DbInteractorTest implements IDbInteractor {
+public class DbInteractor implements IDbInteractor {
     // The context is needed if we intend to use resources (context.getResources()...)
     private Context mContext;
     // Will provide data from JSON and export data to JSON
@@ -37,13 +36,13 @@ public class DbInteractorTest implements IDbInteractor {
     List<Question> questionList = new ArrayList<Question>();
 
 
-    public DbInteractorTest(Context context){
+    public DbInteractor(Context context){
         this.mContext = context;
         mockDataProvider = new JsonManager(mContext);
         mockQuestions = new HashMap<>();
         runSetupQuestions = new HashMap<Integer, HashMap<Integer, QuestionSetup>>();
         this.mockQuestions = mockDataProvider.getQuestionMap();
-        this.mockSession = mockDataProvider.getMockSession();
+        this.mockSession = mockDataProvider.getSession();
 
         this.testStatistics = new TestStatistics();
 

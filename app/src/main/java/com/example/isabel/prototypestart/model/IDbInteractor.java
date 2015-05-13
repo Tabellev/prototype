@@ -17,7 +17,6 @@ public interface IDbInteractor {
     // TODO: Change as appropriate to match HashMap...(if necessary)
     Question getQuestionFromId(int id);
 
-    // new methods
     HashMap<Integer, Question> getMockQuestions();
 
     Question getQuestion(int key);
