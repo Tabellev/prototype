@@ -4,16 +4,12 @@
     tools:context="com.example.isabel.usertestapp.NumericalInputFragment"
     android:descendantFocusability="beforeDescendants"
     android:focusableInTouchMode="true">
-
-
     <TextView
         style="@style/TextFieldStyle"
-        android:text="@string/numerical_question"
         android:id="@+id/numericalQuestion"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="77dp" />
-
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -25,44 +21,37 @@
         android:layout_centerHorizontal="true"
         android:textAlignment="center"
         android:textSize="30sp"
-        android:maxLength="10"
-        />
-
+        android:maxLength="10"/>
     <Button
         style="@style/ButtonNumberStyle"
         android:text="@string/one"
         android:id="@+id/btnOne"
         android:layout_below="@+id/input"
         android:layout_marginLeft="180dp" />
-
     <Button
         style="@style/ButtonNumberStyle"
         android:text="@string/two"
         android:id="@+id/btnTwo"
         android:layout_alignTop="@+id/btnOne"
         android:layout_toEndOf="@+id/btnOne" />
-
     <Button
         style="@style/ButtonNumberStyle"
         android:text="@string/three"
         android:id="@+id/btnThree"
         android:layout_alignTop="@+id/btnTwo"
         android:layout_toEndOf="@+id/btnTwo" />
-
     <Button
         style="@style/ButtonNumberStyle"
         android:text="@string/four"
         android:id="@+id/btnFour"
         android:layout_alignTop="@+id/btnThree"
         android:layout_toEndOf="@+id/btnThree" />
-
     <Button
         style="@style/ButtonNumberStyle"
         android:text="@string/five"
         android:id="@+id/btnFive"
         android:layout_alignTop="@+id/btnFour"
         android:layout_toEndOf="@+id/btnFour" />
-
     <ImageButton
         style="@style/ButtonNumberStyle"
         android:id="@+id/backspace"
@@ -70,7 +59,6 @@
         android:scaleType="centerCrop"
         android:layout_alignTop="@+id/btnFive"
         android:layout_toEndOf="@+id/btnFive" />
-
     <Button
         style="@style/ButtonNumberStyle"
         android:text="@string/six"
@@ -78,49 +66,42 @@
         android:layout_below="@+id/btnOne"
         android:layout_alignStart="@+id/btnOne"
         android:layout_marginTop="48dp" />
-
     <Button
         style="@style/ButtonNumberStyle"
         android:text="@string/seven"
         android:id="@+id/btnSeven"
         android:layout_alignTop="@+id/btnSix"
         android:layout_alignStart="@+id/btnTwo" />
-
     <Button
         style="@style/ButtonNumberStyle"
         android:text="@string/eight"
         android:id="@+id/btnEight"
         android:layout_alignTop="@+id/btnSeven"
         android:layout_alignStart="@+id/btnThree" />
-
     <Button
         style="@style/ButtonNumberStyle"
         android:text="@string/nine"
         android:id="@+id/btnNine"
         android:layout_alignTop="@+id/btnEight"
         android:layout_toEndOf="@+id/btnEight" />
-
     <Button
         style="@style/ButtonNumberStyle"
         android:text="@string/zero"
         android:id="@+id/btnZero"
         android:layout_alignTop="@+id/btnNine"
         android:layout_alignStart="@+id/btnFive" />
-
     <Button
         style="@style/ButtonNumberStyle"
         android:text="@string/point"
         android:id="@+id/btnPoint"
         android:layout_alignTop="@+id/btnZero"
         android:layout_alignStart="@+id/backspace" />
-
     <Button
         style="@style/ButtonDontKnowStyle"
         android:text="@string/answer_dont_know"
         android:id="@+id/btnNumericalDontKnow"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true" />
-
     <TextView
         style="@style/TextFieldSwipeStyle"
         android:text="@string/swipe_to_continue"

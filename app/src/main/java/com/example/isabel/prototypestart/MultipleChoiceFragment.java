@@ -3,7 +3,6 @@ package com.example.isabel.prototypestart;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import com.example.isabel.prototypestart.model.Question;
 import com.example.isabel.prototypestart.model.QuestionSetup;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class MultipleChoiceFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
@@ -42,7 +40,7 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
     private long startTime;
     private long stopTime;
     private long questionTime;
-    // New---------------------------------------------
+
     private int questionID;
     private int runID;
     private Question question;
@@ -53,36 +51,32 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
     private HashMap<Integer, HashMap<Integer, QuestionSetup>> questionConfigurationData;
     private AnsweredQuestion answeredQuestion;
     private ArrayList<String> mGivenAnswer = new ArrayList<>();
-    // --------------------------------------------------------
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if (container == null) {
             return null;
         }
-        // New ---------------------------------------------------------------------------------------
+
         questionID = getArguments().getInt(QUESTIONID);
         runID = getArguments().getInt(RUN_ID);
 
-        question = ((MainActivity)getActivity()).getDBInteractor().getMockQuestions().get(questionID);
+        question = ((MainActivity)getActivity()).getDBInteractor().getQuestions().get(questionID);
         // argument to AnsweredQuestion constructor
         String[] correctAnswer = question.getCorrectAnswer();
-        //------------------------------------------------------------------------------------------------
 
-        // Experimental code ------------------------------------------------------------------------------------
         // Get information about the current Question(time limit, etc.)
         questionConfigurationData = ((MainActivity)getActivity()).getDBInteractor().getRunSetupQuestions();
-        //int runId = 7000; // this ID must come from the current run which the current Question belongs to
-        HashMap<Integer, QuestionSetup> run1QuestionSetups = questionConfigurationData.get(runID);
-        //Log.d("!Mult-RunID:", String.valueOf(runID));
+
+        HashMap<Integer, QuestionSetup> runQuestionSetups = questionConfigurationData.get(runID);
+
         // argument to AnsweredQuestion constructor
-        long timeLimit = run1QuestionSetups.get(questionID).getTimeLimit();
+        long timeLimit = runQuestionSetups.get(questionID).getTimeLimit();
 
         // instantiate answeredQuestion
         answeredQuestion = new AnsweredQuestion(questionID, timeLimit, correctAnswer);
-        //Log.d("!AQ-CorAnsw:", answeredQuestion.getCorrectAnswer()[0]);
 
-        //-------------------------------------------------------------------------------------------------------
 
         View view = inflater.inflate(R.layout.fragment_multiple_choice, container, false);
         btnOption1 = new Button(getActivity().getApplicationContext());
@@ -214,9 +208,7 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
 
             String firstPart = "";
             String lastPart = "";
-
             String[] removedSpace = qText.split(" ");
-
 
             for (int i = 0; i < removedSpace.length/2; i++) {
                 firstPart += (removedSpace[i].concat(" "));
@@ -225,13 +217,10 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
             for (int i = removedSpace.length/2; i < removedSpace.length; i++) {
                 lastPart += (removedSpace[i].concat(" "));
             }
-            Log.d("Tekst",lastPart.toString());
-            Log.d("Tekst",firstPart.toString());
 
             lastPart = System.getProperty("line.separator").concat(lastPart);
             qText = firstPart.concat(lastPart);
         }
-
         return qText;
     }
 
@@ -241,7 +230,6 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
     public static MultipleChoiceFragment newInstance(int runID, int questionID) {
         MultipleChoiceFragment f = new MultipleChoiceFragment();
         Bundle args = new Bundle();
-        //args.putInt("index", index);
         args.putInt(QUESTIONID, questionID);
         args.putInt(RUN_ID, runID);
         f.setArguments(args);
@@ -424,46 +412,38 @@ public class MultipleChoiceFragment extends android.support.v4.app.Fragment impl
             if(answeredQuestion != null){
                 answeredQuestion.setTimeUsed(getQuestionTime(startTime, stopTime));
 
-
-                setGivenAnswer(); // populate mGivenAnswer
+                // populate mGivenAnswer
+                setGivenAnswer();
 
                 answeredQuestion.setGivenAnswer(mGivenAnswer.toArray(new String[mGivenAnswer.size()]));
-                //Log.d("MultGivenAnswer:", String.valueOf(mGivenAnswer.size()));
-                //Log.d("RUN_ID:", String.valueOf(runID));
+
                 ((MainActivity)getActivity()).getDBInteractor().getTestStatistics().setSessionTimeUsed((int) answeredQuestion.getTimeUsed());
                 ((MainActivity)getActivity()).getDBInteractor().getTestStatistics().setNumberOfCorrectAnswers(answeredQuestion.answerWasCorrect() ? 1 : 0);
                 ((MainActivity)getActivity()).getDBInteractor().getTestStatistics().setNumberOfWrongAnswers(answeredQuestion.answerWasCorrect() ? 0 : 1);
                 ((MainActivity)getActivity()).getDBInteractor().getTestStatistics().setNumberOfSkippedAnswers(answeredQuestion.skippedQuestion() ? 1 : 0);
-
-                ((MainActivity)getActivity()).getDBInteractor().getTestResult().getRunResult(runID).addAnsweredQuestion(answeredQuestion/*, index*/);
-                Log.d("AnsweredQuestion", answeredQuestion.answerWasCorrect() + " answered");
+                ((MainActivity)getActivity()).getDBInteractor().getTestResult().getRunResult(runID).addAnsweredQuestion(answeredQuestion);
             }
-            //Log.d("Time", questionTime + " Multiple");
         }
     }
 
 
     @Override
     public void onPause() {
-        //Log.d("IN ON_PAUSE():", "MultipleChoiceFragment got paused.");
         super.onPause();
     }
 
     @Override
     public void onStop() {
-        //Log.d("IN ON_STOP():", "MultipleChoiceFragment got stopped.");
         super.onStop();
     }
 
     @Override
     public void onResume() {
-        //Log.d("IN ON_Resume():", "MultipleChoiceFragment got resumed.");
         super.onResume();
     }
 
     @Override
     public void onDestroy() {
-        //Log.d("IN ON_DESTROY():", "MultipleChoiceFragment got destroyed.");
         super.onDestroy();
     }
 }

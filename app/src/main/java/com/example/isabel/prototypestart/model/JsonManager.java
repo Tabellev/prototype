@@ -41,14 +41,12 @@ import java.util.TimeZone;
 public class JsonManager {
 
     private Context context;
-    // Placeholders for actual data from JSON Configuration file
-    // TODO: rename mSession to mSession
     private Session mSession;
     private HashMap<Integer, Question> questionMap;
     private final int QUESTIONS_FILE = 1;
     private final int CONFIGURATION_FILE = 2;
     private final String OUTPUT_DIRECOTRY_NAME = "Testresult";
-    private final String OUTPUT_FILE_NAME = "testresult.json";
+    private final String OUTPUT_FILE_NAME = "output.json";
     private Gson gson;
 
     public JsonManager(Context context) {
@@ -62,24 +60,9 @@ public class JsonManager {
 
         this.mSession = createSession();
         createQuestions();
-
-        //exportTestResultsToJson(); // called for testing export of testresults to JSON
     }
-
-    public HashMap<Integer, QuestionSetup> importDataFromQuestionsFile() {
-        // Populate a HashMap with QuestionSetups
-        return null;
-    }
-
-    // The actual Questions will be fetched when needed based on QuestionSetup-id
-    public Session buildSessionFromJson() {
-        // Instantiate a Session object with data from Configuration and Questions file
-        return null;
-    }
-
 
     public void exportTestResultsToJson(TestResult testResult) {
-        Log.d("ExportToJSON()", "Testresults exported.");
         String json = gson.toJson(testResult);
 
         // Write output file to device's external storage
@@ -168,7 +151,7 @@ public class JsonManager {
         // Read from R.raw.configurationfile
         String jsonString = readJsonFile(CONFIGURATION_FILE);
         Session session = gson.fromJson(jsonString, Session.class);
-       // Fix to set numberOfRuns and numberOfQuestions. Gson ignores the private setter methods
+
         session.setNumberOfRuns();
         for (int i = 0; i < session.getNumberOfRuns(); i++) {
             session.getRunsToSetup()[i].setNumberOfQuestions();
@@ -178,7 +161,7 @@ public class JsonManager {
     }
 
     // Placeholder method for providing mock-data while implementing the View(UI)
-    private QuestionSetup[] getConfigQuestionsForOneRun(int numberOfQuestions, int startId) {
+   /* private QuestionSetup[] getConfigQuestionsForOneRun(int numberOfQuestions, int startId) {
         QuestionSetup[] configQuestionsReturned = new QuestionSetup[numberOfQuestions];
         int id = startId - 1;
         for(int i = 0; i < numberOfQuestions; i++) {
@@ -187,7 +170,7 @@ public class JsonManager {
 
         // Returns array of QuestionSets with amount given when creating a RunSetup
         return configQuestionsReturned;
-    }
+    }*/
 
     // Placeholder method to provide Question objects for populating the fragments
     public HashMap<Integer, Question> getQuestionMap() {
@@ -199,14 +182,9 @@ public class JsonManager {
         // Create all the questions
         // Take real questions with real alternatives from IFE material(20 x 3)
         // Create all the Questions --> add to this.questionMap
-        HashMap<Integer, Question> returnedMockQuestions = new HashMap<>();
 
         // Reading from R.raw.questionsfile.json
         String jsonString = readJsonFile(QUESTIONS_FILE);
-        //Gson
-        /*Type type = new TypeToken<Question[]>(){}.getType();
-        Question[] questions = gson.fromJson(jsonString, type);*/
-
 
         Type type = new TypeToken<ArrayList<Question>>(){}.getType();
         ArrayList<Question> questions = gson.fromJson(jsonString, type);

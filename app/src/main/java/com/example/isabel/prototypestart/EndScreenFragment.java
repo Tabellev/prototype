@@ -5,17 +5,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.isabel.prototypestart.model.TestResult;
 import com.example.isabel.prototypestart.model.TestStatistics;
 
-import org.w3c.dom.Text;
-
-/**
- * Created by oyvind on 28.04.2015.
- */
 public class EndScreenFragment extends Fragment {
     private TestResult mTestResult;
     private TextView txtTestName, txtTestSessionId, txtTestCrewId, txtTestNumberOfRuns, txtTestTimeUsed,
@@ -47,7 +41,6 @@ public class EndScreenFragment extends Fragment {
     }
 
     private void populateWithTestResults() {
-        //TODO: get TestResult from DbInteractor
         mTestResult = ((MainActivity)getActivity()).getDBInteractor().getTestResult();
 
         mTestStatistics = ((MainActivity)getActivity()).getDBInteractor().getTestStatistics();

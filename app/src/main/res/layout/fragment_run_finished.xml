@@ -1,8 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/FragmentStyle"
-    xmlns:tools="http://schemas.android.com/tools" tools:context="com.example.isabel.guitestapp.StartScreen"
-    >
-
+    xmlns:tools="http://schemas.android.com/tools" tools:context="com.example.isabel.guitestapp.StartScreen">
     <TextView
         style="@style/TextFieldStyle"
         android:text="@string/run_finished"
@@ -10,7 +8,6 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="194dp" />
-
     <TextView
         style="@style/TextFieldStyle"
         android:text="@string/swipe_to_continue"

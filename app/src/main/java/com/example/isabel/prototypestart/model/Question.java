@@ -2,9 +2,6 @@ package com.example.isabel.prototypestart.model;
 
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by oyvind on 28.03.2015.
- */
 public class Question {
     @SerializedName("questionID")
     private int mID;
@@ -19,7 +16,7 @@ public class Question {
 
     public Question(int id, String questionText, QuestionType type, String[] options,
                     String[] correctAnswer) {
-        //super(id, questionText, type);
+
         this.mID = id;
         this.mQuestionText = questionText;
         this.mType = type;

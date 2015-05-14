@@ -4,10 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.Arrays;
 
-/**
- * Created by oyvind on 16.03.2015.
- *
- * Will represent a question in the Output file
+/* Will represent a question in the Output file
  */
 public class AnsweredQuestion {
     @SerializedName("questionID")
@@ -35,25 +32,6 @@ public class AnsweredQuestion {
         this.mSkippedQuestion = true;
     }
 
-    /*public AnsweredQuestion(int questionID, long timeLimit, long timeUsed, boolean skipped,
-                            String[] givenAnswer, String[] correctAnswer, boolean answerWasCorrect) {
-        this.mQuestionID = questionID;
-        this.mTimeLimit = timeLimit;
-        this.mTimeUsed = timeUsed;
-        this.mSkippedQuestion = skipped;
-        this.mGivenAnswer = givenAnswer;
-        this.mCorrectAnswer = correctAnswer;
-        this.mAnswerWasCorrect = answerWasCorrect;
-    }*/
-
-    public int getQuestionID() {
-        return mQuestionID;
-    }
-
-    public long getTimeLimit() {
-        return mTimeLimit;
-    }
-
     public long getTimeUsed() {
         return mTimeUsed;
     }
@@ -62,20 +40,8 @@ public class AnsweredQuestion {
         return mSkippedQuestion;
     }
 
-    public String[] getGivenAnswer() {
-        return mGivenAnswer;
-    }
-
-    public String[] getCorrectAnswer() {
-        return mCorrectAnswer;
-    }
-
     public boolean answerWasCorrect() {
         return mAnswerWasCorrect;
-    }
-
-    public void setTimeLimit(long mTimeLimit) {
-        this.mTimeLimit = mTimeLimit;
     }
 
     public void setTimeUsed(long mTimeUsed) {
@@ -105,9 +71,4 @@ public class AnsweredQuestion {
             }
         }
     }
-
-    /*private void setAnswerWasCorrect(boolean answerWasCorrect) {
-
-        this.mAnswerWasCorrect = answerWasCorrect;
-    }*/
 }

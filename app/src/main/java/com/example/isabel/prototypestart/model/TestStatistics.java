@@ -4,7 +4,8 @@ package com.example.isabel.prototypestart.model;
  * Created by oyvind on 29.04.2015.
  */
 public class TestStatistics {
-    private int sessionTimeUsed; // Sum of all runTimeUsed
+    // Sum of all runTimeUsed
+    private int sessionTimeUsed;
     private int numberOfCorrectAnswers;
     private int numberOfWrongAnswers;
     private int numberOfSkippedAnswers;

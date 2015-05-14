@@ -2,8 +2,6 @@ package com.example.isabel.prototypestart.model;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
-
 /**
  * Created by oyvind on 16.03.2015.
  *
@@ -53,15 +51,4 @@ public class Session {
         return mRunsToSetup;
     }
 
-    // return one specific RunSetup. Used when retrieving QuestionSetup ID's to create indexArray in Fragments
-    public RunSetup getRunSetup(int runID) {
-        for (int i = 0; i < mRunsToSetup.length; i++) {
-            if (runID == mRunsToSetup[i].getRunID()) {
-                return mRunsToSetup[i];
-            } else {
-                return null;
-            }
-        }
-        return null;
-    }
 }

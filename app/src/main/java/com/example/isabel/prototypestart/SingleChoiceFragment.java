@@ -2,12 +2,7 @@ package com.example.isabel.prototypestart;
 
 
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.util.TypedValue;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +15,7 @@ import com.example.isabel.prototypestart.model.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Locale;
+
 
 
 public class SingleChoiceFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
@@ -42,19 +37,14 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
     private long startTime;
     private long stopTime;
     private long questionTime;
-    private long runTime;
     private ArrayList<String> mGivenAnswer = new ArrayList<>();
     ControlledViewPager pager;
-    private boolean answerGiven = false;
 
     private HashMap<Integer, HashMap<Integer, QuestionSetup>> questionConfigurationData;
     private AnsweredQuestion answeredQuestion;
-    private int[] indexOfAnsweredQuestions;
 
-    // Maybe add parameter RunID?
     public static SingleChoiceFragment newInstance(int runID, int questionID) {
         SingleChoiceFragment fragmentSingleChoice = new SingleChoiceFragment();
-        // Maybe add RUNID to the bundle?
         Bundle args = new Bundle();
         args.putInt(QUESTIONID, questionID);
         args.putInt(RUN_ID, runID);
@@ -70,23 +60,14 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
 
         questionID = getArguments().getInt(QUESTIONID);
         runID = getArguments().getInt(RUN_ID);
-        // This is where the Fragment gets hold of the question
-        // Old before test with HashMap
-        //question = ((MainActivity)getActivity()).getDBInteractor().getQuestionFromId(questionID);
 
-        // Test with HashMap for Questions
-        question = ((MainActivity)getActivity()).getDBInteractor().getMockQuestions().get(questionID);
+        question = ((MainActivity)getActivity()).getDBInteractor().getQuestions().get(questionID);
         // argument to AnsweredQuestion constructor
         String[] correctAnswer = question.getCorrectAnswer();
-        //------------------------------------------------------------------------------------------------
 
-        // Experimental code ------------------------------------------------------------------------------------
         // Get information about the current Question(time limit, etc.)
         questionConfigurationData = ((MainActivity)getActivity()).getDBInteractor().getRunSetupQuestions();
 
-        // TODO: separate the Runs with the 'runFinished'-Fragments
-        // runId must be the actual runId to match the once used in PagerAdapter....!!!!!
-        //int runId = 7000; // this ID must come from the current run which the current Question belongs to
         HashMap<Integer, QuestionSetup> run1QuestionSetups = questionConfigurationData.get(runID);
         // argument to AnsweredQuestion constructor
         long timeLimit = run1QuestionSetups.get(questionID).getTimeLimit();
@@ -94,19 +75,6 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
         // instantiate answeredQuestion
         answeredQuestion = new AnsweredQuestion(questionID, timeLimit, correctAnswer);
 
-        // Testing------------------------------------------------------------------------------------------
-        /*RunSetup temp = ((MainActivity)getActivity()).getDBInteractor().getSession().getRunSetup(runID);
-        indexOfAnsweredQuestions = new int[temp.getNumberOfQuestions()];
-        for (int i = 0; i < indexOfAnsweredQuestions.length; i++) {
-            indexOfAnsweredQuestions[i] = temp.getQuestionSetup()[i].getQuestionID();
-        }*/
-
-        //-------------------------------------------------------------------------------------------------------
-
-
-        // The comments below is just examples of how to interact with the data structures
-        //((MainActivity)getActivity()).getDBInteractor().getTestResult().getRunResults()[0].getRunID();
-        //((MainActivity)getActivity()).getDBInteractor().getTestResult().getRunResults()[0].addAnsweredQuestion(questionToAdd);
         View view =  inflater.inflate(R.layout.fragment_single_choice, container, false);
         btnOption1 = new Button(getActivity().getApplicationContext());
         btnOption1.setOnClickListener(this);
@@ -126,8 +94,6 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
         String questionT = checkTextLength(question.getQuestionText());
         questionText.setText(questionT);
         pager = ((MainActivity) getActivity()).getPager();
-
-        //questionText.setText(question.getQuestionText() + question.getQuestionText().length());
 
         buttonSetup();
         return  view;
@@ -244,9 +210,7 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
 
                 String firstPart = "";
                 String lastPart = "";
-
                 String[] removedSpace = qText.split(" ");
-
 
                 for (int i = 0; i < removedSpace.length/2; i++) {
                     firstPart += (removedSpace[i].concat(" "));
@@ -255,13 +219,10 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
                 for (int i = removedSpace.length/2; i < removedSpace.length; i++) {
                     lastPart += (removedSpace[i].concat(" "));
                 }
-                Log.d("Tekst",lastPart.toString());
-                Log.d("Tekst",firstPart.toString());
 
                 lastPart = System.getProperty("line.separator").concat(lastPart);
                 qText = firstPart.concat(lastPart);
             }
-
         return qText;
     }
 
@@ -366,14 +327,12 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
                 // remove previously given answer
                 mGivenAnswer.clear();
                 answeredQuestion.setSkippedQuestion(true);
-
                 break;
         }
     }
 
     public long getQuestionTime(long startTime, long stopTime){
         questionTime = stopTime - startTime;
-
         questionTime = questionTime/1000;
         return questionTime;
     }
@@ -389,56 +348,34 @@ public class SingleChoiceFragment extends android.support.v4.app.Fragment implem
             questionTime = getQuestionTime(startTime,stopTime);
             if(answeredQuestion != null){
                 answeredQuestion.setTimeUsed(getQuestionTime(startTime, stopTime));
-                //Log.d("AnsweredQuestionTime", answeredQuestion.getTimeUsed() + " answered");
-
                 answeredQuestion.setGivenAnswer(mGivenAnswer.toArray(new String[mGivenAnswer.size()]));
-                //Log.d("answeredQuestion : answ", String.valueOf(answeredQuestion.getGivenAnswer()[0]));
-                //Log.d("CorrectAnswer:", answeredQuestion.getCorrectAnswer()[0]);
-                //Log.d("AnswerWasCorrect:", String.valueOf(answeredQuestion.answerWasCorrect()));
-                //Log.d("SkippedQuestion:", String.valueOf(answeredQuestion.skippedQuestion()));
-                // TODO: modify getRunResults() to return correct array from runID, and modify addAnsweredQuestion()
 
-                //int index = 0;
-                /*for (int i = 0; i < indexOfAnsweredQuestions.length; i++) {
-                    if (indexOfAnsweredQuestions[i] == runID) {
-                        index = i;
-                    }
-                }*/
-                //Log.d("RUN_ID:", String.valueOf(runID));
                 ((MainActivity)getActivity()).getDBInteractor().getTestStatistics().setSessionTimeUsed((int) answeredQuestion.getTimeUsed());
                 ((MainActivity)getActivity()).getDBInteractor().getTestStatistics().setNumberOfCorrectAnswers(answeredQuestion.answerWasCorrect() ? 1 : 0);
                 ((MainActivity)getActivity()).getDBInteractor().getTestStatistics().setNumberOfWrongAnswers(answeredQuestion.answerWasCorrect() ? 0 : 1);
                 ((MainActivity)getActivity()).getDBInteractor().getTestStatistics().setNumberOfSkippedAnswers(answeredQuestion.skippedQuestion() ? 1 : 0);
-
-                ((MainActivity)getActivity()).getDBInteractor().getTestResult().getRunResult(runID).addAnsweredQuestion(answeredQuestion/*, index*/);
+                ((MainActivity)getActivity()).getDBInteractor().getTestResult().getRunResult(runID).addAnsweredQuestion(answeredQuestion);
             }
-            //Log.d("Time", questionTime + " Single");
         }
     }
 
     @Override
     public void onPause() {
-        //Log.d("IN ON_PAUSE():", "SingelChoiceFragment got paused.");
         super.onPause();
     }
 
     @Override
     public void onResume() {
-        //Log.d("IN ON_Resume():", "SingelChoiceFragment got resumed.");
-
         super.onResume();
     }
 
     @Override
     public void onStop() {
-        //Log.d("IN ON_STOP():", "SingelChoiceFragment got stopped.");
         super.onStop();
     }
 
     @Override
     public void onDestroy() {
-       //Log.d("IN ON_DESTROY():", "SingelChoiceFragment got destroyed.");
-
         super.onDestroy();
     }
 }

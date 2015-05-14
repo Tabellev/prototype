@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 
 import com.example.isabel.prototypestart.model.DbInteractor;
 import com.example.isabel.prototypestart.model.IDbInteractor;
@@ -15,6 +14,7 @@ import com.example.isabel.prototypestart.model.Question;
 import com.example.isabel.prototypestart.model.Session;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 public class MainActivity extends android.support.v4.app.FragmentActivity {
@@ -45,10 +45,9 @@ public class MainActivity extends android.support.v4.app.FragmentActivity {
             public void onPageSelected(int position) {
 
                 if (position == mPagerAdapter.mSessionFragments.size()) {
-                    Log.d("onPageSelected()", String.valueOf(position));
+                    getDBInteractor().getTestResult().setStopTime(new Date());
                     getDBInteractor().createOutputJsonFile();
                 }
-
             }
 
             @Override
@@ -59,14 +58,13 @@ public class MainActivity extends android.support.v4.app.FragmentActivity {
     }
 
     private void initialisePaging() {
-        this.mPagerAdapter = new PagerAdapter(super.getSupportFragmentManager(), getDBInteractor().getMockQuestions());
+        this.mPagerAdapter = new PagerAdapter(super.getSupportFragmentManager(), getDBInteractor().getQuestions());
         pager.setAdapter(this.mPagerAdapter);
     }
 
 
     // This is called from the fragments
     public IDbInteractor getDBInteractor() { return mDataManager; }
-
 
     public class PagerAdapter extends FragmentStatePagerAdapter {
         private ArrayList<Fragment> mSessionFragments;
@@ -100,7 +98,7 @@ public class MainActivity extends android.support.v4.app.FragmentActivity {
 
         private HashMap<Integer, ArrayList<Question>> buildRunsWithQuestions() {
             HashMap<Integer, ArrayList<Question>> temp = new HashMap<>();
-            Session session = getDBInteractor().getMockSession();
+            Session session = getDBInteractor().getSession();
 
             for (int i = 0; i < session.getRunsToSetup().length; i++) {
                 ArrayList<Question> tmp = new ArrayList<>();
@@ -111,7 +109,6 @@ public class MainActivity extends android.support.v4.app.FragmentActivity {
             }
             return temp;
         }
-
 
         private void populateSessionFragment() {
             mSessionFragments = new ArrayList<>();
@@ -152,7 +149,6 @@ public class MainActivity extends android.support.v4.app.FragmentActivity {
             } else {
                 return mSessionFragments.get(position);
             }
-
         }
 
 

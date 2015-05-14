@@ -2,16 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/FragmentStyle"
     tools:context="com.example.isabel.usertestapp.MultipleChoiceFragment">
-
-
     <TextView
         style="@style/TextFieldStyle"
-        android:text="@string/mutiple_choice_question"
         android:id="@+id/multipleAnswerQuestion"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="106dp" />
-
     <LinearLayout
         android:layout_height="0dp"
         android:baselineAligned="false"
@@ -21,14 +17,12 @@
         android:layout_below="@+id/multipleAnswerQuestion"
         android:layout_alignParentStart="true"
         android:layout_marginTop="100dp" />
-
     <Button
         style="@style/ButtonDontKnowStyle"
         android:text="@string/answer_dont_know"
         android:id="@+id/multipleDontKnow"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true" />
-
     <TextView
         style="@style/TextFieldSwipeStyle"
         android:text="@string/swipe_to_continue"

@@ -1,13 +1,9 @@
 package com.example.isabel.prototypestart;
 
-import android.app.Activity;
-import android.app.Notification;
+
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.text.InputType;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.isabel.prototypestart.model.AnsweredQuestion;
@@ -46,10 +41,8 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
     private long stopTime;
     private long questionTime;
     private ControlledViewPager pager;
-    private boolean dontKnowIsClicked = false;
 
     private boolean answerIsGiven = false;
-    // New---------------------------------------------
     private int questionID;
     private int runID;
     private Question question;
@@ -58,7 +51,6 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
 
     private HashMap<Integer, HashMap<Integer, QuestionSetup>> questionConfigurationData;
     private AnsweredQuestion answeredQuestion;
-    // --------------------------------------------------------
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -66,32 +58,23 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
             return null;
         }
 
-        // New ---------------------------------------------------------------------------------------
         questionID = getArguments().getInt(QUESTIONID);
         runID = getArguments().getInt(RUN_ID);
 
-        question = ((MainActivity)getActivity()).getDBInteractor().getMockQuestions().get(questionID);
+        question = ((MainActivity)getActivity()).getDBInteractor().getQuestions().get(questionID);
         // argument to AnsweredQuestion constructor
         String[] correctAnswer = question.getCorrectAnswer();
-                //------------------------------------------------------------------------------------------------
 
-        // Experimental code ------------------------------------------------------------------------------------
         // Get information about the current Question(time limit, etc.)
         questionConfigurationData = ((MainActivity)getActivity()).getDBInteractor().getRunSetupQuestions();
-        //int runId = 7000; // this ID must come from the current run which the current Question belongs to
+
         HashMap<Integer, QuestionSetup> run1QuestionSetups = questionConfigurationData.get(runID);
         // argument to AnsweredQuestion constructor
         long timeLimit = run1QuestionSetups.get(questionID).getTimeLimit();
-
         // instantiate answeredQuestion
-        // TODO: mTimeUsed, mSkippedQuestion, mGivenAnswer og mAnswerWasCorrect must be set when user navigates to next question
         answeredQuestion = new AnsweredQuestion(questionID, timeLimit, correctAnswer);
 
-        //-------------------------------------------------------------------------------------------------------
-
-
-
-        View view = (RelativeLayout)inflater.inflate(R.layout.fragment_numerical, container, false);
+        View view = inflater.inflate(R.layout.fragment_numerical, container, false);
         btn0 = (Button)view.findViewById(R.id.btnZero);
         btn0.setOnTouchListener(this);
         btn1 = (Button) view.findViewById(R.id.btnOne);
@@ -127,7 +110,6 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
         input.setInputType(InputType.TYPE_NULL);
         pager = ((MainActivity) getActivity()).getPager();
 
-
         return view;
     }
 
@@ -147,8 +129,6 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
             for (int i = removedSpace.length/2; i < removedSpace.length; i++) {
                 lastPart += (removedSpace[i].concat(" "));
             }
-            Log.d("Tekst",lastPart.toString());
-            Log.d("Tekst",firstPart.toString());
 
             lastPart = System.getProperty("line.separator").concat(lastPart);
             qText = firstPart.concat(lastPart);
@@ -161,7 +141,6 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
     public static NumericalFragment newInstance(int runID, int questionID) {
         NumericalFragment f = new NumericalFragment();
         Bundle args = new Bundle();
-        //args.putInt("index", index);
         args.putInt(QUESTIONID, questionID);
         args.putInt(RUN_ID, runID);
         f.setArguments(args);
@@ -252,7 +231,6 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
                     answerIsGiven = false;
                     answeredQuestion.setSkippedQuestion(true);
                     pager.setPagingEnabled(true);
-                    dontKnowIsClicked = true;
                     break;
             }
         } else if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -262,70 +240,60 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
                     swipe.setVisibility(View.VISIBLE);
                     v.setBackgroundColor(Color.rgb(160, 200, 220));
                     dontKnow.setBackgroundColor(Color.rgb(160, 200, 220));
-                    dontKnowIsClicked = false;
                     break;
                 case R.id.btnOne:
                     input.setText(input.getText() + "1");
                     swipe.setVisibility(View.VISIBLE);
                     v.setBackgroundColor(Color.rgb(160, 200, 220));
                     dontKnow.setBackgroundColor(Color.rgb(160, 200, 220));
-                    dontKnowIsClicked = false;
                     break;
                 case R.id.btnTwo:
                     input.setText(input.getText() + "2");
                     swipe.setVisibility(View.VISIBLE);
                     v.setBackgroundColor(Color.rgb(160, 200, 220));
                     dontKnow.setBackgroundColor(Color.rgb(160, 200, 220));
-                    dontKnowIsClicked = false;
                     break;
                 case R.id.btnThree:
                     input.setText(input.getText() + "3");
                     swipe.setVisibility(View.VISIBLE);
                     v.setBackgroundColor(Color.rgb(160, 200, 220));
                     dontKnow.setBackgroundColor(Color.rgb(160, 200, 220));
-                    dontKnowIsClicked = false;
                     break;
                 case R.id.btnFour:
                     input.setText(input.getText() + "4");
                     swipe.setVisibility(View.VISIBLE);
                     v.setBackgroundColor(Color.rgb(160, 200, 220));
                     dontKnow.setBackgroundColor(Color.rgb(160, 200, 220));
-                    dontKnowIsClicked = false;
                     break;
                 case R.id.btnFive:
                     input.setText(input.getText() + "5");
                     swipe.setVisibility(View.VISIBLE);
                     v.setBackgroundColor(Color.rgb(160, 200, 220));
                     dontKnow.setBackgroundColor(Color.rgb(160, 200, 220));
-                    dontKnowIsClicked = false;
                     break;
                 case R.id.btnSix:
                     input.setText(input.getText() + "6");
                     swipe.setVisibility(View.VISIBLE);
                     v.setBackgroundColor(Color.rgb(160, 200, 220));
                     dontKnow.setBackgroundColor(Color.rgb(160, 200, 220));
-                    dontKnowIsClicked = false;
                     break;
                 case R.id.btnSeven:
                     input.setText(input.getText() + "7");
                     swipe.setVisibility(View.VISIBLE);
                     v.setBackgroundColor(Color.rgb(160, 200, 220));
                     dontKnow.setBackgroundColor(Color.rgb(160, 200, 220));
-                    dontKnowIsClicked = false;
                     break;
                 case R.id.btnEight:
                     input.setText(input.getText() + "8");
                     swipe.setVisibility(View.VISIBLE);
                     v.setBackgroundColor(Color.rgb(160, 200, 220));
                     dontKnow.setBackgroundColor(Color.rgb(160, 200, 220));
-                    dontKnowIsClicked = false;
                     break;
                 case R.id.btnNine:
                     input.setText(input.getText() + "9");
                     swipe.setVisibility(View.VISIBLE);
                     v.setBackgroundColor(Color.rgb(160, 200, 220));
                     dontKnow.setBackgroundColor(Color.rgb(160, 200, 220));
-                    dontKnowIsClicked = false;
                     break;
                 case R.id.btnNumericalDontKnow:
                     v.setBackgroundColor(Color.rgb(7, 147, 194));
@@ -339,11 +307,9 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
                         swipe.setVisibility(View.VISIBLE);
                         v.setBackgroundColor(Color.rgb(160, 200, 220));
                         dontKnow.setBackgroundColor(Color.rgb(160, 200, 220));
-                        dontKnowIsClicked = false;
                     } else {
                         v.setBackgroundColor(Color.rgb(160, 200, 220));
                         dontKnow.setBackgroundColor(Color.rgb(160, 200, 220));
-                        dontKnowIsClicked = false;
                     }
                     break;
                 case R.id.backspace:
@@ -358,13 +324,11 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
                     break;
             }
         }
-
         return false;
     }
 
     @Override
     public boolean onLongClick(View v) {
-        // may need to remove the string instead of setting an empty one
         input.setText("");
         answerIsGiven = false;
         pager.setPagingEnabled(false);
@@ -373,7 +337,6 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
 
     public long getQuestionTime(long startTime, long stopTime){
         questionTime = stopTime - startTime;
-
         questionTime = questionTime/1000;
         return questionTime;
     }
@@ -389,25 +352,15 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
             questionTime = getQuestionTime(startTime,stopTime);
             if(answeredQuestion != null){
                 answeredQuestion.setTimeUsed(getQuestionTime(startTime, stopTime));
-                //Log.d("AnsweredQuestionTime", answeredQuestion.getTimeUsed() + " answered");
-
-                // set givenAnswer
-                /*setGivenAnswer();*/
                 answeredQuestion.setGivenAnswer(setGivenAnswer());
 
-                //Log.d("NumericalAQ:", answeredQuestion.getGivenAnswer()[0]);
-                //Log.d("RUN_ID:", String.valueOf(runID));
                 // add answeredQuestion to TestResult
-                Log.d("skippedQuestion:", String.valueOf(answeredQuestion.skippedQuestion()));
-
                 ((MainActivity)getActivity()).getDBInteractor().getTestStatistics().setSessionTimeUsed((int) answeredQuestion.getTimeUsed());
                 ((MainActivity)getActivity()).getDBInteractor().getTestStatistics().setNumberOfCorrectAnswers(answeredQuestion.answerWasCorrect() ? 1 : 0);
                 ((MainActivity)getActivity()).getDBInteractor().getTestStatistics().setNumberOfWrongAnswers(answeredQuestion.answerWasCorrect() ? 0 : 1);
                 ((MainActivity)getActivity()).getDBInteractor().getTestStatistics().setNumberOfSkippedAnswers(answeredQuestion.skippedQuestion() ? 1 : 0);
-
-                ((MainActivity)getActivity()).getDBInteractor().getTestResult().getRunResult(runID).addAnsweredQuestion(answeredQuestion/*, index*/);
+                ((MainActivity)getActivity()).getDBInteractor().getTestResult().getRunResult(runID).addAnsweredQuestion(answeredQuestion);
             }
-            //Log.d("Time", questionTime + " Single");
         }
     }
 
@@ -423,25 +376,20 @@ public class NumericalFragment extends android.support.v4.app.Fragment implement
         return fromInput;
     }
 
-
     @Override
     public void onPause () {
-        //Log.d("IN ON_PAUSE():", "Numerical Fragment got paused.");
         super.onPause();
     }
 
     @Override
     public void onStop () {
-        //Log.d("IN ON_STOP():", "Numerical Fragment got stopped.");
         String[] answerFromInput = new String[]{input.getText().toString()};
         answeredQuestion.setGivenAnswer(answerFromInput);
-
         super.onStop();
     }
 
     @Override
     public void onDestroy() {
-        //Log.d("IN ON_DESTROY():", "Numerical Fragment got destroyed.");
         super.onDestroy();
     }
 }

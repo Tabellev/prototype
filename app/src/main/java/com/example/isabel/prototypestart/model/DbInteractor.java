@@ -2,27 +2,17 @@ package com.example.isabel.prototypestart.model;
 
 import android.content.Context;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
-/**
- * Created by Isabel on 09.03.2015.
- *
- * This class is the central provider of data for the application
- * TODO: We may be forced to build the AnsweredQuestion objects tied to the Fragments here, and save input to this object with the ViewPager.OnPageChangeListeners methods
- *
- * TODO: Rename everything containing mock[....] when things are working as expected
- */
 public class DbInteractor implements IDbInteractor {
     // The context is needed if we intend to use resources (context.getResources()...)
     private Context mContext;
     // Will provide data from JSON and export data to JSON
-    private JsonManager mockDataProvider;
+    private JsonManager dataProvider;
     // Collection to hold Question objects from Questions file
-    private HashMap<Integer, Question> mockQuestions;
-    // mockSession holds information from simulated Configuration file
-    private Session mockSession;
+    private HashMap<Integer, Question> questions;
+    // session holds information from simulated Configuration file
+    private Session session;
     // Will be a data-buffer for input during the test session
     private  TestResult mTestResult;
     // Key: runSetup ID , Values: HashMap(Key: questionSetup ID , Values: QuestionSetup objects from "Configuaration file")
@@ -32,17 +22,14 @@ public class DbInteractor implements IDbInteractor {
     private int[] mRunIDs;
 
     private TestStatistics testStatistics;
-    // Deprecated!
-    List<Question> questionList = new ArrayList<Question>();
-
 
     public DbInteractor(Context context){
         this.mContext = context;
-        mockDataProvider = new JsonManager(mContext);
-        mockQuestions = new HashMap<>();
-        runSetupQuestions = new HashMap<Integer, HashMap<Integer, QuestionSetup>>();
-        this.mockQuestions = mockDataProvider.getQuestionMap();
-        this.mockSession = mockDataProvider.getSession();
+        dataProvider = new JsonManager(mContext);
+        questions = new HashMap<>();
+        runSetupQuestions = new HashMap<>();
+        this.questions = dataProvider.getQuestionMap();
+        this.session = dataProvider.getSession();
 
         this.testStatistics = new TestStatistics();
 
@@ -51,92 +38,64 @@ public class DbInteractor implements IDbInteractor {
 
         // instantiate mTestResult so it is ready to receive input data during the test session
         // we will work directly with this when saving input and time used
-
         initializeTestResult();
 
         // The data used to access a Question's time limit when populating an AnsweredQuestion object in the Fragments
         createAccessibleQuestionSetupList();
 
-
-        // Old-----------------------------------------------------------------------------------------------
-        /*information from questionList must be switched out with information from mockQuestions
-        constructed from the information in mockSession*/
-        questionList.add(new Question(1, "Hva heter du?", QuestionType.SingleChoice, new String[]{"YES", "NO"},
-                                            new String[]{"NO"}));
-        questionList.add(new Question(2,"Hvor gammel er du?", QuestionType.MultipleChoice, new String[]{"Two", "Three", "Four", "Five"},
-                                            new String[]{"Three"}));
-        questionList.add(new Question(3, "Hva er 5/2?", QuestionType.Numerical, new String[]{}, new String[]{"2.5"}));
-        //-------------------------------------------------------------------------------------------------------------------
     }
 
     // Creates the initial TestResult object with information from Session
     private void initializeTestResult() {
-        RunSetup[] runs = mockSession.getRunsToSetup();
+        RunSetup[] runs = session.getRunsToSetup();
         int length = runs.length;
 
-        mTestResult = new TestResult(mockSession.getExperimentName(), mockSession.getSessionID(),
-                mockSession.getCrewID(), mockSession.getNumberOfRuns());
+        mTestResult = new TestResult(session.getExperimentName(), session.getSessionID(),
+                session.getCrewID(), session.getNumberOfRuns());
 
-        /*int runID, String operatorID, String scenario, long runTimeLimit, int numberOfQuestions */
         for (int i = 0; i < length; i++) {
-            int id = mockSession.getRunsToSetup()[i].getRunID();
+            int id = session.getRunsToSetup()[i].getRunID();
 
-            //Log.d("InitializeTestResult():", "runID: " + String.valueOf(id));
+            String operatorID = session.getRunsToSetup()[i].getOperatorID();
+            String scenario = session.getRunsToSetup()[i].getScenario();
+            long timeLimit = session.getRunsToSetup()[i].getRunTimeLimit();
+            int numOfQuestions = session.getRunsToSetup()[i].getNumberOfQuestions();
 
-            String operatorID = mockSession.getRunsToSetup()[i].getOperatorID();
-            String scenario = mockSession.getRunsToSetup()[i].getScenario();
-            long timeLimit = mockSession.getRunsToSetup()[i].getRunTimeLimit();
-            int numOfQuestions = mockSession.getRunsToSetup()[i].getNumberOfQuestions();
-
-            // kan det være trøbbel i addRunResult()????????
-            //Log.d("new RunResult:", "id: " + id + " numOfQuestions: " + numOfQuestions + " i: " + i);
             mTestResult.addRunResult(new RunResult(id, operatorID, scenario, timeLimit, numOfQuestions), i);
         }
     }
 
 
     private void createAccessibleQuestionSetupList() {
-        int lengthRuns = mockSession.getRunsToSetup().length;
+        int lengthRuns = session.getRunsToSetup().length;
 
         for (int i = 0; i < lengthRuns; i++) {
             HashMap<Integer, QuestionSetup> temp = new HashMap<>();
-            int runId = mockSession.getRunsToSetup()[i].getRunID();
-            int lengthQuestions = mockSession.getRunsToSetup()[i].getQuestionSetup().length;
+            int lengthQuestions = session.getRunsToSetup()[i].getQuestionSetup().length;
 
             for (int j = 0; j < lengthQuestions; j++) {
-                int questionId = mockSession.getRunsToSetup()[i].getQuestionSetup()[j].getQuestionID();
-                temp.put(questionId, mockSession.getRunsToSetup()[i].getQuestionSetup()[j]);
+                int questionId = session.getRunsToSetup()[i].getQuestionSetup()[j].getQuestionID();
+                temp.put(questionId, session.getRunsToSetup()[i].getQuestionSetup()[j]);
             }
-            runSetupQuestions.put(mockSession.getRunsToSetup()[i].getRunID(), temp);
+            runSetupQuestions.put(session.getRunsToSetup()[i].getRunID(), temp);
         }
     }
 
-    // TODO: Change to HashMap<Integer, Question> when things are working
+
+   // Method to provide the questions from Questions file
     @Override
-    public List<Question> getQuestions() {
-        return questionList;
+    public HashMap<Integer, Question> getQuestions() {
+        return questions;
     }
 
-    // TODO: Change as appropriate to match HashMap...(if necessary)
+    // Method to provide one question
     @Override
-    public Question getQuestionFromId(int id) {
-        return questionList.get(id);
-    }
-
-    // Temporary method to provide the questions from Questions file
-    @Override
-    public HashMap<Integer, Question> getMockQuestions() {
-        return mockQuestions;
-    }
-
-    // Temporary method to provide one question
-    @Override
-    public Question getQuestion(int key) { return mockQuestions.get(key); }
+    public Question getQuestion(int key) { return questions.get(key); }
 
     // Provides a Session object containing all information needed to construct a test session
     @Override
-    public Session getMockSession() {
-        return mockSession;
+    public Session getSession() {
+        return session;
     }
 
     @Override
@@ -150,11 +109,10 @@ public class DbInteractor implements IDbInteractor {
     }
 
     private void setRunIDs() {
-        int length = this.mockSession.getRunsToSetup().length;
+        int length = this.session.getRunsToSetup().length;
         mRunIDs = new int[length];
         for (int i = 0; i < mRunIDs.length; i++) {
-            mRunIDs[i] = this.mockSession.getRunsToSetup()[i].getRunID();
-            //Log.d("mRunIDs:", "" + i + ": " + mRunIDs[i]);
+            mRunIDs[i] = this.session.getRunsToSetup()[i].getRunID();
         }
     }
 
@@ -163,41 +121,11 @@ public class DbInteractor implements IDbInteractor {
     }
 
     public void createOutputJsonFile() {
-        //this.mockDataProvider.exportTestResultsToJson(mTestResult); // The last AnsweredQuestion is not added??
-
-        //TODO: put TestStatistics stuff in it's own method...
-        //populate TestStatistics
-        /*int numOfCorrectAnswers = 0;
-        int numOfWrongAnswers = 0;
-        int numOfSkippedAnswers = 0;
-        int overallTimeUsed = 0;
-
-        int numberOfRuns = mTestResult.getNumberOfRuns();
-        for (int i = 0; i < numberOfRuns; i++) {
-            int numberOfQuestions = mTestResult.getRunResults()[i].getAnsweredQuestions().length;
-            overallTimeUsed += mTestResult.getRunResults()[i].getRunTimeUsed();
-            for (int j = 0; j < numberOfQuestions; j++) {
-                if (mTestResult.getRunResults()[i].getAnsweredQuestions()[j].answerWasCorrect()) {
-                    numOfCorrectAnswers++;
-                } else {
-                    numOfWrongAnswers++;
-                }
-                if (mTestResult.getRunResults()[i].getAnsweredQuestions()[j].skippedQuestion()) {
-                    numOfSkippedAnswers++;
-                }
-            }
-        }
-        this.testStatistics.setSessionTimeUsed(overallTimeUsed);
-        this.testStatistics.setNumberOfCorrectAnswers(numOfCorrectAnswers);
-        this.testStatistics.setNumberOfWrongAnswers(numOfWrongAnswers);
-        this.testStatistics.setNumberOfSkippedAnswers(numOfSkippedAnswers);*/
-
-        this.mockDataProvider.exportTestResultsToJson(mTestResult);
+        this.dataProvider.exportTestResultsToJson(mTestResult);
     }
 
     @Override
     public TestStatistics getTestStatistics() {
         return testStatistics;
     }
-
 }
