@@ -13,7 +13,6 @@ public class ControlledViewPager extends ViewPager {
     boolean enabled;
 
     public ControlledViewPager(Context context) {
-
         super(context);
         this.enabled = true;
     }
